@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".user.LoginActivity"
+    android:layout_marginStart="25dp"
+    android:layout_marginEnd="25dp"
+    android:orientation="vertical"
+    >
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:lottie_rawRes="@raw/logo"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etLoginIC"
+        android:hint="Enter NRIC"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberSigned"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etLoginPwd"
+        android:hint="Enter Password"
+        app:passwordToggleEnabled="true"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnLoginForgotPwd"
+        android:background="#00FFFFFF"
+        android:text="Forget Password"
+        android:layout_gravity="end"
+        android:textStyle="bold"
+        android:elevation="0dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Login"
+        android:id="@+id/btnLogin"
+        android:textColor="#ffff"
+        android:background="@drawable/button_login"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Register Account"
+        android:id="@+id/btnLoginRegister"
+        android:layout_marginTop="10dp"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
