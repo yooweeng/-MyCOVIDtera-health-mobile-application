@@ -8,15 +8,27 @@
     android:layout_marginStart="25dp"
     android:layout_marginEnd="25dp"
     android:orientation="vertical"
+
     >
 
     <com.airbnb.lottie.LottieAnimationView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+
+        android:layout_width="250dp"
+        android:layout_height="200dp"
         app:lottie_rawRes="@raw/logo"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
+        android:layout_gravity="center"
         />
+    <TextView
+        android:id="@+id/tvAppName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/sulphur_point_bold"
+        android:text="@string/app_name"
+        android:textColor="@color/black_txt"
+        android:textSize="35sp"
+        android:layout_gravity="center"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -28,7 +40,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberSigned"/>
+            android:inputType="numberSigned" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -42,20 +54,22 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
         android:id="@+id/btnLoginForgotPwd"
         android:background="#00FFFFFF"
-        android:text="Forget Password"
+        android:text="@string/forget_password"
         android:layout_gravity="end"
         android:textStyle="bold"
         android:elevation="0dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="10dp"
+        android:textColor="@color/purple_btn"
+
         />
 
     <Button
@@ -63,8 +77,8 @@
         android:layout_height="50dp"
         android:text="Login"
         android:id="@+id/btnLogin"
-        android:textColor="#ffff"
-        android:background="@drawable/button_login"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/purple_btn"
         />
 
     <Button
@@ -73,7 +87,19 @@
         android:text="Register Account"
         android:id="@+id/btnLoginRegister"
         android:layout_marginTop="10dp"
+        android:textColor="@color/purple_btn"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         />
+
+    <TextView
+        android:id="@+id/tvLoginDeveloped"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/nunito_sans_bold"
+        android:text="@string/developed_by"
+        android:textColor="@color/black_txt"
+        android:textSize="18sp"
+        android:layout_gravity="end"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -2,4 +2,5 @@
     <string name="app_name">MyCOVIDtera</string>
     <string name="developed_by">by The Chipmunks</string>
     <string name="app_desc">A COVID-19 contact tracing app.</string>
+    <string name="forget_password">Forget Password?</string>
 </resources>
