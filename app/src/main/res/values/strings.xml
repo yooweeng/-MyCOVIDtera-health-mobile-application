@@ -3,4 +3,28 @@
     <string name="developed_by">by The Chipmunks</string>
     <string name="app_desc">A COVID-19 contact tracing app.</string>
     <string name="forget_password">Forget Password?</string>
+
+    <string-array name="gender">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <string-array name="state">
+        <item>Johor</item>
+        <item>Kedah</item>
+        <item>Kelantan</item>
+        <item>Malacca</item>
+        <item>Negeri Sembilan</item>
+        <item>Pahang</item>
+        <item>Penang</item>
+        <item>Perak</item>
+        <item>Perlis</item>
+        <item>Sabah</item>
+        <item>Sarawak</item>
+        <item>Selangor</item>
+        <item>Terengganu</item>
+        <item>Kuala Lumpur</item>
+        <item>Labuan</item>
+        <item>Putrajaya</item>
+    </string-array>
 </resources>

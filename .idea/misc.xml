@@ -7,6 +7,25 @@
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/activity_register.xml" value="0.21557971014492755" />
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/activity_splash.xml" value="0.2" />
+        <entry key="..\:/Users/User/Documents/MyCOVIDtera/app/src/main/res/drawable/navbar_selector.xml" value="0.2703125" />
+        <entry key="..\:/Users/User/Documents/MyCOVIDtera/app/src/main/res/drawable/shadow.xml" value="0.2703125" />
+        <entry key="..\:/Users/User/Documents/MyCOVIDtera/app/src/main/res/font/amiko_bold.xml" value="0.16041666666666668" />
+        <entry key="..\:/Users/User/Documents/MyCOVIDtera/app/src/main/res/font/nunito_sans_bold.xml" value="0.16041666666666668" />
+        <entry key="..\:/Users/User/Documents/MyCOVIDtera/app/src/main/res/font/sulphur.xml" value="0.16041666666666668" />
+        <entry key="..\:/Users/User/Documents/MyCOVIDtera/app/src/main/res/font/sulphur_point.xml" value="0.16041666666666668" />
+        <entry key="..\:/Users/User/Documents/MyCOVIDtera/app/src/main/res/font/sulphur_point_bold.xml" value="0.264" />
+        <entry key="..\:/Users/User/Documents/MyCOVIDtera/app/src/main/res/font/sulphur_point_light.xml" value="0.16041666666666668" />
+        <entry key="..\:/Users/User/Documents/MyCOVIDtera/app/src/main/res/layout/activity_forget_password.xml" value="0.2" />
+        <entry key="..\:/Users/User/Documents/MyCOVIDtera/app/src/main/res/layout/activity_login.xml" value="0.176" />
+        <entry key="..\:/Users/User/Documents/MyCOVIDtera/app/src/main/res/layout/activity_main.xml" value="0.176" />
+        <entry key="..\:/Users/User/Documents/MyCOVIDtera/app/src/main/res/layout/activity_profile.xml" value="0.2" />
+        <entry key="..\:/Users/User/Documents/MyCOVIDtera/app/src/main/res/layout/activity_register.xml" value="0.2" />
+        <entry key="..\:/Users/User/Documents/MyCOVIDtera/app/src/main/res/layout/activity_splash.xml" value="0.13020833333333334" />
+        <entry key="..\:/Users/User/Documents/MyCOVIDtera/app/src/main/res/layout/activity_statistics.xml" value="0.19701086956521738" />
+        <entry key="..\:/Users/User/Documents/MyCOVIDtera/app/src/main/res/layout/activity_trace.xml" value="0.19701086956521738" />
+        <entry key="..\:/Users/User/Documents/MyCOVIDtera/app/src/main/res/layout/register_gender_dropdown_item.xml" value="0.264" />
+        <entry key="..\:/Users/User/Documents/MyCOVIDtera/app/src/main/res/layout/register_state_dropdown_item.xml" value="0.13020833333333334" />
+        <entry key="..\:/Users/User/Documents/MyCOVIDtera/app/src/main/res/menu/navbar.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>

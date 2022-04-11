@@ -10,18 +10,18 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-public class MainActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_profile);
 
         //Initialize and Assign Value
         BottomNavigationView bottomNavigationView = findViewById(R.id.navbar);
 
         //Set Home selected
-        bottomNavigationView.setSelectedItemId(R.id.Home);
+        bottomNavigationView.setSelectedItemId(R.id.Trace);
 
         //Perform ItemSelectedListener
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.Home:
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        overridePendingTransition(0,0);
                         return true;
 
                     case R.id.Statistic:
@@ -42,8 +44,6 @@ public class MainActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.Profile:
-                        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
-                        overridePendingTransition(0,0);
                         return true;
                 }
                 return false;

@@ -5,11 +5,34 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context=".user.RegisterActivity"
-    android:layout_marginStart="25dp"
-    android:layout_marginEnd="25dp"
     android:orientation="vertical">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvAppName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/amiko_bold"
+        android:text="Register Account"
+        android:textAllCaps="true"
+        android:textColor="@color/black_txt"
+        android:textSize="27sp" />
+
     <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/etRegisterIC"
@@ -23,6 +46,21 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginTop="3dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etRegisterName"
+        android:hint="Enter Name"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberSigned"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginTop="3dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/etRegisterPwd"
@@ -37,18 +75,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/etRegisterName"
-        android:hint="Enter Full Name"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginTop="3dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/etRegisterPhone"
@@ -60,26 +87,61 @@
             android:inputType="numberSigned"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginTop="3dp"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="Register"
-        android:id="@+id/btnRegister"
-        android:textColor="#ffff"
-        />
+        android:layout_height="wrap_content"
+        android:id="@+id/etRegisterGender"
+        android:hint="Gender"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <AutoCompleteTextView
+            android:id="@+id/RegisterGenderDropDown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="none"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginTop="3dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etRegisterState"
+        android:hint="State"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <AutoCompleteTextView
+            android:id="@+id/RegisterStateDropDown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="none"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/purple_btn"
+        android:fontFamily="@font/amiko_semibold"
+        android:text="Sign Up"
+        android:textColor="#ffff" />
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnRegisterBackLogin"
         android:background="#00FFFFFF"
-        android:text="Already have an account? Login"
+        android:text="Already have an account? SIGN IN"
         android:layout_gravity="end"
-        android:textColor="@color/black"
+        android:textColor="@color/purple_btn"
         android:textStyle="bold"
         android:elevation="0dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
+        android:fontFamily="@font/nunito_sans_bold"
+        android:textSize="14sp"
         />
+    </LinearLayout>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -12,7 +12,7 @@
     >
 
     <com.airbnb.lottie.LottieAnimationView
-
+        android:layout_marginTop="35dp"
         android:layout_width="250dp"
         android:layout_height="200dp"
         app:lottie_rawRes="@raw/logo"
@@ -20,17 +20,19 @@
         app:lottie_loop="true"
         android:layout_gravity="center"
         />
+
     <TextView
         android:id="@+id/tvAppName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/sulphur_point_bold"
+        android:layout_gravity="center"
+        android:fontFamily="@font/sulphur"
         android:text="@string/app_name"
         android:textColor="@color/black_txt"
-        android:textSize="35sp"
-        android:layout_gravity="center"/>
+        android:textSize="35sp" />
 
     <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/etLoginIC"
@@ -57,7 +59,7 @@
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:id="@+id/btnLoginForgotPwd"
@@ -69,8 +71,8 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="10dp"
         android:textColor="@color/purple_btn"
-
-        />
+        android:fontFamily="@font/nunito_sans_bold"
+        android:textSize="14dp"/>
 
     <Button
         android:layout_width="match_parent"
@@ -86,7 +88,6 @@
         android:layout_height="50dp"
         android:text="Register Account"
         android:id="@+id/btnLoginRegister"
-        android:layout_marginTop="10dp"
         android:textColor="@color/purple_btn"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         />

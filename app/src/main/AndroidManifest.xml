@@ -10,6 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EmbeddedProgrammingAssignment">
         <activity
+            android:name=".TraceActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="true" />
+        <activity
+            android:name=".StatisticsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".user.ForgetPasswordActivity"
+            android:exported="true" />
+        <activity
             android:name=".user.LoginActivity"
             android:exported="false" />
         <activity
