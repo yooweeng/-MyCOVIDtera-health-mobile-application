@@ -17,47 +17,93 @@ import com.example.embeddedprogrammingassignment.fragments.TraceFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 public class MainActivity extends AppCompatActivity {
 
-    @SuppressLint("NonConstantResourceId")
+    BottomNavigationView bottomNavigationView;
+    Deque<Integer> integerDeque = new ArrayDeque<>(4);
+    boolean openFlag = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        bottomNavigationView = findViewById(R.id.navbar);
 
         //To get the IC for user that has successfully logged in
         Intent intent = getIntent();
         String currActiveAcc = intent.getStringExtra("nric");
         Log.d("Current Active Account:",  currActiveAcc);
 
-        //Initialize and Assign Value
-        BottomNavigationView bottomNavigationView = findViewById(R.id.navbar);
-
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragContainer, new HomeFragment()).commit();
-
-        //Set Home selected
+        integerDeque.push(R.id.Home);
+        // Load initial Fragment & set initial bot nav item
+        loadFragment(new HomeFragment());
         bottomNavigationView.setSelectedItemId(R.id.Home);
 
-        //Perform ItemSelectedListener
         bottomNavigationView.setOnItemSelectedListener(item -> {
-            Fragment fragment = null;
-            switch (item.getItemId()) {
-                case R.id.Home:
-                    fragment = new HomeFragment();
-                    break;
-                case R.id.Statistic:
-                    fragment = new StatisticsFragment();
-                    break;
-                case R.id.Trace:
-                    fragment = new TraceFragment();
-                    break;
-                case R.id.Profile:
-                    fragment = new ProfileFragment();
-                    break;
+            //Get selected item id
+            int id = item.getItemId();
+            if(integerDeque.contains(id)) {
+                //When deque list contains selected id
+                //Check condition
+                if(id == R.id.Home) {
+                    //When selected id is the home fragment id
+                    if(integerDeque.size() != 1) {
+                        //When deque list size is not equal to 1
+                        if(openFlag){
+                            integerDeque.addFirst(R.id.Home);
+                            openFlag = false;
+                        }
+                    }
+                }
+                //Remove selected id from deque list
+                integerDeque.remove(id);
             }
-            assert fragment != null;
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragContainer, fragment).commit();
+            //Push selected id in deque list
+            integerDeque.push(id);
+            //Load fragment
+            loadFragment(getFragment(item.getItemId()));
             return true;
         });
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    private Fragment getFragment(int itemId) {
+        switch (itemId) {
+            case R.id.Home:
+                bottomNavigationView.getMenu().getItem(0).setChecked(true);
+                return new HomeFragment();
+            case R.id.Statistic:
+                bottomNavigationView.getMenu().getItem(1).setChecked(true);
+                return new StatisticsFragment();
+            case R.id.Trace:
+                bottomNavigationView.getMenu().getItem(2).setChecked(true);
+                return new TraceFragment();
+            case R.id.Profile:
+                bottomNavigationView.getMenu().getItem(3).setChecked(true);
+                return new ProfileFragment();
+        }
+
+        //Default
+        bottomNavigationView.getMenu().getItem(0).setChecked(true);
+        return new HomeFragment();
+    }
+
+    private void loadFragment(Fragment fragment) {
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragContainer, fragment).commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        integerDeque.pop();
+        if (!integerDeque.isEmpty()) {
+            loadFragment(getFragment(integerDeque.peek()));
+        }
+        else {
+            finish();
+        }
     }
 }
