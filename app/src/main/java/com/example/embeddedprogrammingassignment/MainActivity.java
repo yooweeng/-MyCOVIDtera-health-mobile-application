@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String currActiveAcc = intent.getStringExtra("nric");
         Log.d("Current Active Account:",  currActiveAcc);
-
         integerDeque.push(R.id.Home);
         // Load initial Fragment & set initial bot nav item
         loadFragment(new HomeFragment());
@@ -54,15 +53,18 @@ public class MainActivity extends AppCompatActivity {
                     if(integerDeque.size() != 1) {
                         //When deque list size is not equal to 1
                         if(openFlag){
+                            Log.d("Deque Home", integerDeque.toString());
                             integerDeque.addFirst(R.id.Home);
                             openFlag = false;
                         }
                     }
                 }
                 //Remove selected id from deque list
+                Log.d("Deque Removed", integerDeque.toString());
                 integerDeque.remove(id);
             }
             //Push selected id in deque list
+            Log.d("Deque Pushed", integerDeque.toString());
             integerDeque.push(id);
             //Load fragment
             loadFragment(getFragment(item.getItemId()));
@@ -99,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         integerDeque.pop();
+        Log.d("Deque Popped", integerDeque.toString());
         if (!integerDeque.isEmpty()) {
             loadFragment(getFragment(integerDeque.peek()));
         }
