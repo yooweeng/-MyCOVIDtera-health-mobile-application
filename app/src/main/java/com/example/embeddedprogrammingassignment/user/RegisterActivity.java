@@ -14,11 +14,18 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.embeddedprogrammingassignment.R;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Objects;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -29,7 +36,8 @@ public class RegisterActivity extends AppCompatActivity {
     Toolbar toolbar;
     ArrayAdapter<String> genderAdapterItems, stateAdapterItems;
 
-    private FirebaseAuth mAuth;
+    FirebaseDatabase rootNode;
+    DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +57,8 @@ public class RegisterActivity extends AppCompatActivity {
         stateView = findViewById(R.id.RegisterStateDropDown);
         toolbar = findViewById(R.id.toolbar);
 
-        String[] gender = getResources().getStringArray(R.array.gender);
-        genderAdapterItems = new ArrayAdapter<String>(this, R.layout.register_gender_dropdown_item, gender);
+        String[] gender_option = getResources().getStringArray(R.array.gender);
+        genderAdapterItems = new ArrayAdapter<String>(this, R.layout.register_gender_dropdown_item, gender_option);
         genderView.setAdapter(genderAdapterItems);
 
         genderView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -60,8 +68,8 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        String[] state = getResources().getStringArray(R.array.state);
-        stateAdapterItems = new ArrayAdapter<String>(this, R.layout.register_state_dropdown_item, state);
+        String[] state_option = getResources().getStringArray(R.array.state);
+        stateAdapterItems = new ArrayAdapter<String>(this, R.layout.register_state_dropdown_item, state_option);
         stateView.setAdapter(stateAdapterItems);
 
         stateView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -72,7 +80,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Back");
 //        getSupportActionBar().setHomeActionContentDescription(R.);
@@ -90,15 +98,41 @@ public class RegisterActivity extends AppCompatActivity {
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String nric = nricEt.getEditText().getText().toString();
-                String password = passwordEt.getEditText().getText().toString();
-                String name = nameEt.getEditText().getText().toString();
-                String phone = phoneEt.getEditText().getText().toString();
-
-                Log.d("User Register Input", "Input: " + nric +" " + password +" " + name +" " + phone +" ");
+                register();
             }
         });
 
+    }
+
+    private void register() {
+        String nric = nricEt.getEditText().getText().toString();
+        String password = passwordEt.getEditText().getText().toString();
+        String name = nameEt.getEditText().getText().toString();
+        String phone = phoneEt.getEditText().getText().toString();
+        String gender = genderView.getText().toString();
+        String state = stateView.getText().toString();
+        User user = new User(nric, password, name, phone, gender, state);
+
+        rootNode = FirebaseDatabase.getInstance();
+        reference = rootNode.getReference("users");
+
+        Query newUser = reference.orderByChild("nric").equalTo(nric);
+
+        newUser.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()) {
+                    Toast.makeText(getApplicationContext(), "Registration failed! Account has been registered before.", Toast.LENGTH_SHORT).show();
+                }
+                else
+                    reference.child(nric).setValue(user);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     @Override

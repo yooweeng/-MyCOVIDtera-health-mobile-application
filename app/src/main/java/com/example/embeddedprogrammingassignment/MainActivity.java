@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -16,6 +17,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //To get the IC for user that has successfully logged in
+        Intent intent = getIntent();
+        String currActiveAcc = intent.getStringExtra("nric");
+        Log.d("Current Active Account:",  currActiveAcc);
 
         //Initialize and Assign Value
         BottomNavigationView bottomNavigationView = findViewById(R.id.navbar);
