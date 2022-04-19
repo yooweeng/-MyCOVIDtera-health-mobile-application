@@ -60,7 +60,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         String pwd1 = pwdEt.getEditText().getText().toString();
         String pwd2 = confirmedPwdEt.getEditText().getText().toString();
 
-        if(pwd1.equals(pwd2)) {
+        if(validField(nric, phone, pwd1, pwd2)) {
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
             Query findUser = reference.orderByChild("nric").equalTo(nric);
 
@@ -85,8 +85,24 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                 }
             });
         }
-        else
-            Toast.makeText(getApplicationContext(), "Your passwords does not match!", Toast.LENGTH_SHORT).show();
+
+
+    }
+
+    private boolean validField(String nric, String phone, String pwd1, String pwd2) {
+        if(nric.length() != 12) {
+            Toast.makeText(getApplicationContext(), "Invalid NRIC.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(phone.length() < 9 ) {
+            Toast.makeText(getApplicationContext(), "Please enter a valid phone number.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(!pwd1.equals(pwd2)) {
+            Toast.makeText(getApplicationContext(), "Passwords does not match!.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 
     @Override
