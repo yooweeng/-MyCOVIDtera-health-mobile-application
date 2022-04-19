@@ -60,18 +60,19 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         String pwd1 = pwdEt.getEditText().getText().toString();
         String pwd2 = confirmedPwdEt.getEditText().getText().toString();
 
-        if(pwd1.equals(pwd2)) {
+        if(validField(nric, phone, pwd1, pwd2)) {
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-            Query findUser = reference.orderByChild("nric").equalTo(nric);
-
-            findUser.addListenerForSingleValueEvent(new ValueEventListener() {
+            reference.child(nric).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if(snapshot.exists() && (Objects.equals(snapshot.child(nric).child("phone").getValue(String.class), phone))) {
+                    User user = snapshot.getValue(User.class);
+                    if(user.getPhone().equals(phone)) {
                         reference.child(nric).child("password").setValue(pwd1);
+
                         Toast.makeText(getApplicationContext(), "Password reset success!", Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent(ForgetPasswordActivity.this, MainActivity.class);
+                        intent.putExtra("nric", nric);
                         startActivity(intent);
                         finish();
                     }
@@ -85,8 +86,22 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                 }
             });
         }
-        else
-            Toast.makeText(getApplicationContext(), "Your passwords does not match!", Toast.LENGTH_SHORT).show();
+    }
+
+    private boolean validField(String nric, String phone, String pwd1, String pwd2) {
+        if(nric.length() != 12) {
+            Toast.makeText(getApplicationContext(), "Invalid NRIC.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(phone.length() < 9 ) {
+            Toast.makeText(getApplicationContext(), "Please enter a valid phone number.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(!pwd1.equals(pwd2)) {
+            Toast.makeText(getApplicationContext(), "Passwords does not match!.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -97,5 +112,32 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void another() {
+        //Another method
+//            Query findUser = reference.orderByChild("nric").equalTo(nric);
+//
+//            findUser.addListenerForSingleValueEvent(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                    if(snapshot.exists() && (Objects.equals(snapshot.child(nric).child("phone").getValue(String.class), phone))) {
+//                        reference.child(nric).child("password").setValue(pwd1);
+//                        Toast.makeText(getApplicationContext(), "Password reset success!", Toast.LENGTH_SHORT).show();
+//
+//                        Intent intent = new Intent(ForgetPasswordActivity.this, MainActivity.class);
+//                         intent.putExtra("nric", nric);
+//                        startActivity(intent);
+//                        finish();
+//                    }
+//                    else
+//                        Toast.makeText(getApplicationContext(), "Password reset failed! You have entered incorrect details.", Toast.LENGTH_SHORT).show();
+//                }
+//
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError error) {
+//
+//                }
+//            });
     }
 }

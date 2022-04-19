@@ -2,13 +2,23 @@ package com.example.embeddedprogrammingassignment.fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.embeddedprogrammingassignment.R;
+import com.example.embeddedprogrammingassignment.user.User;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class ProfileFragment extends Fragment {
 
@@ -16,10 +26,38 @@ public class ProfileFragment extends Fragment {
 
     }
 
+    TextView nricEt, phoneEt, stateEt, nameEt;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+
+        nameEt = view.findViewById(R.id.tvProfileName);
+        nricEt = view.findViewById(R.id.tvProfileNRIC);
+        phoneEt = view.findViewById(R.id.tvProfilePhone);
+        stateEt = view.findViewById(R.id.tvProfileState);
+
+        String currActiveAcc = getActivity().getIntent().getStringExtra("nric");
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+        reference.child(currActiveAcc).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User user = snapshot.getValue(User.class);
+                nameEt.setText(user.getName());
+                nricEt.setText(user.getNric());
+                phoneEt.setText(user.getPhone());
+                stateEt.setText(user.getState());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        return view;
     }
 }

@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.embeddedprogrammingassignment.MainActivity;
 import com.example.embeddedprogrammingassignment.R;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
@@ -113,26 +114,63 @@ public class RegisterActivity extends AppCompatActivity {
         String state = stateView.getText().toString();
         User user = new User(nric, password, name, phone, gender, state);
 
-        rootNode = FirebaseDatabase.getInstance();
-        reference = rootNode.getReference("users");
+        if(validField(user)) {
+            rootNode = FirebaseDatabase.getInstance();
+            reference = rootNode.getReference("users");
 
-        Query newUser = reference.orderByChild("nric").equalTo(nric);
+            Query newUser = reference.orderByChild("nric").equalTo(nric);
 
-        newUser.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()) {
-                    Toast.makeText(getApplicationContext(), "Registration failed! Account has been registered before.", Toast.LENGTH_SHORT).show();
+            newUser.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.exists()) {
+                        Toast.makeText(getApplicationContext(), "Registration failed! Account has been registered before.", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        reference.child(nric).setValue(user);
+                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                        intent.putExtra("nric", nric);
+                        startActivity(intent);
+                        finish();
+                    }
+
                 }
-                else
-                    reference.child(nric).setValue(user);
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
+                }
+            });
+        }
+    }
+
+    private boolean validField(User user) {
+        if(user.getNric().length() != 12) {
+            Toast.makeText(getApplicationContext(), "Invalid NRIC.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(user.getName().length() < 5) {
+            Toast.makeText(getApplicationContext(), "Please enter a valid name.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(user.getPassword().length() < 6 ) {
+            Toast.makeText(getApplicationContext(), "Please create a password with at least 6 characters.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(user.getPhone().length() < 9 ) {
+            Toast.makeText(getApplicationContext(), "Please enter a valid phone number.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(user.getGender().equals("")) {
+            Toast.makeText(getApplicationContext(), "Please select your gender.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(user.getState().equals("")) {
+            Toast.makeText(getApplicationContext(), "Please select your current state.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
     }
 
     @Override

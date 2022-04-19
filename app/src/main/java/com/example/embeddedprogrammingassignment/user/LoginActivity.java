@@ -68,34 +68,48 @@ public class LoginActivity extends AppCompatActivity {
         String nric = nricEt.getEditText().getText().toString();
         String password = passwordEt.getEditText().getText().toString();
 
-        rootNode = FirebaseDatabase.getInstance();
-        reference = rootNode.getReference("users");
+        if(validField(nric, password)) {
+            rootNode = FirebaseDatabase.getInstance();
+            reference = rootNode.getReference("users");
 
-        Query checkUser = reference.orderByChild("nric").equalTo(nric);
+            Query checkUser = reference.orderByChild("nric").equalTo(nric);
 
-        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()) {
-                    String passwordDB = snapshot.child(nric).child("password").getValue(String.class);
-                    if (passwordDB.equals(password)) {
+            checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.exists()) {
+                        String passwordDB = snapshot.child(nric).child("password").getValue(String.class);
+                        if (passwordDB.equals(password)) {
 
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        intent.putExtra("nric", nric);
-                        startActivity(intent);
-                        finish();
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            intent.putExtra("nric", nric);
+                            startActivity(intent);
+                            finish();
+                        }
+                        else
+                            Toast.makeText(getApplicationContext(), "Login failed! You have entered incorrect NRIC or password.", Toast.LENGTH_SHORT).show();
                     }
                     else
                         Toast.makeText(getApplicationContext(), "Login failed! You have entered incorrect NRIC or password.", Toast.LENGTH_SHORT).show();
                 }
-                else
-                    Toast.makeText(getApplicationContext(), "Login failed! You have entered incorrect NRIC or password.", Toast.LENGTH_SHORT).show();
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
+                }
+            });
+        }
+    }
+
+    private boolean validField(String nric, String password) {
+        if(nric.length() != 12) {
+            Toast.makeText(getApplicationContext(), "Invalid NRIC.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(password.length() < 6 ) {
+            Toast.makeText(getApplicationContext(), "Invalid password length.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 }
