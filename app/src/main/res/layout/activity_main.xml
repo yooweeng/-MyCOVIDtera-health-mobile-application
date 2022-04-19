@@ -20,8 +20,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:elevation="20dp"
         app:itemIconTint="@drawable/navbar_selector"
         app:itemTextColor="@drawable/navbar_selector"
-        app:menu="@menu/navbar"
-        android:elevation="20dp" />
+        app:menu="@menu/navbar" />
 </RelativeLayout>

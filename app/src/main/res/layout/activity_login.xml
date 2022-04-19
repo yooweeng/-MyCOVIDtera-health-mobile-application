@@ -84,13 +84,12 @@
         />
 
     <Button
+        android:id="@+id/btnLoginRegister"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:text="Register Account"
-        android:id="@+id/btnLoginRegister"
-        android:textColor="@color/purple_btn"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        />
+        android:textColor="@color/purple_btn" />
 
     <TextView
         android:id="@+id/tvLoginDeveloped"

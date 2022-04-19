@@ -14,6 +14,8 @@ import com.example.embeddedprogrammingassignment.fragments.HomeFragment;
 import com.example.embeddedprogrammingassignment.fragments.ProfileFragment;
 import com.example.embeddedprogrammingassignment.fragments.StatisticsFragment;
 import com.example.embeddedprogrammingassignment.fragments.TraceFragment;
+import com.example.embeddedprogrammingassignment.fragments.trace.CheckInSuccessfulFragment;
+import com.example.embeddedprogrammingassignment.fragments.trace.QrHistoryFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -39,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("Current Active Account:",  currActiveAcc);
         integerDeque.push(R.id.Home);
         // Load initial Fragment & set initial bot nav item
-        loadFragment(new HomeFragment());
+        loadFragment(new CheckInSuccessfulFragment());
         bottomNavigationView.setSelectedItemId(R.id.Home);
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
