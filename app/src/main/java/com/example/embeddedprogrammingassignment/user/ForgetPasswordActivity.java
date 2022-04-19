@@ -62,16 +62,17 @@ public class ForgetPasswordActivity extends AppCompatActivity {
 
         if(validField(nric, phone, pwd1, pwd2)) {
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-            Query findUser = reference.orderByChild("nric").equalTo(nric);
-
-            findUser.addListenerForSingleValueEvent(new ValueEventListener() {
+            reference.child(nric).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if(snapshot.exists() && (Objects.equals(snapshot.child(nric).child("phone").getValue(String.class), phone))) {
+                    User user = snapshot.getValue(User.class);
+                    if(user.getPhone().equals(phone)) {
                         reference.child(nric).child("password").setValue(pwd1);
+
                         Toast.makeText(getApplicationContext(), "Password reset success!", Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent(ForgetPasswordActivity.this, MainActivity.class);
+                        intent.putExtra("nric", nric);
                         startActivity(intent);
                         finish();
                     }
@@ -85,8 +86,6 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                 }
             });
         }
-
-
     }
 
     private boolean validField(String nric, String phone, String pwd1, String pwd2) {
@@ -113,5 +112,32 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void another() {
+        //Another method
+//            Query findUser = reference.orderByChild("nric").equalTo(nric);
+//
+//            findUser.addListenerForSingleValueEvent(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                    if(snapshot.exists() && (Objects.equals(snapshot.child(nric).child("phone").getValue(String.class), phone))) {
+//                        reference.child(nric).child("password").setValue(pwd1);
+//                        Toast.makeText(getApplicationContext(), "Password reset success!", Toast.LENGTH_SHORT).show();
+//
+//                        Intent intent = new Intent(ForgetPasswordActivity.this, MainActivity.class);
+//                         intent.putExtra("nric", nric);
+//                        startActivity(intent);
+//                        finish();
+//                    }
+//                    else
+//                        Toast.makeText(getApplicationContext(), "Password reset failed! You have entered incorrect details.", Toast.LENGTH_SHORT).show();
+//                }
+//
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError error) {
+//
+//                }
+//            });
     }
 }
