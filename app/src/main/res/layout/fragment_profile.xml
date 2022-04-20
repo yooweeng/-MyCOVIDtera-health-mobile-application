@@ -78,7 +78,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginEnd="25dp"
             app:cardElevation="10dp"
-            app:cardCornerRadius="20dp"
+            app:cardCornerRadius="15dp"
             >
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -108,9 +108,9 @@
                     android:textSize="20sp" />
 
                 <TextView
+                    android:id="@+id/tvProfilePhoneText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tvProfilePhoneText"
                     android:layout_above="@+id/tvProfileNRICText"
                     android:fontFamily="@font/amiko_semibold"
                     android:text="Phone Number"
@@ -152,10 +152,9 @@
             </RelativeLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <ImageView
-            android:layout_width="356dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:src="@drawable/no_exposure" />
+        <include
+            layout="@layout/cardview_covid_exposure_risk"
+            />
+
     </LinearLayout>
 </ScrollView>
