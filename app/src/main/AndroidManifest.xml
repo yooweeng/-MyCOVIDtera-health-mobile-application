@@ -10,13 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EmbeddedProgrammingAssignment">
         <activity
-            android:name=".user.ForgetPasswordActivity"
+            android:name=".ForgetPasswordActivity"
             android:exported="true" />
         <activity
-            android:name=".user.LoginActivity"
+            android:name=".LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".user.RegisterActivity"
+            android:name=".RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

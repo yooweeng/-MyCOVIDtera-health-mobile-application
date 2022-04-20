@@ -1,4 +1,4 @@
-package com.example.embeddedprogrammingassignment.user;
+package com.example.embeddedprogrammingassignment.modal;
 
 public class User {
     String nric, password, name, phone, gender, state;

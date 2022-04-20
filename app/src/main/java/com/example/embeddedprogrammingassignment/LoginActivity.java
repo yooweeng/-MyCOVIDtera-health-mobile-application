@@ -1,4 +1,4 @@
-package com.example.embeddedprogrammingassignment.user;
+package com.example.embeddedprogrammingassignment;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,8 +10,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.embeddedprogrammingassignment.MainActivity;
-import com.example.embeddedprogrammingassignment.R;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

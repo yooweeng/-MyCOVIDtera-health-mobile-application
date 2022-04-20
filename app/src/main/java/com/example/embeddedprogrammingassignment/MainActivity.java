@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String currActiveAcc = intent.getStringExtra("nric");
         Log.d("Current Active Account:",  currActiveAcc);
+
+
         integerDeque.push(R.id.Home);
         // Load initial Fragment & set initial bot nav item
         loadFragment(new SelfReportCovidFragment());
