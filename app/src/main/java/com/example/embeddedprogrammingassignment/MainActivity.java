@@ -22,9 +22,12 @@ import com.google.android.material.navigation.NavigationBarView;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
+import meow.bottomnavigation.MeowBottomNavigation;
+
 public class MainActivity extends AppCompatActivity {
 
-    BottomNavigationView bottomNavigationView;
+
+    MeowBottomNavigation bottomNavigationView;
     Deque<Integer> integerDeque = new ArrayDeque<>(4);
     boolean openFlag = true;
 
@@ -42,73 +45,80 @@ public class MainActivity extends AppCompatActivity {
         integerDeque.push(R.id.Home);
         // Load initial Fragment & set initial bot nav item
         loadFragment(new CheckInSuccessfulFragment());
-        bottomNavigationView.setSelectedItemId(R.id.Home);
 
-        bottomNavigationView.setOnItemSelectedListener(item -> {
-            //Get selected item id
-            int id = item.getItemId();
-            if(integerDeque.contains(id)) {
-                //When deque list contains selected id
-                //Check condition
-                if(id == R.id.Home) {
-                    //When selected id is the home fragment id
-                    if(integerDeque.size() != 1) {
-                        //When deque list size is not equal to 1
-                        if(openFlag){
-                            Log.d("Deque Home", integerDeque.toString());
-                            integerDeque.addFirst(R.id.Home);
-                            openFlag = false;
-                        }
-                    }
-                }
-                //Remove selected id from deque list
-                Log.d("Deque Removed", integerDeque.toString());
-                integerDeque.remove(id);
-            }
-            //Push selected id in deque list
-            Log.d("Deque Pushed", integerDeque.toString());
-            integerDeque.push(id);
-            //Load fragment
-            loadFragment(getFragment(item.getItemId()));
-            return true;
-        });
+        bottomNavigationView.add(new MeowBottomNavigation.Model(1, R.drawable.ic_home));
+        bottomNavigationView.add(new MeowBottomNavigation.Model(2, R.drawable.ic_statistics));
+        bottomNavigationView.add(new MeowBottomNavigation.Model(3, R.drawable.ic_qr));
+        bottomNavigationView.add(new MeowBottomNavigation.Model(4, R.drawable.ic_user));
+
+
+//        bottomNavigationView.setSelectedItemId(R.id.Home);
+//
+//        bottomNavigationView.setOnItemSelectedListener(item -> {
+//            //Get selected item id
+//            int id = item.getItemId();
+//            if(integerDeque.contains(id)) {
+//                //When deque list contains selected id
+//                //Check condition
+//                if(id == R.id.Home) {
+//                    //When selected id is the home fragment id
+//                    if(integerDeque.size() != 1) {
+//                        //When deque list size is not equal to 1
+//                        if(openFlag){
+//                            Log.d("Deque Home", integerDeque.toString());
+//                            integerDeque.addFirst(R.id.Home);
+//                            openFlag = false;
+//                        }
+//                    }
+//                }
+//                //Remove selected id from deque list
+//                Log.d("Deque Removed", integerDeque.toString());
+//                integerDeque.remove(id);
+//            }
+//            //Push selected id in deque list
+//            Log.d("Deque Pushed", integerDeque.toString());
+//            integerDeque.push(id);
+//            //Load fragment
+//            loadFragment(getFragment(item.getItemId()));
+//            return true;
+//        });
     }
 
-    @SuppressLint("NonConstantResourceId")
-    private Fragment getFragment(int itemId) {
-        switch (itemId) {
-            case R.id.Home:
-                bottomNavigationView.getMenu().getItem(0).setChecked(true);
-                return new HomeFragment();
-            case R.id.Statistic:
-                bottomNavigationView.getMenu().getItem(1).setChecked(true);
-                return new StatisticsFragment();
-            case R.id.Trace:
-                bottomNavigationView.getMenu().getItem(2).setChecked(true);
-                return new TraceFragment();
-            case R.id.Profile:
-                bottomNavigationView.getMenu().getItem(3).setChecked(true);
-                return new ProfileFragment();
-        }
-
-        //Default
-        bottomNavigationView.getMenu().getItem(0).setChecked(true);
-        return new HomeFragment();
-    }
-
+//    @SuppressLint("NonConstantResourceId")
+//    private Fragment getFragment(int itemId) {
+//        switch (itemId) {
+//            case R.id.Home:
+//                bottomNavigationView.getMenu().getItem(0).setChecked(true);
+//                return new HomeFragment();
+//            case R.id.Statistic:
+//                bottomNavigationView.getMenu().getItem(1).setChecked(true);
+//                return new StatisticsFragment();
+//            case R.id.Trace:
+//                bottomNavigationView.getMenu().getItem(2).setChecked(true);
+//                return new TraceFragment();
+//            case R.id.Profile:
+//                bottomNavigationView.getMenu().getItem(3).setChecked(true);
+//                return new ProfileFragment();
+//        }
+//
+//        //Default
+//        bottomNavigationView.getMenu().getItem(0).setChecked(true);
+//        return new HomeFragment();
+//    }
+//
     private void loadFragment(Fragment fragment) {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragContainer, fragment).commit();
     }
-
-    @Override
-    public void onBackPressed() {
-        integerDeque.pop();
-        Log.d("Deque Popped", integerDeque.toString());
-        if (!integerDeque.isEmpty()) {
-            loadFragment(getFragment(integerDeque.peek()));
-        }
-        else {
-            finish();
-        }
+//
+//    @Override
+//    public void onBackPressed() {
+//        integerDeque.pop();
+//        Log.d("Deque Popped", integerDeque.toString());
+//        if (!integerDeque.isEmpty()) {
+//            loadFragment(getFragment(integerDeque.peek()));
+//        }
+//        else {
+//            finish();
+//        }
     }
-}
+
