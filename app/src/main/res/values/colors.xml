@@ -12,10 +12,10 @@
     <color name="purple_btn_not_selected">#666967AC</color>
     <color name="black_txt">#393938</color>
     <color name="blue_bg">#E4DFFF</color>
-    <color name="green_warning">#14A534</color>
     <color name="yellow_bg">#FFF1CD</color>
+    <color name="green_warning">#00A572</color>
     <color name="yellow_warning">#F7CF07</color>
-    <color name="red_warning">#FF0000</color>
+    <color name="red_warning">#F14545</color>
     <color name="blue_selected">#D9E5FD</color>
 
 
