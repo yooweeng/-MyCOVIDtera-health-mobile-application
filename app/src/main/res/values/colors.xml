@@ -10,6 +10,8 @@
     <color name="purple_txt">#454397</color>
     <color name="purple_btn">#6967AC</color>
     <color name="purple_btn_not_selected">#666967AC</color>
+    <color name="sky_blue">#BDD2FB</color>
+    <color name="testkitselected">#99588BF1</color>
     <color name="black_txt">#393938</color>
     <color name="blue_bg">#E4DFFF</color>
     <color name="yellow_bg">#FFF1CD</color>

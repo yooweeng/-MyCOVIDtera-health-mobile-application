@@ -5,14 +5,9 @@
       <map>
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/drawable/button_login.xml" value="0.1215" />
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/activity_login.xml" value="0.264" />
-        <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/activity_main.xml" value="0.10078125" />
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/activity_register.xml" value="0.21557971014492755" />
-        <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/cardview_covid_exposure_risk.xml" value="0.4" />
-        <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/cardview_historyitem.xml" value="0.1102077687443541" />
-        <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/cardview_qr_history.xml" value="0.2" />
-        <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/fragment_profile.xml" value="0.4" />
-        <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/register_gender_dropdown_item.xml" value="0.10078125" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MyCOVIDtera/app/src/main/res/drawable/button_login.xml" value="0.149" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/MyCOVIDtera/app/src/main/res/font/amiko_bold.xml" value="0.2759259259259259" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MyCOVIDtera/app/src/main/res/layout/activity_forget_password.xml" value="0.21557971014492755" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MyCOVIDtera/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MyCOVIDtera/app/src/main/res/layout/activity_main.xml" value="0.1793478260869565" />
@@ -21,14 +16,17 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/MyCOVIDtera/app/src/main/res/layout/activity_splash.xml" value="0.1140625" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MyCOVIDtera/app/src/main/res/layout/activity_statistics.xml" value="0.21557971014492755" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MyCOVIDtera/app/src/main/res/layout/activity_trace.xml" value="0.21557971014492755" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/MyCOVIDtera/app/src/main/res/layout/cardview_covid_exposure_risk.xml" value="0.20425724637681159" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MyCOVIDtera/app/src/main/res/layout/cardview_historyitem.xml" value="0.20425724637681159" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MyCOVIDtera/app/src/main/res/layout/cardview_qr_history.xml" value="0.20425724637681159" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MyCOVIDtera/app/src/main/res/layout/fragment_checkin_successful.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MyCOVIDtera/app/src/main/res/layout/fragment_home.xml" value="0.20878623188405798" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MyCOVIDtera/app/src/main/res/layout/fragment_profile.xml" value="0.2" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MyCOVIDtera/app/src/main/res/layout/fragment_qr_history.xml" value="0.20425724637681159" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/MyCOVIDtera/app/src/main/res/layout/fragment_self_report_covid.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MyCOVIDtera/app/src/main/res/layout/fragment_statistics.xml" value="0.20878623188405798" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MyCOVIDtera/app/src/main/res/layout/fragment_trace.xml" value="0.2" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/MyCOVIDtera/app/src/main/res/layout/popup_testkitinfo.xml" value="0.20425724637681159" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MyCOVIDtera/app/src/main/res/layout/register_gender_dropdown_item.xml" value="0.1140625" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MyCOVIDtera/app/src/main/res/layout/register_state_dropdown_item.xml" value="0.21557971014492755" />
       </map>

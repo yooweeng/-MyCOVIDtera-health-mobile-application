@@ -146,11 +146,9 @@
             </RelativeLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <ImageView
-            android:layout_width="356dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:src="@drawable/no_exposure" />
+        <include
+            layout="@layout/cardview_covid_exposure_risk"
+            />
 
         <Button
             android:id="@+id/btnRegister"

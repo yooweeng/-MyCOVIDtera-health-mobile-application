@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.home.SelfReportCovidFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/tvLabelTestkitResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/amiko_bold"
+            android:text="Your test kit result:"
+            android:textColor="@color/black_txt"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivInfo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:src="@drawable/icon_info"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivTestkitPositive"
+            android:layout_width="75dp"
+            android:layout_height="240dp"
+            android:layout_marginStart="65dp"
+            android:layout_marginTop="20dp"
+            android:foreground="@drawable/testkit_positive"
+            android:foregroundTintMode="src_atop"
+            android:paddingStart="100dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvLabelTestkitResult" />
+
+        <ImageView
+            android:id="@+id/ivTestkitNegative"
+            android:layout_width="75dp"
+            android:layout_height="240dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="65dp"
+            android:foreground="@drawable/testkit_negative"
+            android:foregroundTintMode="src_atop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLabelTestkitResult" />
+
+        <TextView
+            android:id="@+id/tvLabelYourSymptom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="25dp"
+            android:fontFamily="@font/amiko_semibold"
+            android:text="Your symptoms:"
+            android:textColor="@color/black_txt"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivTestkitPositive" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCough"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="15dp"
+            android:backgroundTint="@color/white"
+            android:text="Cough"
+            android:textAllCaps="false"
+            android:textColor="@color/black_txt"
+            android:textSize="17dp"
+            app:cornerRadius="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvLabelYourSymptom" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnTiredness"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="60dp"
+            android:backgroundTint="@color/white"
+            android:text="Tiredness"
+            android:textAllCaps="false"
+            android:textColor="@color/black_txt"
+            android:textSize="17dp"
+            app:cornerRadius="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLabelYourSymptom" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCramp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/white"
+            android:text="Cramp"
+            android:textAllCaps="false"
+            android:textColor="@color/black_txt"
+            android:textSize="17dp"
+            app:cornerRadius="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnCough" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSmellLoss"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="60dp"
+            android:backgroundTint="@color/white"
+            android:text="Smell Loss"
+            android:textAllCaps="false"
+            android:textColor="@color/black_txt"
+            android:textSize="17dp"
+            app:cornerRadius="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnTiredness" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnFever"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="10dp"
+            android:text="Fever"
+            android:textAllCaps="false"
+            android:textColor="@color/black_txt"
+            android:textSize="17dp"
+            app:cornerRadius="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnCramp" />
+
+        <TextView
+            android:id="@+id/tvLabelOtherSymptom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="25dp"
+            android:fontFamily="@font/amiko_semibold"
+            android:text="Other symptoms:"
+            android:textColor="@color/black_txt"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnFever" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etDescription"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:hint="Description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLabelOtherSymptom">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:maxLength="12" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="320dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="25dp"
+            android:backgroundTint="@color/purple_btn"
+            android:fontFamily="@font/amiko_semibold"
+            android:text="Submit"
+            android:textAllCaps="false"
+            android:textColor="#ffff"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etDescription" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
