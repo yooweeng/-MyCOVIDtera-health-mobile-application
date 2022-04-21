@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EmbeddedProgrammingAssignment">
         <activity
+            android:name=".fragments.home.things_to_do.ThingsToDoActivity"
+            android:exported="false" />
+        <activity
             android:name=".ForgetPasswordActivity"
             android:exported="true" />
         <activity

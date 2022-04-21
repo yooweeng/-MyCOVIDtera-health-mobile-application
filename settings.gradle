@@ -4,6 +4,20 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         jcenter() // Warning: this repository is going to shut down soon
+
+        maven { url 'https://jitpack.io'}
+        maven { url 'https://jitpack.io'
+
+            name = "GitHubPackages"
+
+            url = uri("https://maven.pkg.github.com/Cuberto/liquid-swipe-android")
+            credentials {
+
+                username = "vinscc"
+                password = "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"
+
+            }
+        }
     }
 }
 rootProject.name = "Embedded Programming Assignment"

@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_homeFragment_to_selfReportCovidFragment"
             app:destination="@id/selfReportCovidFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_thingsToDoActivity"
+            app:destination="@id/thingsToDoActivity" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -72,4 +75,9 @@
             android:id="@+id/action_selfReportCovidFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
+    <activity
+        android:id="@+id/thingsToDoActivity"
+        android:name="com.example.embeddedprogrammingassignment.fragments.home.things_to_do.ThingsToDoActivity"
+        android:label="activity_things_to_do"
+        tools:layout="@layout/activity_things_to_do" />
 </navigation>
