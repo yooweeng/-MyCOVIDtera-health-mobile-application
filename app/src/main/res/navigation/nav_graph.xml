@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.embeddedprogrammingassignment.fragments.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_selfReportCovidFragment"
+            app:destination="@id/selfReportCovidFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.embeddedprogrammingassignment.fragments.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.example.embeddedprogrammingassignment.fragments.profile.EditProfileFragment"
+        android:label="Edit Profile"
+        tools:layout="@layout/fragment_edit_profile" >
+        <action
+            android:id="@+id/action_editProfileFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/traceFragment"
+        android:name="com.example.embeddedprogrammingassignment.fragments.TraceFragment"
+        android:label="fragment_trace"
+        tools:layout="@layout/fragment_trace" >
+        <action
+            android:id="@+id/action_traceFragment_to_qrHistoryFragment"
+            app:destination="@id/qrHistoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/qrHistoryFragment"
+        android:name="com.example.embeddedprogrammingassignment.fragments.trace.QrHistoryFragment"
+        android:label="fragment_qr_history"
+        tools:layout="@layout/fragment_qr_history" >
+        <action
+            android:id="@+id/action_qrHistoryFragment_to_traceFragment"
+            app:destination="@id/traceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/statisticsFragment"
+        android:name="com.example.embeddedprogrammingassignment.fragments.StatisticsFragment"
+        android:label="fragment_statistics"
+        tools:layout="@layout/fragment_statistics" />
+    <fragment
+        android:id="@+id/checkInSuccessfulFragment"
+        android:name="com.example.embeddedprogrammingassignment.fragments.trace.CheckInSuccessfulFragment"
+        android:label="fragment_checkin_successful"
+        tools:layout="@layout/fragment_checkin_successful" />
+    <fragment
+        android:id="@+id/selfReportCovidFragment"
+        android:name="com.example.embeddedprogrammingassignment.fragments.home.SelfReportCovidFragment"
+        android:label="fragment_self_report_covid"
+        tools:layout="@layout/fragment_self_report_covid" >
+        <action
+            android:id="@+id/action_selfReportCovidFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+</navigation>

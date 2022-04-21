@@ -1,14 +1,23 @@
 package com.example.embeddedprogrammingassignment;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
 import android.util.Log;
+import android.view.View;
 
 import com.example.embeddedprogrammingassignment.fragments.HomeFragment;
 import com.example.embeddedprogrammingassignment.fragments.ProfileFragment;
@@ -29,57 +38,51 @@ import com.google.firebase.database.ValueEventListener;
 import org.parceler.Parcels;
 
 import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.Deque;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
-    Deque<Integer> integerDeque = new ArrayDeque<>(4);
+    NavHostFragment navHostFragment;
     boolean openFlag = true;
     User user;
     Bundle bundle;
+
+    Toolbar toolbar;
+    private final List<Integer> list = Arrays.asList(R.id.homeFragment, R.id.statisticsFragment, R.id.traceFragment, R.id.profileFragment);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        bottomNavigationView = findViewById(R.id.navbar);
+        toolbar = findViewById(R.id.toolbar);
 
         getActiveUser();
 
-        integerDeque.push(R.id.Home);
-        // Load initial Fragment & set initial bot nav item
-        loadFragment(new SelfReportCovidFragment());
-        bottomNavigationView.setSelectedItemId(R.id.Home);
+        bottomNavigationView = findViewById(R.id.navbar);
+        navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragContainer);
+        assert navHostFragment != null;
+        NavController navController = navHostFragment.getNavController();
 
-        bottomNavigationView.setOnItemSelectedListener(item -> {
-            //Get selected item id
-            int id = item.getItemId();
-            if(integerDeque.contains(id)) {
-                //When deque list contains selected id
-                //Check condition
-                if(id == R.id.Home) {
-                    //When selected id is the home fragment id
-                    if(integerDeque.size() != 1) {
-                        //When deque list size is not equal to 1
-                        if(openFlag){
-                            Log.d("Deque Home", integerDeque.toString());
-                            integerDeque.addFirst(R.id.Home);
-                            openFlag = false;
-                        }
-                    }
+        AppBarConfiguration appBarConfiguration =
+                new AppBarConfiguration.Builder(navController.getGraph()).build();
+
+        NavigationUI.setupWithNavController(bottomNavigationView, navController);
+        NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration);
+
+        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
+            @Override
+            public void onDestinationChanged(@NonNull NavController navController, @NonNull NavDestination navDestination, @Nullable Bundle bundle) {
+                if(list.contains(navDestination.getId())) {
+                    toolbar.setVisibility(View.GONE);
                 }
-                //Remove selected id from deque list
-                Log.d("Deque Removed", integerDeque.toString());
-                integerDeque.remove(id);
+                else {
+                    toolbar.setVisibility(View.VISIBLE);
+                }
             }
-            //Push selected id in deque list
-            Log.d("Deque Pushed", integerDeque.toString());
-            integerDeque.push(id);
-            //Load fragment
-            loadFragment(getFragment(item.getItemId()));
-            return true;
         });
     }
 
@@ -103,44 +106,5 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-    }
-
-    @SuppressLint("NonConstantResourceId")
-    private Fragment getFragment(int itemId) {
-        switch (itemId) {
-            case R.id.Home:
-                bottomNavigationView.getMenu().getItem(0).setChecked(true);
-                return new HomeFragment();
-            case R.id.Statistic:
-                bottomNavigationView.getMenu().getItem(1).setChecked(true);
-                return new StatisticsFragment();
-            case R.id.Trace:
-                bottomNavigationView.getMenu().getItem(2).setChecked(true);
-                return new TraceFragment();
-            case R.id.Profile:
-                bottomNavigationView.getMenu().getItem(3).setChecked(true);
-                return new ProfileFragment();
-        }
-
-        //Default
-        bottomNavigationView.getMenu().getItem(0).setChecked(true);
-        return new HomeFragment();
-    }
-
-    private void loadFragment(Fragment fragment) {
-        fragment.setArguments(bundle);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragContainer, fragment).commit();
-    }
-
-    @Override
-    public void onBackPressed() {
-        integerDeque.pop();
-        Log.d("Deque Popped", integerDeque.toString());
-        if (!integerDeque.isEmpty()) {
-            loadFragment(getFragment(integerDeque.peek()));
-        }
-        else {
-            finish();
-        }
     }
 }

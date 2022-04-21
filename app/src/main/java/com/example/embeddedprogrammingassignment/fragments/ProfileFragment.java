@@ -3,6 +3,7 @@ package com.example.embeddedprogrammingassignment.fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,8 +35,9 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        assert getArguments() != null;
-        user = Parcels.unwrap(getArguments().getParcelable("activeUser"));
+//        assert getArguments() != null;
+//        user = Parcels.unwrap(getArguments().getParcelable("activeUser"));
+        user = new User("Alvin","Alvin","Alvin","Alvin","Alvin","Alvin");
 
         nameTv = view.findViewById(R.id.tvProfileName);
         nricTv = view.findViewById(R.id.tvProfileNRIC);
@@ -53,7 +55,7 @@ public class ProfileFragment extends Fragment {
         editProfileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragContainer, new EditProfileFragment()).commit();
+                Navigation.findNavController(view).navigate(R.id.action_profileFragment_to_editProfileFragment);
             }
         });
 

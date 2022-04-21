@@ -51,8 +51,8 @@ public class EditProfileFragment extends Fragment {
         stateEt = view.findViewById(R.id.etEditProfileState);
         genderView = view.findViewById(R.id.EditProfileGenderDropDown);
         stateView = view.findViewById(R.id.EditProfileStateDropDown);
-        toolbar = view.findViewById(R.id.toolbar);
-        toolbar.setTitle("Edit Profile");
+        toolbar = view.findViewById(R.id.toolbar_place);
+
 
         // user = Parcels.unwrap(getArguments().getParcelable("activeUser"));
 

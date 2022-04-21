@@ -30,8 +30,9 @@ public class TraceFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_trace, container, false);
 
-        assert getArguments() != null;
-        user = Parcels.unwrap(getArguments().getParcelable("activeUser"));
+//        assert getArguments() != null;
+//        user = Parcels.unwrap(getArguments().getParcelable("activeUser"));
+        user = new User("Alvin","Alvin","Alvin","Alvin","Alvin","Alvin");
 
         fragmentTitleTv = view.findViewById(R.id.tvCarduserFragmentTitle);
         fragmentTitleTv.setText("Check-in");
