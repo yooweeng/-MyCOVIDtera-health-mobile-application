@@ -1,5 +1,8 @@
 package com.example.embeddedprogrammingassignment.modal;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class User {
     String nric, password, name, phone, gender, state;
 

@@ -13,6 +13,79 @@
         <include
             layout="@layout/cardview_user_profile" />
 
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginTop="5dp"
+            app:cardBackgroundColor="#FFF1CD"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="5dp"
+            android:layout_marginBottom="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvProfileVaxStatusTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/amiko_bold"
+                    android:maxLines="1"
+                    android:text="COVID-19 Vaccine Status"
+                    android:textColor="@color/black_txt"
+                    android:textSize="20sp"
+                    android:layout_marginTop="15dp"/>
+
+                <ImageView
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_straight_line_black"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:id="@+id/tvProfileVaxStatusName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/amiko_bold"
+                    android:text="Name"
+                    android:textColor="@color/black_txt"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/tvProfileVaxStatusNRIC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/amiko_semibold"
+                    android:text="NRIC"
+                    android:textColor="@color/black_txt"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvProfileVaxStatusPhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/amiko_semibold"
+                    android:text="Name"
+                    android:textColor="@color/black_txt"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
     </LinearLayout>
 
 </ScrollView>
