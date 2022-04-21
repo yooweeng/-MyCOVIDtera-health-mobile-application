@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     Bundle bundle;
 
     Toolbar toolbar;
-    private final List<Integer> list = Arrays.asList(R.id.homeFragment, R.id.statisticsFragment, R.id.traceFragment, R.id.profileFragment);
+    private final List<Integer> list = Arrays.asList(R.id.homeFragment, R.id.statisticsFragment, R.id.traceFragment, R.id.profileFragment, R.id.action_homeFragment_to_thingsToDoActivity);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
