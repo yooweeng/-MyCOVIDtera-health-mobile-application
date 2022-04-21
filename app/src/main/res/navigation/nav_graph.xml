@@ -58,7 +58,11 @@
         android:id="@+id/checkInSuccessfulFragment"
         android:name="com.example.embeddedprogrammingassignment.fragments.trace.CheckInSuccessfulFragment"
         android:label="fragment_checkin_successful"
-        tools:layout="@layout/fragment_checkin_successful" />
+        tools:layout="@layout/fragment_checkin_successful" >
+        <action
+            android:id="@+id/action_checkInSuccessfulFragment_to_traceFragment"
+            app:destination="@id/traceFragment" />
+    </fragment>
     <fragment
         android:id="@+id/selfReportCovidFragment"
         android:name="com.example.embeddedprogrammingassignment.fragments.home.SelfReportCovidFragment"
