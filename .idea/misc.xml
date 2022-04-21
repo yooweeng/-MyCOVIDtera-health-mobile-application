@@ -15,11 +15,13 @@
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/cardview_user_profile.xml" value="0.4" />
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/cardview_user_vaccine_doses.xml" value="0.6" />
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/fragment_checkin_successful.xml" value="0.264" />
+        <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/fragment_edit_profile.xml" value="0.1" />
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/fragment_profile.xml" value="0.176" />
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/fragment_qr_history.xml" value="0.1102077687443541" />
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/fragment_self_report_covid.xml" value="0.4" />
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/fragment_trace.xml" value="0.152" />
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/register_gender_dropdown_item.xml" value="0.10078125" />
+        <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/toolbar_back_button.xml" value="0.1" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MyCOVIDtera/app/src/main/res/drawable/button_login.xml" value="0.149" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MyCOVIDtera/app/src/main/res/layout/activity_forget_password.xml" value="0.21557971014492755" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MyCOVIDtera/app/src/main/res/layout/activity_login.xml" value="0.264" />
