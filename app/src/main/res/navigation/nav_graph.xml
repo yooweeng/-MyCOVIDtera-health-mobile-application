@@ -80,4 +80,9 @@
         android:name="com.example.embeddedprogrammingassignment.fragments.home.things_to_do.ThingsToDoActivity"
         android:label="activity_things_to_do"
         tools:layout="@layout/activity_things_to_do" />
+    <fragment
+        android:id="@+id/riskStatusFragment"
+        android:name="com.example.embeddedprogrammingassignment.fragments.home.RiskStatusFragment"
+        android:label="fragment_risk_status"
+        tools:layout="@layout/fragment_risk_status" />
 </navigation>
