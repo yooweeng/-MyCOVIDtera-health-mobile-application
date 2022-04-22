@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".fragments.home.things_to_do.ThingsToDoActivity">
 
-    <com.cuberto.liquid_swipe.LiquidPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/vpThingsToDo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
