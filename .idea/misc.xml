@@ -52,6 +52,18 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/MyCOVIDtera/app/src/main/res/layout/fragment_trace.xml" value="0.2" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MyCOVIDtera/app/src/main/res/layout/register_gender_dropdown_item.xml" value="0.1140625" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MyCOVIDtera/app/src/main/res/layout/register_state_dropdown_item.xml" value="0.21557971014492755" />
+        <entry key="..\:/Users/User/Documents/Mobile Application System Design/MyCOVIDtera/app/src/main/res/drawable/bg_main_material.xml" value="0.14635416666666667" />
+        <entry key="..\:/Users/User/Documents/Mobile Application System Design/MyCOVIDtera/app/src/main/res/drawable/button_login.xml" value="0.14635416666666667" />
+        <entry key="..\:/Users/User/Documents/Mobile Application System Design/MyCOVIDtera/app/src/main/res/drawable/circle_indicator.xml" value="0.14635416666666667" />
+        <entry key="..\:/Users/User/Documents/Mobile Application System Design/MyCOVIDtera/app/src/main/res/drawable/ic_user.xml" value="0.14635416666666667" />
+        <entry key="..\:/Users/User/Documents/Mobile Application System Design/MyCOVIDtera/app/src/main/res/drawable/main_material_design.xml" value="0.14635416666666667" />
+        <entry key="..\:/Users/User/Documents/Mobile Application System Design/MyCOVIDtera/app/src/main/res/drawable/navbar_selector.xml" value="0.14635416666666667" />
+        <entry key="..\:/Users/User/Documents/Mobile Application System Design/MyCOVIDtera/app/src/main/res/layout/activity_main.xml" value="0.13020833333333334" />
+        <entry key="..\:/Users/User/Documents/Mobile Application System Design/MyCOVIDtera/app/src/main/res/layout/cardview_user_profile.xml" value="0.13020833333333334" />
+        <entry key="..\:/Users/User/Documents/Mobile Application System Design/MyCOVIDtera/app/src/main/res/layout/fragment_home.xml" value="0.264" />
+        <entry key="..\:/Users/User/Documents/Mobile Application System Design/MyCOVIDtera/app/src/main/res/layout/fragment_profile.xml" value="0.13020833333333334" />
+        <entry key="..\:/Users/User/Documents/Mobile Application System Design/MyCOVIDtera/app/src/main/res/layout/main_material_design.xml" value="0.13020833333333334" />
+        <entry key="..\:/Users/User/Documents/Mobile Application System Design/MyCOVIDtera/app/src/main/res/menu/navbar.xml" value="0.13020833333333334" />
       </map>
     </option>
   </component>
