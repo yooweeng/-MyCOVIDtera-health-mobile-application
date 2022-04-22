@@ -25,7 +25,9 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
         thingsToDoBtn = view.findViewById(R.id.btnHomeThingsToDo);
+
         thingsToDoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
