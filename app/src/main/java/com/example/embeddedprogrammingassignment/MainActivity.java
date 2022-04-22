@@ -64,17 +64,17 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
 
-        getActiveUser();
+//        getActiveUser();
 
         bottomNavigationView = findViewById(R.id.navbar);
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragContainer);
         assert navHostFragment != null;
         NavController navController = navHostFragment.getNavController();
-        navController.navigate(R.id.riskStatusFragment);
+
         AppBarConfiguration appBarConfiguration =
                 new AppBarConfiguration.Builder(navController.getGraph()).build();
 
-        NavigationUI.setupWithNavController(bottomNavigationView, navController);
+//        NavigationUI.setupWithNavController(bottomNavigationView, navController);
         NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration);
 
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {

@@ -93,6 +93,20 @@
 
         </com.google.android.material.card.MaterialCardView>
 
+        <Button
+            android:id="@+id/btnProfileLogout"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Log out"
+            android:textColor="@color/purple_btn" />
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieProfileLogoutBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:lottie_rawRes="@raw/lottie_delete"
+            android:layout_gravity="center_horizontal"/>
+
     </LinearLayout>
 
 </ScrollView>
