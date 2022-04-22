@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.home.RiskStatusFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tvLabelHealthRiskAssessment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:fontFamily="@font/amiko_bold"
+            android:text="Health Risk Assessment"
+            android:textColor="@color/black_txt"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvq1"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLabelHealthRiskAssessment"
+            app:cardElevation="30dp"
+            app:cardCornerRadius="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/amiko_bold"
+                    android:text="1. What symptoms of COVID-19 are you exhibiting?"
+                    android:textColor="@color/black_txt"
+                    android:textSize="18sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="match_parent"
+                    style="@style/Widget.AppCompat.CompoundButton.RadioButton"
+                    android:layout_height="30dp"
+                    android:text="Fever"
+                    android:textColor="@color/black_txt"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/amiko_semibold"/>
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="match_parent"
+                    style="@style/Widget.AppCompat.CompoundButton.RadioButton"
+                    android:layout_height="30dp"
+                    android:text="Cough"
+                    android:textColor="@color/black_txt"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/amiko_semibold"/>
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="match_parent"
+                    style="@style/Widget.AppCompat.CompoundButton.RadioButton"
+                    android:layout_height="30dp"
+                    android:text="Difficulty in breathing"
+                    android:textColor="@color/black_txt"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/amiko_semibold"/>
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="match_parent"
+                    style="@style/Widget.AppCompat.CompoundButton.RadioButton"
+                    android:layout_height="30dp"
+                    android:text="Sore throat"
+                    android:textColor="@color/black_txt"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/amiko_semibold"/>
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="match_parent"
+                    style="@style/Widget.AppCompat.CompoundButton.RadioButton"
+                    android:layout_height="30dp"
+                    android:text="Headache"
+                    android:textColor="@color/black_txt"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/amiko_semibold"/>
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="match_parent"
+                    style="@style/Widget.AppCompat.CompoundButton.RadioButton"
+                    android:layout_height="30dp"
+                    android:text="Lost of smell"
+                    android:textColor="@color/black_txt"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/amiko_semibold"/>
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="match_parent"
+                    style="@style/Widget.AppCompat.CompoundButton.RadioButton"
+                    android:layout_height="30dp"
+                    android:text="Loss of taste"
+                    android:textColor="@color/black_txt"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/amiko_semibold"/>
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="match_parent"
+                    style="@style/Widget.AppCompat.CompoundButton.RadioButton"
+                    android:layout_height="30dp"
+                    android:text="Chills"
+                    android:textColor="@color/black_txt"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/amiko_semibold"/>
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="match_parent"
+                    style="@style/Widget.AppCompat.CompoundButton.RadioButton"
+                    android:layout_height="30dp"
+                    android:text="Diarrhea"
+                    android:textColor="@color/black_txt"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/amiko_semibold"/>
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="match_parent"
+                    style="@style/Widget.AppCompat.CompoundButton.RadioButton"
+                    android:layout_height="30dp"
+                    android:text="Fatique"
+                    android:textColor="@color/black_txt"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/amiko_semibold"/>
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="match_parent"
+                    style="@style/Widget.AppCompat.CompoundButton.RadioButton"
+                    android:layout_height="30dp"
+                    android:text="Nausea or vomiting"
+                    android:textColor="@color/black_txt"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/amiko_semibold"/>
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="match_parent"
+                    style="@style/Widget.AppCompat.CompoundButton.RadioButton"
+                    android:layout_height="50dp"
+                    android:fontFamily="@font/amiko_semibold"
+                    android:text="Runny nose or nausal congestion"
+                    android:textColor="@color/black_txt"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvq2"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cvq1">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="25dp"
+                android:paddingTop="10dp"
+                android:paddingRight="25dp"
+                android:paddingBottom="10dp">
+
+                <TextView
+                    android:id="@+id/tvLabelq2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/amiko_bold"
+                    android:text="2. Have you attend any event/ areas associated with known COVID-19 cluster?"
+                    android:textColor="@color/black_txt"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.button.MaterialButtonToggleGroup
+                    android:id="@+id/tgq2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:singleSelection="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvLabelq2">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnq2Yes"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Yes"
+                        android:backgroundTint="@color/white"
+                        android:textColor="@color/black_txt"
+                        android:textSize="17dp"
+                        app:cornerRadius="20dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnq2No"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
+                        android:text="No"
+                        android:textColor="@color/black_txt"
+                        android:textSize="17dp"
+                        app:cornerRadius="20dp" />
+
+                </com.google.android.material.button.MaterialButtonToggleGroup>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvq3"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cvq2">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="25dp"
+                android:paddingTop="10dp"
+                android:paddingRight="25dp"
+                android:paddingBottom="10dp">
+
+                <TextView
+                    android:id="@+id/tvLabelq3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/amiko_bold"
+                    android:text="3. Have you travelled abroad within the last 14 days?"
+                    android:textColor="@color/black_txt"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.button.MaterialButtonToggleGroup
+                    android:id="@+id/tgq3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:singleSelection="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvLabelq3">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnq3Yes"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
+                        android:text="Yes"
+                        android:textColor="@color/black_txt"
+                        android:textSize="17dp"
+                        app:cornerRadius="20dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvLabelq3" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnq3No"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
+                        android:text="No"
+                        android:textColor="@color/black_txt"
+                        android:textSize="17dp"
+                        app:cornerRadius="20dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvLabelq3" />
+
+                </com.google.android.material.button.MaterialButtonToggleGroup>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvq4"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cvq3">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="25dp"
+                android:paddingTop="10dp"
+                android:paddingRight="25dp"
+                android:paddingBottom="10dp">
+
+                <TextView
+                    android:id="@+id/tvLabelq4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/amiko_bold"
+                    android:text="4. Have you close contact with any confrimed or suspected COVID-19 cases within last 14 days?"
+                    android:textColor="@color/black_txt"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.button.MaterialButtonToggleGroup
+                    android:id="@+id/tgq4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:singleSelection="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvLabelq4">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnq4Yes"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
+                        android:text="Yes"
+                        android:textColor="@color/black_txt"
+                        android:textSize="17dp"
+                        app:cornerRadius="20dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvLabelq4" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnq4No"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
+                        android:text="No"
+                        android:textColor="@color/black_txt"
+                        android:textSize="17dp"
+                        app:cornerRadius="20dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvLabelq4" />
+
+                </com.google.android.material.button.MaterialButtonToggleGroup>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/btnSubmitRiskStatus"
+            android:layout_width="320dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="25dp"
+            android:backgroundTint="@color/purple_btn"
+            android:fontFamily="@font/amiko_semibold"
+            android:text="Submit"
+            android:textAllCaps="false"
+            android:textColor="#ffff"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cvq4" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

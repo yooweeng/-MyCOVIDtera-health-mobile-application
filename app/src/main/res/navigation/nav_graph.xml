@@ -29,7 +29,7 @@
         android:id="@+id/editProfileFragment"
         android:name="com.example.embeddedprogrammingassignment.fragments.profile.EditProfileFragment"
         android:label="Edit Profile"
-        tools:layout="@layout/fragment_edit_profile" >
+        tools:layout="@layout/fragment_profile_edit_profile" >
         <action
             android:id="@+id/action_editProfileFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
@@ -47,7 +47,7 @@
         android:id="@+id/qrHistoryFragment"
         android:name="com.example.embeddedprogrammingassignment.fragments.trace.QrHistoryFragment"
         android:label="fragment_qr_history"
-        tools:layout="@layout/fragment_qr_history" >
+        tools:layout="@layout/fragment_trace_qr_history" >
         <action
             android:id="@+id/action_qrHistoryFragment_to_traceFragment"
             app:destination="@id/traceFragment" />
@@ -61,7 +61,7 @@
         android:id="@+id/checkInSuccessfulFragment"
         android:name="com.example.embeddedprogrammingassignment.fragments.trace.CheckInSuccessfulFragment"
         android:label="fragment_checkin_successful"
-        tools:layout="@layout/fragment_checkin_successful" >
+        tools:layout="@layout/fragment_trace_checkin_successful" >
         <action
             android:id="@+id/action_checkInSuccessfulFragment_to_traceFragment"
             app:destination="@id/traceFragment" />
@@ -70,7 +70,7 @@
         android:id="@+id/selfReportCovidFragment"
         android:name="com.example.embeddedprogrammingassignment.fragments.home.SelfReportCovidFragment"
         android:label="fragment_self_report_covid"
-        tools:layout="@layout/fragment_self_report_covid" >
+        tools:layout="@layout/fragment_home_self_report_covid" >
         <action
             android:id="@+id/action_selfReportCovidFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
@@ -84,5 +84,5 @@
         android:id="@+id/riskStatusFragment"
         android:name="com.example.embeddedprogrammingassignment.fragments.home.RiskStatusFragment"
         android:label="fragment_risk_status"
-        tools:layout="@layout/fragment_risk_status" />
+        tools:layout="@layout/fragment_home_risk_status" />
 </navigation>

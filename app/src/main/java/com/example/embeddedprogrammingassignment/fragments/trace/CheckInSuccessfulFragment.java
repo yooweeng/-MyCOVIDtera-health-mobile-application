@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.embeddedprogrammingassignment.R;
-import com.example.embeddedprogrammingassignment.fragments.TraceFragment;
 
 
 public class CheckInSuccessfulFragment extends Fragment {
@@ -22,7 +21,7 @@ public class CheckInSuccessfulFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_checkin_successful, container, false);
+        View view= inflater.inflate(R.layout.fragment_trace_checkin_successful, container, false);
 
         checkoutBtn=view.findViewById(R.id.btnCheckout);
 

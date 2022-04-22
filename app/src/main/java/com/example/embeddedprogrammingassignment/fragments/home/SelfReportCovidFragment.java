@@ -2,7 +2,6 @@ package com.example.embeddedprogrammingassignment.fragments.home;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.content.res.ColorStateList;
 import android.os.Bundle;
 
 import androidx.core.content.ContextCompat;
@@ -12,12 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.example.embeddedprogrammingassignment.R;
-
-import java.util.List;
 
 public class SelfReportCovidFragment extends Fragment {
 
@@ -32,7 +28,7 @@ public class SelfReportCovidFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view=inflater.inflate(R.layout.fragment_self_report_covid, container, false);
+        View view=inflater.inflate(R.layout.fragment_home_self_report_covid, container, false);
 
         infoButton=view.findViewById(R.id.ivInfo);
         testkitPositive=view.findViewById(R.id.ivTestkitPositive);

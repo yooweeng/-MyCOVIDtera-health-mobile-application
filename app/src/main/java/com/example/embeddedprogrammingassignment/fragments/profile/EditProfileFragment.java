@@ -17,8 +17,6 @@ import com.example.embeddedprogrammingassignment.R;
 import com.example.embeddedprogrammingassignment.modal.User;
 import com.google.android.material.textfield.TextInputLayout;
 
-import org.parceler.Parcels;
-
 public class EditProfileFragment extends Fragment {
 
     public EditProfileFragment() {
@@ -40,7 +38,7 @@ public class EditProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_edit_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile_edit_profile, container, false);
 
         nricEt = view.findViewById(R.id.etEditProfileIC);
         passwordEt1 = view.findViewById(R.id.etEditProfilePwd);
