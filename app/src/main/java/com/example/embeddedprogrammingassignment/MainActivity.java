@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragContainer);
         assert navHostFragment != null;
         NavController navController = navHostFragment.getNavController();
-        navController.navigate(R.id.riskStatusFragment);
+
         AppBarConfiguration appBarConfiguration =
                 new AppBarConfiguration.Builder(navController.getGraph()).build();
 

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.TextView;
 
 import com.example.embeddedprogrammingassignment.R;
 import com.example.embeddedprogrammingassignment.modal.User;
@@ -27,7 +28,8 @@ public class EditProfileFragment extends Fragment {
 
     Toolbar toolbar;
     ArrayAdapter<String> genderAdapterItems, stateAdapterItems;
-    TextInputLayout nricEt, passwordEt1, passwordEt2, nameEt, phoneEt, genderEt, stateEt;
+    TextInputLayout passwordEt1, passwordEt2, phoneEt, genderEt, stateEt;
+    TextView nricEt, nameEt;
     AutoCompleteTextView genderView, stateView;
     User user;
 
@@ -42,10 +44,10 @@ public class EditProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edit_profile, container, false);
 
-        nricEt = view.findViewById(R.id.etEditProfileIC);
+        nricEt = view.findViewById(R.id.tvEditProfileNRIC);
         passwordEt1 = view.findViewById(R.id.etEditProfilePwd);
         passwordEt2 = view.findViewById(R.id.etEditProfileConfirmedPwd);
-        nameEt = view.findViewById(R.id.etEditProfileName);
+        nameEt = view.findViewById(R.id.tvEditProfileName);
         phoneEt = view.findViewById(R.id.etEditProfilePhone);
         genderEt = view.findViewById(R.id.etEditProfileGender);
         stateEt = view.findViewById(R.id.etEditProfileState);

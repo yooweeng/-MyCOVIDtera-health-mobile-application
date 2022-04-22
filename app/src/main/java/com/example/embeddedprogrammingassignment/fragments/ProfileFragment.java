@@ -1,16 +1,24 @@
 package com.example.embeddedprogrammingassignment.fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
+import com.example.embeddedprogrammingassignment.LoginActivity;
+import com.example.embeddedprogrammingassignment.MainActivity;
 import com.example.embeddedprogrammingassignment.R;
 import com.example.embeddedprogrammingassignment.fragments.profile.EditProfileFragment;
 import com.example.embeddedprogrammingassignment.modal.User;
@@ -28,6 +36,8 @@ public class ProfileFragment extends Fragment {
     TextView nricTv, phoneTv, stateTv, nameTv;
     TextView nricVaxTv, phoneVaxTv, nameVaxTv;
     ImageView editProfileBtn;
+    LottieAnimationView lottieBtn;
+    Button logOutBtn;
     User user;
 
     @Override
@@ -47,6 +57,8 @@ public class ProfileFragment extends Fragment {
         nameVaxTv = view.findViewById(R.id.tvProfileVaxStatusName);
         nricVaxTv = view.findViewById(R.id.tvProfileVaxStatusNRIC);
         phoneVaxTv = view.findViewById(R.id.tvProfileVaxStatusPhone);
+        lottieBtn = view.findViewById(R.id.lottieProfileLogoutBtn);
+        logOutBtn = view.findViewById(R.id.btnProfileLogout);
 
         stateTv.setText(user.getState());
         setDetails(nameTv, nricTv, phoneTv);
@@ -56,6 +68,41 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Navigation.findNavController(view).navigate(R.id.action_profileFragment_to_editProfileFragment);
+            }
+        });
+
+        logOutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
+                requireActivity().finish();
+            }
+        });
+
+        lottieBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog alert = new AlertDialog.Builder(getContext())
+                        .setTitle("Delete Account")
+                        .setMessage("Are you sure you want to delete the account?")
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                lottieBtn.playAnimation();
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Intent intent = new Intent(getActivity(), LoginActivity.class);
+                                        startActivity(intent);
+                                        requireActivity().finish();
+                                    }
+                                },2000);
+                            }
+                        })
+                        .setNegativeButton("Cancel", null)
+                        .show();
             }
         });
 
