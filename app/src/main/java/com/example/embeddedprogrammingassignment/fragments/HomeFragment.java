@@ -2,6 +2,7 @@ package com.example.embeddedprogrammingassignment.fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -10,7 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.cpacm.library.SimpleViewPager;
+import com.cpacm.library.transformers.CyclePageTransformer;
 import com.example.embeddedprogrammingassignment.R;
+import com.example.embeddedprogrammingassignment.adapter.ThingsToDoAdapter;
 
 
 public class HomeFragment extends Fragment {
@@ -19,21 +23,28 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
-    Button thingsToDoBtn;
+    SimpleViewPager thingsToDoSlider;
+    ThingsToDoAdapter thingsToDoAdapter;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        thingsToDoAdapter = new ThingsToDoAdapter(getContext());
+
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        thingsToDoBtn = view.findViewById(R.id.btnHomeThingsToDo);
+        thingsToDoSlider = view.findViewById(R.id.svpHomeThingsToDoSlider);
+        thingsToDoSlider.setAdapter(thingsToDoAdapter);
+        thingsToDoSlider.startAutoScroll(true);
+        thingsToDoSlider.setPageTransformer(new CyclePageTransformer(thingsToDoSlider));
 
-        thingsToDoBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_thingsToDoActivity);
-            }
-        });
         // Inflate the layout for this fragment
         return view;
     }

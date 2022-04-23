@@ -352,11 +352,14 @@
             android:textColor="@color/black_txt"
             android:textSize="30sp" />
 
-        <Button
-            android:id="@+id/btnHomeThingsToDo"
-            android:layout_width="wrap_content"
+        <include
+            layout="@layout/layout_things_scroll" />
+
+        <com.cpacm.library.SimpleViewPager
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Things to do" />
+            android:id="@+id/svpHomeThingsToDoSlider"
+            />
 
         <TextView
             android:id="@+id/tvAnnouncementTitle"
@@ -372,7 +375,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
-            android:padding="2dp">
+            android:padding="2dp"
+            >
         </androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
 </ScrollView>
