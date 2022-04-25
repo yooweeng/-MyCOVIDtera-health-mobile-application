@@ -29,10 +29,18 @@ public class ThingsToDoAdapter extends PagerAdapter {
 
     private List<Integer> getImagesList() {
         List<Integer> imageList = new ArrayList<Integer>();
-        imageList.add(R.raw.do_wear_mask);
-        imageList.add(R.raw.do_wash_hand);
-        imageList.add(R.raw.do_sanitize);
+        imageList.add(R.drawable.test1);
+        imageList.add(R.drawable.test1);
+        imageList.add(R.drawable.test1);
         return imageList;
+    }
+
+    public void setCovers() {
+        images.clear();
+        images.add(R.drawable.test1);
+        images.add(R.drawable.test1);
+        images.add(R.drawable.test1);
+        notifyDataSetChanged();
     }
 
     private final String[] imageTitle = new String[] {"Wear a mask!", "Wash your hands!", "Sanitize regularly!"};
@@ -46,10 +54,8 @@ public class ThingsToDoAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         View view = layoutInflater.inflate(R.layout.layout_things_scroll, container, false);
-        LottieAnimationView image = view.findViewById(R.id.lottieHomeThingsToDoLabel);
-        TextView title = view.findViewById(R.id.tvHomeThingsToDoLabel);
-        title.setText(imageTitle[position]);
-        image.setAnimation(images.get(position));
+        ImageView iv = view.findViewById(R.id.ivHomeThingsBanner);
+        iv.setImageResource(images.get(position));
         container.addView(view);
         return view;
     }

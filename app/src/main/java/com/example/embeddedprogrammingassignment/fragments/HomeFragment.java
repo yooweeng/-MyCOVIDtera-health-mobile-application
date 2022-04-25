@@ -31,8 +31,6 @@ public class HomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         thingsToDoAdapter = new ThingsToDoAdapter(getContext());
-
-
     }
 
     @Override
