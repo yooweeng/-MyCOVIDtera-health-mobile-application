@@ -20,6 +20,7 @@
     <color name="red_warning">#F14545</color>
     <color name="blue_selected">#D9E5FD</color>
     <color name="milk_bg">#FFFAED</color>
+    <color name="daily_bar_past">#C4C4C4</color>
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>

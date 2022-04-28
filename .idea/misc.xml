@@ -6,6 +6,8 @@
         <entry key="..\:/Users/USER/.gradle/caches/transforms-3/ab6e016150fde2d3ab833882876fc6fb/transformed/jetified-liquid-swipe-1.0.0/res/drawable-anydpi-v24/ic_button.xml" value="0.167" />
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/drawable/button_login.xml" value="0.1215" />
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/drawable/ic_straight_line_black.xml" value="0.2165" />
+        <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/drawable/progress_vertical.xml" value="0.1785" />
+        <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/drawable/progress_vertical_unselected.xml" value="0.1785" />
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/activity_forget_password.xml" value="0.10078125" />
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/activity_main.xml" value="0.22842105263157894" />
@@ -26,9 +28,10 @@
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/fragment_qr_history.xml" value="0.1102077687443541" />
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/fragment_risk_status.xml" value="0.11197916666666667" />
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/fragment_self_report_covid.xml" value="0.4" />
-        <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/fragment_statistics.xml" value="0.536" />
+        <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/fragment_statistics.xml" value="0.2" />
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/fragment_trace.xml" value="0.152" />
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/layout_things_scroll.xml" value="0.536" />
+        <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/progress_drawable_vertical.xml" value="0.16304347826086957" />
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/register_gender_dropdown_item.xml" value="0.10078125" />
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/toolbar_back_button.xml" value="0.1" />
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/menu/navbar.xml" value="0.25416666666666665" />
