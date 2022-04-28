@@ -29,21 +29,14 @@ public class ThingsToDoAdapter extends PagerAdapter {
 
     private List<Integer> getImagesList() {
         List<Integer> imageList = new ArrayList<Integer>();
-        imageList.add(R.drawable.test1);
-        imageList.add(R.drawable.test1);
-        imageList.add(R.drawable.test1);
-        imageList.add(R.drawable.test1);
+        imageList.add(R.drawable.banner1);
+        imageList.add(R.drawable.banner2);
+        imageList.add(R.drawable.banner3);
+        imageList.add(R.drawable.banner1);
+        imageList.add(R.drawable.banner2);
+        imageList.add(R.drawable.banner3);
 
         return imageList;
-    }
-
-    public void setCovers() {
-        images.clear();
-        images.add(R.drawable.test1);
-        images.add(R.drawable.test1);
-        images.add(R.drawable.test1);
-
-        notifyDataSetChanged();
     }
 
     private final String[] imageTitle = new String[] {"Wear a mask!", "Wash your hands!", "Sanitize regularly!"};
