@@ -352,12 +352,9 @@
             android:textColor="@color/black_txt"
             android:textSize="30sp" />
 
-        <include
-            layout="@layout/layout_things_scroll" />
-
         <com.cpacm.library.SimpleViewPager
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="160dp"
             android:id="@+id/svpHomeThingsToDoSlider"
             />
 

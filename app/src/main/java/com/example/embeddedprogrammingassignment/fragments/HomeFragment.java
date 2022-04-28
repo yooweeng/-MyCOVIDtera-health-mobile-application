@@ -6,10 +6,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+
 
 import com.cpacm.library.SimpleViewPager;
 import com.cpacm.library.transformers.CyclePageTransformer;
@@ -41,6 +42,7 @@ public class HomeFragment extends Fragment {
         thingsToDoSlider = view.findViewById(R.id.svpHomeThingsToDoSlider);
         thingsToDoSlider.setAdapter(thingsToDoAdapter);
         thingsToDoSlider.startAutoScroll(true);
+        thingsToDoSlider.setSliderDuration(7000);
         thingsToDoSlider.setPageTransformer(new CyclePageTransformer(thingsToDoSlider));
 
         // Inflate the layout for this fragment

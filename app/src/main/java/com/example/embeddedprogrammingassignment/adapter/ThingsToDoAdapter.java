@@ -5,13 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.navigation.Navigation;
 import androidx.viewpager.widget.PagerAdapter;
 
-import com.airbnb.lottie.LottieAnimationView;
 import com.example.embeddedprogrammingassignment.R;
 
 import java.util.ArrayList;
@@ -21,6 +20,7 @@ public class ThingsToDoAdapter extends PagerAdapter {
 
     List<Integer> images;
     LayoutInflater layoutInflater;
+    Boolean firstItem = true;
 
     public ThingsToDoAdapter(Context context) {
         images = getImagesList();
@@ -32,6 +32,8 @@ public class ThingsToDoAdapter extends PagerAdapter {
         imageList.add(R.drawable.test1);
         imageList.add(R.drawable.test1);
         imageList.add(R.drawable.test1);
+        imageList.add(R.drawable.test1);
+
         return imageList;
     }
 
@@ -40,6 +42,7 @@ public class ThingsToDoAdapter extends PagerAdapter {
         images.add(R.drawable.test1);
         images.add(R.drawable.test1);
         images.add(R.drawable.test1);
+
         notifyDataSetChanged();
     }
 
@@ -57,6 +60,14 @@ public class ThingsToDoAdapter extends PagerAdapter {
         ImageView iv = view.findViewById(R.id.ivHomeThingsBanner);
         iv.setImageResource(images.get(position));
         container.addView(view);
+
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_thingsToDoActivity);
+            }
+        });
+
         return view;
     }
 
