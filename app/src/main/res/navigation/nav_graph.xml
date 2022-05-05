@@ -91,8 +91,8 @@
     <fragment
         android:id="@+id/checkInScanFragment"
         android:name="com.example.embeddedprogrammingassignment.fragments.trace.CheckInScanFragment"
-        android:label="fragment_check_in_scan"
-        tools:layout="@layout/fragment_check_in_scan" >
+        android:label="Scan QR Code"
+        tools:layout="@layout/fragment_check_in_scan">
         <action
             android:id="@+id/action_checkInScanFragment_to_checkInSuccessfulFragment"
             app:destination="@id/checkInSuccessfulFragment" />

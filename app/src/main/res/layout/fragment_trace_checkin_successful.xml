@@ -37,29 +37,31 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
-                    android:text="User status:"
+                    android:layout_marginTop="16dp"
                     android:fontFamily="@font/amiko_semibold"
+                    android:text="User status:"
                     android:textColor="@color/black_txt"
                     android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                <include
+                    layout="@layout/cardview_covid_exposure_risk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textView3" />
 
-            <ImageView
-                android:layout_width="356dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="-130dp"
-                android:layout_marginStart="15dp"
-                android:src="@drawable/no_exposure" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_height="400dp"
                 android:layout_width="match_parent"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginStart="25dp"
                 android:layout_marginEnd="25dp"
                 app:cardElevation="10dp"
@@ -79,7 +81,7 @@
                         android:fontFamily="@font/amiko_bold"
                         android:text="Status"
                         android:textColor="@color/black_txt"
-                        android:textSize="30sp"
+                        android:textSize="28sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -92,7 +94,7 @@
                         android:fontFamily="@font/amiko_semibold"
                         android:text="Successful"
                         android:textColor="@color/green_warning"
-                        android:textSize="30sp"
+                        android:textSize="28sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -105,7 +107,7 @@
                         android:fontFamily="@font/amiko_semibold"
                         android:text="28-Mar-2022"
                         android:textColor="@color/black_txt"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
@@ -119,7 +121,7 @@
                         android:gravity="right"
                         android:text="Xiamen University Malaysia"
                         android:textColor="@color/black_txt"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
@@ -132,7 +134,7 @@
                         android:fontFamily="@font/amiko_semibold"
                         android:text="07:00:24"
                         android:textColor="@color/black_txt"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
@@ -145,7 +147,7 @@
                         android:fontFamily="@font/amiko_semibold"
                         android:text="Location"
                         android:textColor="@color/black_txt"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
@@ -158,7 +160,7 @@
                         android:fontFamily="@font/amiko_semibold"
                         android:text="Date"
                         android:textColor="@color/black_txt"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -171,7 +173,7 @@
                         android:fontFamily="@font/amiko_semibold"
                         android:text="Phone Number"
                         android:textColor="@color/black_txt"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
@@ -184,7 +186,7 @@
                         android:fontFamily="@font/amiko_semibold"
                         android:text="012-3456789"
                         android:textColor="@color/black_txt"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -197,7 +199,7 @@
                         android:fontFamily="@font/amiko_semibold"
                         android:text="NRIC"
                         android:textColor="@color/black_txt"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -210,7 +212,7 @@
                         android:fontFamily="@font/amiko_semibold"
                         android:text="000101-02-1234"
                         android:textColor="@color/black_txt"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -223,7 +225,7 @@
                         android:fontFamily="@font/amiko_semibold"
                         android:text="Time"
                         android:textColor="@color/black_txt"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView10" />
 

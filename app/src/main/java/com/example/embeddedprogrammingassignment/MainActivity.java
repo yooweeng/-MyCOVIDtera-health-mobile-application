@@ -86,6 +86,10 @@ public class MainActivity extends AppCompatActivity {
                 else {
                     toolbar.setVisibility(View.VISIBLE);
                 }
+
+                if(navDestination.getId()==R.id.checkInScanFragment){
+                    bottomNavigationView.setVisibility(View.GONE);
+                }
             }
         });
     }

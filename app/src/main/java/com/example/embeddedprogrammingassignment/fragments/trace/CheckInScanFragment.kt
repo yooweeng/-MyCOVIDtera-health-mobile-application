@@ -26,7 +26,6 @@ private const val CAMERA_REQUEST_CODE = 101
 
 class CheckInScanFragment : Fragment() {
     private lateinit var codeScanner: CodeScanner
-    private lateinit var tvResults: TextView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -43,7 +42,6 @@ class CheckInScanFragment : Fragment() {
 
     private fun codeScanner(view: View) {
         val codeScannerID = view.findViewById<CodeScannerView>(R.id.scanScanCode)
-        tvResults = view.findViewById<TextView>(R.id.tvScanResult)
 
         codeScanner = CodeScanner(requireContext(), codeScannerID)
         codeScanner.apply {
@@ -59,7 +57,6 @@ class CheckInScanFragment : Fragment() {
                 activity?.runOnUiThread {
                     // Write code here
                     val result: String = it.text
-                    tvResults.text = result
                     // if this is json file
                     if (result.contains("http://") || result.contains("www.") || result.contains("https://")) {
                         Log.i("Website", result)
