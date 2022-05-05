@@ -80,6 +80,16 @@ class CheckInScanFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        codeScanner.startPreview()
+    }
+
+    override fun onPause() {
+        codeScanner.releaseResources()
+        super.onPause()
+    }
+
     private fun setupPermission() {
         val permission: Int = ContextCompat.checkSelfPermission(requireContext(),
             android.Manifest.permission.CAMERA)
