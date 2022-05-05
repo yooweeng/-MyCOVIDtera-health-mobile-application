@@ -90,6 +90,9 @@ public class MainActivity extends AppCompatActivity {
                 if(navDestination.getId()==R.id.checkInScanFragment){
                     bottomNavigationView.setVisibility(View.GONE);
                 }
+                else{
+                    bottomNavigationView.setVisibility(View.VISIBLE);
+                }
             }
         });
     }
