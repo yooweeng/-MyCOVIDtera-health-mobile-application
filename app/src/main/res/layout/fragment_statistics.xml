@@ -283,6 +283,13 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:layout_margin="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:id="@+id/statisticsLineChart"
+            />
     </LinearLayout>
 
 </ScrollView>
