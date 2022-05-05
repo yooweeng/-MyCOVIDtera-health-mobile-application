@@ -42,6 +42,9 @@
         <action
             android:id="@+id/action_traceFragment_to_qrHistoryFragment"
             app:destination="@id/qrHistoryFragment" />
+        <action
+            android:id="@+id/action_traceFragment_to_checkInScanFragment"
+            app:destination="@id/checkInScanFragment" />
     </fragment>
     <fragment
         android:id="@+id/qrHistoryFragment"
@@ -85,4 +88,13 @@
         android:name="com.example.embeddedprogrammingassignment.fragments.home.RiskStatusFragment"
         android:label="fragment_risk_status"
         tools:layout="@layout/fragment_home_risk_status" />
+    <fragment
+        android:id="@+id/checkInScanFragment"
+        android:name="com.example.embeddedprogrammingassignment.fragments.trace.CheckInScanFragment"
+        android:label="fragment_check_in_scan"
+        tools:layout="@layout/fragment_check_in_scan" >
+        <action
+            android:id="@+id/action_checkInScanFragment_to_checkInSuccessfulFragment"
+            app:destination="@id/checkInSuccessfulFragment" />
+    </fragment>
 </navigation>

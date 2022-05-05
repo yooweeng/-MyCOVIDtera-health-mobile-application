@@ -3,10 +3,13 @@ package com.example.embeddedprogrammingassignment.fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,6 +26,7 @@ public class TraceFragment extends Fragment {
 
     TextView fragmentTitleTv, nricTv, phoneTv, stateTv, nameTv;
     ImageView fragmentEditProfileBtn;
+    Button checkInBtn;
     User user;
 
     @Override
@@ -49,6 +53,14 @@ public class TraceFragment extends Fragment {
 
         fragmentEditProfileBtn = view.findViewById(R.id.ivProfileEditBtn);
         fragmentEditProfileBtn.setVisibility(View.GONE);
+
+        checkInBtn = view.findViewById(R.id.btnCheckInQR);
+        checkInBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_traceFragment_to_checkInScanFragment);
+            }
+        });
 
         // Inflate the layout for this fragment
         return view;
