@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
+import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -17,6 +18,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.example.embeddedprogrammingassignment.fragments.HomeFragment;
@@ -46,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
     NavHostFragment navHostFragment;
-    boolean openFlag = true;
     User user;
     Bundle bundle;
 
@@ -66,10 +67,42 @@ public class MainActivity extends AppCompatActivity {
 
         getActiveUser();
 
+    }
+
+    private void getActiveUser() {
+        //To get the IC for user that has successfully logged in
+        Intent intent = getIntent();
+        String currActiveAcc = intent.getStringExtra("nric");
+        Log.d("Current Active Account @ Main Activity",  currActiveAcc);
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+        reference.child(currActiveAcc).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                user = snapshot.getValue(User.class);
+                setNavigationComponent();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
+    private void setNavigationComponent() {
+        bundle = new Bundle();
+        bundle.putParcelable("activeUser", Parcels.wrap(user));
+        Log.i("Count", user.toString());
         bottomNavigationView = findViewById(R.id.navbar);
+
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragContainer);
+
         assert navHostFragment != null;
         NavController navController = navHostFragment.getNavController();
+        navController.setGraph(R.navigation.nav_graph, bundle);
+
 
         AppBarConfiguration appBarConfiguration =
                 new AppBarConfiguration.Builder(navController.getGraph()).build();
@@ -95,27 +128,12 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-    }
 
-    private void getActiveUser() {
-        //To get the IC for user that has successfully logged in
-        Intent intent = getIntent();
-        String currActiveAcc = intent.getStringExtra("nric");
-        Log.d("Current Active Account:",  currActiveAcc);
+        bottomNavigationView.setOnItemSelectedListener(item -> {
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-        reference.child(currActiveAcc).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                user = snapshot.getValue(User.class);
-                bundle = new Bundle();
-                bundle.putParcelable("activeUser", Parcels.wrap(user));
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
+            navController.popBackStack(R.id.homeFragment, false);
+            navController.navigate(item.getItemId(), bundle);
+            return true;
         });
     }
 }

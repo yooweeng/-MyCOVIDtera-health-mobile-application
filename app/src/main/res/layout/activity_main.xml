@@ -23,8 +23,7 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar_place"
         android:layout_above="@+id/navbar"
-        app:defaultNavHost="true"
-        app:navGraph="@navigation/nav_graph" />
+        app:defaultNavHost="true" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navbar"

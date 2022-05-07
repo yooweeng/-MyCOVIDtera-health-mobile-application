@@ -37,6 +37,9 @@ public class StatisticsFragment extends Fragment {
     private ArrayList<Entry> total_cases_data = new ArrayList<>();
     private List<String> total_cases_label = new ArrayList<>();
 
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -73,10 +76,6 @@ public class StatisticsFragment extends Fragment {
         // Hooker
         LineChart lineChart = view.findViewById(R.id.statisticsLineChart);
 
-        // Pinch, click, zoom
-//        lineChart.setTouchEnabled(false);
-//        lineChart.setPinchZoom(false);
-
         // Axis Line
         XAxis xAxis = lineChart.getXAxis();
         YAxis leftAxis = lineChart.getAxisLeft();
@@ -100,13 +99,6 @@ public class StatisticsFragment extends Fragment {
         rightAxis.setEnabled(false);
         rightAxis.setGranularity(1f);
         leftAxis.setGranularity(1f);
-
-        // Legend
-        Legend legend = lineChart.getLegend();
-//        legend.setOrientation(Legend.LegendOrientation.VERTICAL);  //Set the legend horizontal display
-//        legend.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP); //top
-//        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT); //Right to it
-
 
         // Hide grid lines
         lineChart.getAxisRight().setDrawGridLines(false);

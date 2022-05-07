@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,9 @@ import com.cpacm.library.SimpleViewPager;
 import com.cpacm.library.transformers.CyclePageTransformer;
 import com.example.embeddedprogrammingassignment.R;
 import com.example.embeddedprogrammingassignment.adapter.ThingsToDoAdapter;
+import com.example.embeddedprogrammingassignment.modal.User;
+
+import org.parceler.Parcels;
 
 
 public class HomeFragment extends Fragment {
@@ -28,11 +32,15 @@ public class HomeFragment extends Fragment {
     CardView riskStatus,selfReport;
     SimpleViewPager thingsToDoSlider;
     ThingsToDoAdapter thingsToDoAdapter;
+    User user;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            user = Parcels.unwrap(getArguments().getParcelable("activeUser"));
+        }
         thingsToDoAdapter = new ThingsToDoAdapter(getContext());
     }
 

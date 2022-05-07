@@ -1,5 +1,7 @@
 package com.example.embeddedprogrammingassignment.modal;
 
+import androidx.annotation.NonNull;
+
 import org.parceler.Parcel;
 
 @Parcel
@@ -64,5 +66,17 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "nric='" + nric + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", gender='" + gender + '\'' +
+                ", state='" + state + '\'' +
+                '}';
     }
 }
