@@ -47,4 +47,5 @@ dependencies {
     annotationProcessor 'org.parceler:parceler:1.1.12'
     implementation 'io.github.cpacm:simpleslider:2.3.2'
     implementation 'com.github.yuriy-budiyev:code-scanner:2.1.2'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }

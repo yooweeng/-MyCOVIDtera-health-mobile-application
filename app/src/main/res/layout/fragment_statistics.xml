@@ -134,7 +134,7 @@
                     android:orientation="horizontal"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.62"
+
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView16"
                     app:layout_constraintVertical_bias="0.916">
@@ -157,7 +157,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="MON"
-                            android:layout_gravity="center"/>
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/amiko_semibold"
+                            android:textSize="11sp"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -177,7 +179,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="TUE"
-                            android:layout_gravity="center"/>
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/amiko_semibold"
+                            android:textSize="11sp"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -197,7 +201,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="WED"
-                            android:layout_gravity="center"/>
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/amiko_semibold"
+                            android:textSize="11sp"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -217,7 +223,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="THU"
-                            android:layout_gravity="center"/>
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/amiko_semibold"
+                            android:textSize="11sp"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -237,7 +245,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="FRI"
-                            android:layout_gravity="center"/>
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/amiko_semibold"
+                            android:textSize="11sp"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -257,7 +267,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="SAT"
-                            android:layout_gravity="center"/>
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/amiko_semibold"
+                            android:textSize="11sp"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -277,12 +289,49 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="SUN"
-                            android:layout_gravity="center"/>
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/amiko_semibold"
+                            android:textSize="11sp"/>
                     </LinearLayout>
                 </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="25dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="Total Cases in Malaysia (2022)"
+                    android:fontFamily="@font/amiko_bold"
+                    android:textColor="@color/black_txt"
+                    android:textSize="16sp"
+                    android:textAlignment="center"/>
+                <com.github.mikephil.charting.charts.LineChart
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="25dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:id="@+id/statisticsLineChart"
+                    />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
     </LinearLayout>
 
 </ScrollView>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="50dp"
+    android:background="@color/black_txt"
+    android:layout_margin="5dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvGraphMarkerView1"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="5dp"
+        android:textSize="11sp"
+        android:textColor="@color/white"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvGraphMarkerView2"
+        android:layout_below="@id/tvGraphMarkerView1"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="5dp"
+        android:textSize="11sp"
+        android:textColor="@color/white"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        />
+
+</RelativeLayout>
