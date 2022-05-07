@@ -1,6 +1,5 @@
 package com.example.embeddedprogrammingassignment.fragments.trace
 
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -8,7 +7,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
@@ -20,7 +18,6 @@ import com.budiyev.android.codescanner.CodeScannerView
 import com.budiyev.android.codescanner.DecodeCallback
 import com.budiyev.android.codescanner.ErrorCallback
 import com.budiyev.android.codescanner.ScanMode
-import com.example.embeddedprogrammingassignment.MainActivity
 import com.example.embeddedprogrammingassignment.R
 
 private const val CAMERA_REQUEST_CODE = 101
@@ -31,7 +28,7 @@ class CheckInScanFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_check_in_scan, container, false)
+        val view = inflater.inflate(R.layout.fragment_trace_check_in_scan, container, false)
         setupPermission()
         codeScanner(view)
         return view

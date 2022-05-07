@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_homeFragment_to_thingsToDoActivity"
             app:destination="@id/thingsToDoActivity" />
+        <action
+            android:id="@+id/action_homeFragment_to_riskStatusFragment"
+            app:destination="@id/riskStatusFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -72,8 +75,8 @@
     <fragment
         android:id="@+id/selfReportCovidFragment"
         android:name="com.example.embeddedprogrammingassignment.fragments.home.SelfReportCovidFragment"
-        android:label="fragment_self_report_covid"
-        tools:layout="@layout/fragment_home_self_report_covid" >
+        android:label="Self Report"
+        tools:layout="@layout/fragment_home_self_report_covid">
         <action
             android:id="@+id/action_selfReportCovidFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
@@ -86,13 +89,13 @@
     <fragment
         android:id="@+id/riskStatusFragment"
         android:name="com.example.embeddedprogrammingassignment.fragments.home.RiskStatusFragment"
-        android:label="fragment_risk_status"
+        android:label="Health Risk Assesment"
         tools:layout="@layout/fragment_home_risk_status" />
     <fragment
         android:id="@+id/checkInScanFragment"
         android:name="com.example.embeddedprogrammingassignment.fragments.trace.CheckInScanFragment"
         android:label="Scan QR Code"
-        tools:layout="@layout/fragment_check_in_scan">
+        tools:layout="@layout/fragment_trace_check_in_scan">
         <action
             android:id="@+id/action_checkInScanFragment_to_checkInSuccessfulFragment"
             app:destination="@id/checkInSuccessfulFragment" />
