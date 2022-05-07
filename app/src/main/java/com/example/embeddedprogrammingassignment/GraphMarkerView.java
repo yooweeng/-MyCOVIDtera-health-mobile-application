@@ -29,7 +29,7 @@ public class GraphMarkerView extends MarkerView {
     @Override
     public void refreshContent(Entry e, Highlight highlight) {
         tvContent1.setText("Cases: " + (int) e.getY());
-        tvContent2.setText("Date: " + mXLabels.get((int) e.getX()));
+        tvContent2.setText("Date: " + mXLabels.get((int) e.getX()-1));
         super.refreshContent(e, highlight);
     }
 
