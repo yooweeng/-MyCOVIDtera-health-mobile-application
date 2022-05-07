@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.navigation.Navigation
@@ -34,10 +35,6 @@ class CheckInScanFragment : Fragment() {
         setupPermission()
         codeScanner(view)
         return view
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
     }
 
     private fun codeScanner(view: View) {
@@ -98,18 +95,14 @@ class CheckInScanFragment : Fragment() {
             CAMERA_REQUEST_CODE)
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        when (requestCode) {
-            CAMERA_REQUEST_CODE -> {
-                if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(context, "You need the camera permission", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-    }
+//    private val permReqLauncher =
+//        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+//            val granted = permissions.entries.all {
+//                it.value == true
+//            }
+//            if (!granted) {
+//                Toast.makeText(context, "You need the camera permission", Toast.LENGTH_SHORT).show()
+//            }
+//        }
+
 }
