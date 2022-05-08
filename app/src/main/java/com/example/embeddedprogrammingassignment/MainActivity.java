@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
         assert navHostFragment != null;
         NavController navController = navHostFragment.getNavController();
-        navController.setGraph(R.navigation.nav_graph, bundle);
+        navController.setGraph(R.navigation.nav_graph);
 
 
         AppBarConfiguration appBarConfiguration =
@@ -129,11 +129,39 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        bottomNavigationView.setOnItemSelectedListener(item -> {
+        updateBottomNav(0, bundle);
 
-            navController.popBackStack(R.id.homeFragment, false);
-            navController.navigate(item.getItemId(), bundle);
+
+    }
+
+    private void updateBottomNav(int i, Bundle sendBundle) {
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            navHostFragment.getNavController().getGraph().addInDefaultArgs(sendBundle);
+            if (i==0)
+                navHostFragment.getNavController().popBackStack(R.id.homeFragment, false);
+            navHostFragment.getNavController().navigate(item.getItemId(), sendBundle);
             return true;
+        });
+    }
+
+    public void getUser() {
+        Intent intent = getIntent();
+        String currActiveAcc = intent.getStringExtra("nric");
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+        reference.child(currActiveAcc).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                user = snapshot.getValue(User.class);
+                Log.d("MainActivity user @ update ", user.toString());
+                bundle.putParcelable("activeUser", Parcels.wrap(user));
+                updateBottomNav(1, bundle);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
         });
     }
 }

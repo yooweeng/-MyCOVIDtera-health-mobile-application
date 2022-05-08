@@ -1,5 +1,7 @@
 package com.example.embeddedprogrammingassignment.fragments;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -29,7 +31,7 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
-    CardView riskStatus,selfReport;
+    CardView riskStatus,selfReport, hotlinePhone;
     SimpleViewPager thingsToDoSlider;
     ThingsToDoAdapter thingsToDoAdapter;
     User user;
@@ -51,6 +53,7 @@ public class HomeFragment extends Fragment {
 
         riskStatus=view.findViewById(R.id.riskStatusCard);
         selfReport=view.findViewById(R.id.selfReportCard);
+        hotlinePhone = view.findViewById(R.id.hotlineCard);
 
         riskStatus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +66,15 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_selfReportCovidFragment);
+            }
+        });
+
+        hotlinePhone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel: 01234567789"));
+                startActivity(intent);
             }
         });
 

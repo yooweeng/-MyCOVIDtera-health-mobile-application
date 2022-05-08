@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.embeddedprogrammingassignment.MainActivity;
 import com.example.embeddedprogrammingassignment.R;
 import com.example.embeddedprogrammingassignment.modal.User;
 import com.google.android.material.textfield.TextInputLayout;
@@ -30,6 +31,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import org.parceler.Parcels;
+
+import java.util.Objects;
 
 public class EditProfileFragment extends Fragment {
 
@@ -67,7 +70,6 @@ public class EditProfileFragment extends Fragment {
         stateView = view.findViewById(R.id.EditProfileStateDropDown);
         toolbar = view.findViewById(R.id.toolbar_place);
         updateBtn = view.findViewById(R.id.btnEditProfileUpdate);
-
 
         user = Parcels.unwrap(getArguments().getParcelable("activeUser"));
         nricEt.setText(user.getNric());
@@ -107,19 +109,25 @@ public class EditProfileFragment extends Fragment {
                 if (passwordEt1.getEditText().getText().toString().equals(passwordEt2.getEditText().getText().toString())) {
                     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
                     DatabaseReference databaseReference = firebaseDatabase.getReference("users");
-                    User updateDetails = new User();
-                    updateDetails.setNric(user.getNric());
-                    updateDetails.setGender(genderEt.getEditText().getText().toString());
-                    updateDetails.setName(user.getName());
-                    updateDetails.setPhone(phoneEt.getEditText().getText().toString());
-                    updateDetails.setPassword(passwordEt1.getEditText().getText().toString());
-                    updateDetails.setState(stateEt.getEditText().getText().toString());
+                    User updateUser = new User();
+                    updateUser.setNric(user.getNric());
+                    updateUser.setGender(genderEt.getEditText().getText().toString());
+                    updateUser.setName(user.getName());
+                    updateUser.setPhone(phoneEt.getEditText().getText().toString());
+                    updateUser.setPassword(passwordEt1.getEditText().getText().toString());
+                    updateUser.setState(stateEt.getEditText().getText().toString());
 
                     databaseReference.child(user.getNric()).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if(snapshot.exists()) {
-                                databaseReference.child(user.getNric()).setValue(updateDetails);
+                                databaseReference.child(user.getNric()).setValue(updateUser);
+                                Log.d("EditActivity user @ after update dr ", updateUser.toString());
+                                Bundle bundle = new Bundle();
+                                bundle.putParcelable("activeUser", Parcels.wrap(updateUser));
+                                Log.d("EditActivity user @ update ", updateUser.toString());
+                                ((MainActivity) requireActivity()).getUser();
+                                Navigation.findNavController(view).navigate(R.id.action_editProfileFragment_to_profileFragment, bundle);
                             }
                         }
 
@@ -128,9 +136,7 @@ public class EditProfileFragment extends Fragment {
 
                         }
                     });
-                    Bundle bundle = new Bundle();
-                    bundle.putParcelable("activeUser", Parcels.wrap(updateDetails));
-                    Navigation.findNavController(view).navigate(R.id.action_editProfileFragment_to_profileFragment, bundle);
+
                 } else {
                     Toast.makeText(getContext(), "Password reset failed! You have entered incorrect passwords.", Toast.LENGTH_SHORT).show();
                 }
