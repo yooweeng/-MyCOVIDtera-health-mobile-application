@@ -128,10 +128,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
         updateBottomNav(0, bundle);
-
-
     }
 
     private void updateBottomNav(int i, Bundle sendBundle) {

@@ -102,7 +102,8 @@
                         android:text="Vaccination"
                         android:textSize="10sp"
                         android:layout_marginTop="3dp"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -262,7 +263,8 @@
                         android:text="SOP Guideline"
                         android:textSize="10sp"
                         android:layout_marginTop="3dp"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textAlignment="center"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -300,7 +302,8 @@
                         android:fontFamily="@font/abhaya_libre_extrabold"
                         android:text="SOP Violation"
                         android:textColor="@color/black"
-                        android:textSize="10sp" />
+                        android:textSize="10sp"
+                        android:textAlignment="center"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -336,7 +339,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/abhaya_libre_extrabold"
                         android:text="FAQs"
-                        android:textSize="12sp"
+                        android:textSize="10sp"
                         android:layout_marginTop="3dp"
                         android:textColor="@color/black" />
                 </LinearLayout>

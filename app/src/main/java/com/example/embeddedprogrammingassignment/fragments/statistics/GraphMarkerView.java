@@ -1,9 +1,10 @@
-package com.example.embeddedprogrammingassignment;
+package com.example.embeddedprogrammingassignment.fragments.statistics;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.widget.TextView;
 
+import com.example.embeddedprogrammingassignment.R;
 import com.github.mikephil.charting.components.MarkerView;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.highlight.Highlight;

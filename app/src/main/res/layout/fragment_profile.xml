@@ -99,7 +99,9 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="Log out"
-            android:textColor="@color/purple_btn" />
+            android:textColor="@color/purple_btn"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"/>
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/lottieProfileLogoutBtn"
             android:layout_width="50dp"

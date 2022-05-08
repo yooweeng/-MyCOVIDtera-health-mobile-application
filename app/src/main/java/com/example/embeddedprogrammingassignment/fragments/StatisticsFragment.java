@@ -1,5 +1,6 @@
 package com.example.embeddedprogrammingassignment.fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,12 +10,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
-import com.example.embeddedprogrammingassignment.GraphMarkerView;
+import com.example.embeddedprogrammingassignment.fragments.statistics.DailyCases;
+import com.example.embeddedprogrammingassignment.fragments.statistics.GraphMarkerView;
 import com.example.embeddedprogrammingassignment.R;
 import com.example.embeddedprogrammingassignment.modal.PointValueLabel;
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
@@ -27,7 +30,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class StatisticsFragment extends Fragment {
@@ -36,14 +42,23 @@ public class StatisticsFragment extends Fragment {
     DatabaseReference databaseReference;
     private ArrayList<Entry> total_cases_data = new ArrayList<>();
     private List<String> total_cases_label = new ArrayList<>();
-
-
-
+    List<Integer> dailyCasesProgress;
+    ProgressBar progMon, progTue, progWed, progThurs, progFri, progSat, progSun;
+    TextView dailyCasesTv, dailyIncreaseTv;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_statistics, container, false);
+
+        progressBarHooker(view);
+
+        DailyCases dailyCases = new DailyCases();
+        dailyCases.setDailyValues();
+        dailyCasesProgress = dailyCases.setProgressValues();
+        Log.d("Kotlin set daily cases @ Statistics Fragment", dailyCasesProgress.toString());
+
+        setProgressBar(dailyCasesProgress, dailyCases);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("stats/total_cases");
@@ -71,8 +86,54 @@ public class StatisticsFragment extends Fragment {
         return view;
     }
 
-    private void showTotalCaseChart(View view) {
+    @SuppressLint({"UseCompatLoadingForDrawables", "SetTextI18n"})
+    private void setProgressBar(List<Integer> list, DailyCases dailyCases) {
+        int maxProgress = Collections.max(list);
+        String day = LocalDate.now().getDayOfWeek().name();
+        List<String> daysList = Arrays.asList("MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY");
+        List<ProgressBar> progressBarList = Arrays.asList(progMon, progTue, progWed, progThurs, progFri, progSat, progSun);
+        int index = daysList.indexOf(day);
+        for (int i = 0; i < dailyCasesProgress.size(); i++) {
+            if(i == index) {
+                progressBarList.get(i).setProgressDrawable(getResources().getDrawable(R.drawable.progress_vertical_selected));
+                int previousDay = 0;
+                if(index==0)
+                    previousDay = dailyCases.getDailyCasesList().get(list.size()-1);
+                else
+                    previousDay = dailyCases.getDailyCasesList().get(i-1);
+                String change = calculateChange(previousDay, dailyCases.getDailyCasesList().get(i));
+                if (change.contains("-"))
+                    dailyIncreaseTv.setText(change+"%↓");
+                else
+                    dailyIncreaseTv.setText(change+"%↑");
+                dailyCasesTv.setText(dailyCases.getDailyCasesList().get(i).toString());
+            }
+            else
+                progressBarList.get(i).setProgressDrawable(getResources().getDrawable(R.drawable.progress_vertical_unselected));
+            progressBarList.get(i).setProgress(Math.round(list.get(i)));
+            progressBarList.get(i).setMax(maxProgress);
+            Log.d("Progress to int", ""+Math.round(list.get(i)));
+        }
+    }
 
+    private String calculateChange(int previousDayCases, Integer todayCases) {
+        Float percentageChange = ((todayCases-previousDayCases) * 100.0f)/previousDayCases;
+        return percentageChange.toString();
+    }
+
+    private void progressBarHooker(View view) {
+        progMon = view.findViewById(R.id.progressStatMon);
+        progTue = view.findViewById(R.id.progressStatTue);
+        progWed = view.findViewById(R.id.progressStatWed);
+        progThurs = view.findViewById(R.id.progressStatThur);
+        progFri = view.findViewById(R.id.progressStatFri);
+        progSat = view.findViewById(R.id.progressStatSat);
+        progSun = view.findViewById(R.id.progressStatSun);
+        dailyCasesTv = view.findViewById(R.id.tvStatsNewDailyCases);
+        dailyIncreaseTv = view.findViewById(R.id.tvStatsDailyIncreasePercentage);
+    }
+
+    private void showTotalCaseChart(View view) {
         // Hooker
         LineChart lineChart = view.findViewById(R.id.statisticsLineChart);
 

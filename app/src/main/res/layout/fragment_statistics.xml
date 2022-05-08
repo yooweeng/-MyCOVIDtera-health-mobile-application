@@ -47,7 +47,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView16"
+                    android:id="@+id/tvStatsNewDailyCases"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -55,21 +55,22 @@
                     android:text="17329"
                     android:textColor="@color/purple_title"
                     android:textSize="30sp"
-                    app:layout_constraintStart_toStartOf="@+id/textView3"
+                    app:layout_constraintEnd_toEndOf="@+id/textView3"
                     app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
                 <TextView
-                    android:id="@+id/textView19"
+                    android:id="@+id/tvStatsDailyIncreasePercentage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginStart="12dp"
                     android:fontFamily="@font/sulphur_point_bold"
                     android:text="5.9%"
                     android:textColor="@color/black_txt"
                     android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView16"
-                    app:layout_constraintStart_toEndOf="@+id/textView16"
-                    app:layout_constraintTop_toTopOf="@+id/textView16" />
+                    app:layout_constraintBottom_toBottomOf="@+id/tvStatsNewDailyCases"
+                    app:layout_constraintStart_toEndOf="@+id/textView3"
+                    app:layout_constraintTop_toTopOf="@+id/tvStatsNewDailyCases"
+                    app:layout_constraintVertical_bias="0.545" />
 
                 <TextView
                     android:id="@+id/textView17"
@@ -79,9 +80,9 @@
                     android:fontFamily="@font/sulphur_point_bold"
                     android:text="From last week"
                     android:textColor="@color/black_txt"
-                    android:textSize="15sp"
+                    android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="@+id/textView3"
-                    app:layout_constraintStart_toEndOf="@+id/textView19"
+                    app:layout_constraintStart_toEndOf="@+id/tvStatsDailyIncreasePercentage"
                     app:layout_constraintTop_toTopOf="@+id/textView3"
                     app:layout_constraintVertical_bias="0.0" />
 
@@ -89,11 +90,11 @@
                     android:id="@+id/textView18"
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="12dp"
                     android:fontFamily="@font/sulphur_point_bold"
                     android:text="Recovery Rate"
                     android:textColor="@color/black_txt"
-                    android:textSize="15sp"
+                    android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="@+id/textView17"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.761"
@@ -104,24 +105,23 @@
                     android:id="@+id/textView21"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:fontFamily="@font/roboto_bold"
-                    android:fontFeatureSettings="14sp"
+
                     android:text="9.43%"
                     android:textColor="@color/purple_title"
-                    android:textSize="18sp"
+                    android:textSize="13sp"
                     app:layout_constraintStart_toStartOf="@+id/textView17"
-                    app:layout_constraintTop_toBottomOf="@+id/textView17" />
+                    app:layout_constraintTop_toTopOf="@+id/tvStatsDailyIncreasePercentage" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/roboto_bold"
-                    android:fontFeatureSettings="14sp"
+
                     android:text="6.43%"
                     android:textColor="@color/purple_title"
-                    android:textSize="18sp"
+                    android:textSize="13sp"
                     app:layout_constraintBottom_toBottomOf="@+id/textView21"
                     app:layout_constraintStart_toStartOf="@+id/textView18"
                     app:layout_constraintTop_toBottomOf="@+id/textView18"
@@ -136,7 +136,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
 
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView16"
+                    app:layout_constraintTop_toBottomOf="@+id/tvStatsNewDailyCases"
                     app:layout_constraintVertical_bias="0.916">
 
                     <LinearLayout
@@ -145,6 +145,7 @@
                         android:orientation="vertical"
                         android:layout_weight="1">
                         <ProgressBar
+                            android:id="@+id/progressStatMon"
                             android:layout_width="15dp"
                             android:layout_height="match_parent"
                             style="@android:style/Widget.ProgressBar.Horizontal"
@@ -167,6 +168,7 @@
                         android:orientation="vertical"
                         android:layout_weight="1">
                         <ProgressBar
+                            android:id="@+id/progressStatTue"
                             android:layout_width="15dp"
                             android:layout_height="match_parent"
                             style="@android:style/Widget.ProgressBar.Horizontal"
@@ -189,6 +191,7 @@
                         android:orientation="vertical"
                         android:layout_weight="1">
                         <ProgressBar
+                            android:id="@+id/progressStatWed"
                             android:layout_width="15dp"
                             android:layout_height="match_parent"
                             style="@android:style/Widget.ProgressBar.Horizontal"
@@ -211,6 +214,7 @@
                         android:orientation="vertical"
                         android:layout_weight="1">
                         <ProgressBar
+                            android:id="@+id/progressStatThur"
                             android:layout_width="15dp"
                             android:layout_height="match_parent"
                             style="@android:style/Widget.ProgressBar.Horizontal"
@@ -233,6 +237,7 @@
                         android:orientation="vertical"
                         android:layout_weight="1">
                         <ProgressBar
+                            android:id="@+id/progressStatFri"
                             android:layout_width="15dp"
                             android:layout_height="match_parent"
                             style="@android:style/Widget.ProgressBar.Horizontal"
@@ -255,6 +260,7 @@
                         android:orientation="vertical"
                         android:layout_weight="1">
                         <ProgressBar
+                            android:id="@+id/progressStatSat"
                             android:layout_width="15dp"
                             android:layout_height="match_parent"
                             style="@android:style/Widget.ProgressBar.Horizontal"
@@ -277,6 +283,7 @@
                         android:orientation="vertical"
                         android:layout_weight="1">
                         <ProgressBar
+                            android:id="@+id/progressStatSun"
                             android:layout_width="15dp"
                             android:layout_height="match_parent"
                             style="@android:style/Widget.ProgressBar.Horizontal"
