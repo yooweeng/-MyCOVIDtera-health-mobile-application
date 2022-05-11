@@ -95,7 +95,6 @@
             android:id="@+id/etEditProfileGender"
             android:hint="Gender"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
-
             <AutoCompleteTextView
                 android:id="@+id/EditProfileGenderDropDown"
                 android:layout_width="match_parent"
