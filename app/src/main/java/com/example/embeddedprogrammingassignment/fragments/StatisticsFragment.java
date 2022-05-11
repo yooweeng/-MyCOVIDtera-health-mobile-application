@@ -13,6 +13,10 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.embeddedprogrammingassignment.apiclient.CovidData;
+import com.example.embeddedprogrammingassignment.apiclient.CovidDataController;
+import com.example.embeddedprogrammingassignment.apiclient.CovidDataRepository;
+import com.example.embeddedprogrammingassignment.apiclient.CovidDataService;
 import com.example.embeddedprogrammingassignment.fragments.statistics.DailyCases;
 import com.example.embeddedprogrammingassignment.fragments.statistics.GraphMarkerView;
 import com.example.embeddedprogrammingassignment.R;
@@ -35,6 +39,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class StatisticsFragment extends Fragment {
 
@@ -79,6 +87,27 @@ public class StatisticsFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+
+        //can implement yesterday today filter
+        CovidDataService covidDataService = new CovidDataService();
+        CovidDataController covidDataController = new CovidDataController(covidDataService);
+        Call<CovidData> call = covidDataController.findAll(true);
+
+        call.enqueue(new Callback<CovidData>() {
+            @Override
+            public void onResponse(Call<CovidData> call, Response<CovidData> response) {
+                CovidData responseBody = response.body();
+
+                Log.i("CovidDatafromApi","onResponse: status code " + response.code());
+
+                Log.i("CovidDatafromApi","Response body: " + responseBody);
+            }
+
+            @Override
+            public void onFailure(Call<CovidData> call, Throwable t) {
+                Log.i("CovidDatafromApi","onFailure: " + t.getMessage());
             }
         });
 

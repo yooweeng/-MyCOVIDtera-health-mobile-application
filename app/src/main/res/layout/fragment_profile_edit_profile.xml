@@ -95,12 +95,13 @@
             android:id="@+id/etEditProfileGender"
             android:hint="Gender"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+
             <AutoCompleteTextView
                 android:id="@+id/EditProfileGenderDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:inputType="none"/>
+                android:inputType="none" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
