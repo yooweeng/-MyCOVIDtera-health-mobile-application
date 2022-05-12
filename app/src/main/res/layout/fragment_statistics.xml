@@ -78,7 +78,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:fontFamily="@font/sulphur_point_bold"
-                    android:text="From last week"
+                    android:text="Today Recovered"
                     android:textColor="@color/black_txt"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="@+id/textView3"
@@ -102,7 +102,7 @@
                     app:layout_constraintTop_toTopOf="@+id/textView17" />
 
                 <TextView
-                    android:id="@+id/textView21"
+                    android:id="@+id/tvStatsTodayRecovered"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_bold"
@@ -116,13 +116,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/tvStatsRecoveryRate"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/roboto_bold"
-
                     android:text="6.43%"
                     android:textColor="@color/purple_title"
                     android:textSize="13sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView21"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvStatsTodayRecovered"
                     app:layout_constraintStart_toStartOf="@+id/textView18"
                     app:layout_constraintTop_toBottomOf="@+id/textView18"
                     app:layout_constraintVertical_bias="1.0" />

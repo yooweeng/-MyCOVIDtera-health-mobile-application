@@ -66,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
 
         getActiveUser();
-
     }
 
     private void getActiveUser() {
@@ -88,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
     }
 
     private void setNavigationComponent() {

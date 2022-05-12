@@ -60,23 +60,9 @@ public class RegisterActivity extends AppCompatActivity {
         genderAdapterItems = new ArrayAdapter<String>(this, R.layout.register_gender_dropdown_item, gender_option);
         genderView.setAdapter(genderAdapterItems);
 
-        genderView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String gender = adapterView.getItemAtPosition(i).toString();
-            }
-        });
-
         String[] state_option = getResources().getStringArray(R.array.state);
         stateAdapterItems = new ArrayAdapter<String>(this, R.layout.register_state_dropdown_item, state_option);
         stateView.setAdapter(stateAdapterItems);
-
-        stateView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String state = adapterView.getItemAtPosition(i).toString();
-            }
-        });
 
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);

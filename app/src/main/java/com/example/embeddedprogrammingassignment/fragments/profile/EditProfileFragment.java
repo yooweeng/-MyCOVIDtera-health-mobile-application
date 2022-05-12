@@ -85,65 +85,61 @@ public class EditProfileFragment extends Fragment {
         genderAdapterItems = new ArrayAdapter<String>(getActivity(), R.layout.register_gender_dropdown_item, gender_option);
         genderView.setAdapter(genderAdapterItems);
 
-        genderView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String gender = adapterView.getItemAtPosition(i).toString();
-            }
-        });
-
         String[] state_option = getResources().getStringArray(R.array.state);
         stateAdapterItems = new ArrayAdapter<String>(getActivity(), R.layout.register_state_dropdown_item, state_option);
         stateView.setAdapter(stateAdapterItems);
-
-        stateView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String state = adapterView.getItemAtPosition(i).toString();
-            }
-        });
-
+        
         updateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (passwordEt1.getEditText().getText().toString().equals(passwordEt2.getEditText().getText().toString())) {
-                    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                    DatabaseReference databaseReference = firebaseDatabase.getReference("users");
-                    User updateUser = new User();
-                    updateUser.setNric(user.getNric());
-                    updateUser.setGender(genderEt.getEditText().getText().toString());
-                    updateUser.setName(user.getName());
-                    updateUser.setPhone(phoneEt.getEditText().getText().toString());
-                    updateUser.setPassword(passwordEt1.getEditText().getText().toString());
-                    updateUser.setState(stateEt.getEditText().getText().toString());
+                if(!validField(phoneEt.getEditText().getText().toString(),passwordEt1.getEditText().getText().toString(),passwordEt2.getEditText().getText().toString()))
+                    return;
 
-                    databaseReference.child(user.getNric()).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if(snapshot.exists()) {
-                                databaseReference.child(user.getNric()).setValue(updateUser);
-                                Log.d("EditActivity user @ after update dr ", updateUser.toString());
-                                Bundle bundle = new Bundle();
-                                bundle.putParcelable("activeUser", Parcels.wrap(updateUser));
-                                Log.d("EditActivity user @ update ", updateUser.toString());
-                                ((MainActivity) requireActivity()).getUser();
-                                Navigation.findNavController(view).navigate(R.id.action_editProfileFragment_to_profileFragment, bundle);
-                            }
+                FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                DatabaseReference databaseReference = firebaseDatabase.getReference("users");
+                User updateUser = new User();
+                updateUser.setNric(user.getNric());
+                updateUser.setGender(genderEt.getEditText().getText().toString());
+                updateUser.setName(user.getName());
+                updateUser.setPhone(phoneEt.getEditText().getText().toString());
+                updateUser.setPassword(passwordEt1.getEditText().getText().toString());
+                updateUser.setState(stateEt.getEditText().getText().toString());
+
+                databaseReference.child(user.getNric()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists()) {
+                            databaseReference.child(user.getNric()).setValue(updateUser);
+                            Log.d("EditActivity user @ after update dr ", updateUser.toString());
+                            Bundle bundle = new Bundle();
+                            bundle.putParcelable("activeUser", Parcels.wrap(updateUser));
+                            Log.d("EditActivity user @ update ", updateUser.toString());
+                            ((MainActivity) requireActivity()).getUser();
+                            Navigation.findNavController(view).navigate(R.id.action_editProfileFragment_to_profileFragment, bundle);
                         }
+                    }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
 
-                        }
-                    });
-
-                } else {
-                    Toast.makeText(getContext(), "Password reset failed! You have entered incorrect passwords.", Toast.LENGTH_SHORT).show();
-                }
+                    }
+                });
             }
         });
 
         // Inflate the layout for this fragment
         return view;
+    }
+
+    private boolean validField(String phone, String pwd1, String pwd2) {
+        if(phone.length() < 9 ) {
+            Toast.makeText(getContext(), "Please enter a valid phone number.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(!pwd1.equals(pwd2)) {
+            Toast.makeText(getContext(), "Passwords does not match!.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 }

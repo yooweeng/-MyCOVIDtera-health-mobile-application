@@ -54,8 +54,9 @@ public class StatisticsFragment extends Fragment {
     private List<String> total_cases_label = new ArrayList<>();
     List<Integer> dailyCasesProgress;
     ProgressBar progMon, progTue, progWed, progThurs, progFri, progSat, progSun;
-    TextView dailyCasesTv, dailyIncreaseTv;
+    TextView dailyCasesTv, dailyIncreaseTv, dailyRecoveredCaseTv, dailyRecoveredRateTv;
     WorldometersData worldometersData;
+    List<String> daysList = Arrays.asList("MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY");
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,13 +74,11 @@ public class StatisticsFragment extends Fragment {
             @Override
             public void onResponse(Call<WorldometersData> call, Response<WorldometersData> response) {
                 WorldometersData responseBody = response.body();
-
                 Log.i("CovidDatafromApi","onResponse: status code " + response.code());
-
                 Log.i("CovidDatafromApi","Response body: " + responseBody);
-
                 worldometersData = responseBody;
                 Log.i("CovidDatafromApi","worldometers data " + worldometersData.getTodayCases());
+                getDailyRecoveredCasesFromAPI(worldometersData);
             }
 
             @Override
@@ -98,15 +97,19 @@ public class StatisticsFragment extends Fragment {
                 List<Covid19Data> responseBody = response.body();
 
                 Log.i("CovidDatafromApi","onResponse: status code " + response.code());
-
+                Log.i("CovidDatafromApi","onResponse: ResponseBody " + responseBody.get(responseBody.size()-1));
                 Log.i("CovidDatafromApi","Response body: " + responseBody.get(responseBody.size()-1));
 
-                List<Covid19Data> temp = responseBody.subList(responseBody.size()-9,responseBody.size()-1);
-                List<Integer> pastWeek = new ArrayList<>();
-                temp.forEach(object -> {pastWeek.add(Integer.parseInt(object.getConfirmed()));
+                List<Covid19Data> temp = responseBody.subList(responseBody.size()-8,responseBody.size());
+                List<Integer> pastWeekCases = new ArrayList<>();
+                List<String> pastWeekDayLabels = new ArrayList<>();
+                temp.forEach(object -> {
+                    pastWeekCases.add(Integer.parseInt(object.getConfirmed()));
+                    pastWeekDayLabels.add(object.getDate());
                     Log.i("CovidDatafromApi",object.getConfirmed());
+                    Log.i("CovidDatafromApi",object.getDate());
                 });
-                getDailyCasesFromAPI(pastWeek);
+                getDailyCasesFromAPI(pastWeekCases, pastWeekDayLabels);
             }
 
             @Override
@@ -143,23 +146,67 @@ public class StatisticsFragment extends Fragment {
         return view;
     }
 
-    private void getDailyCasesFromAPI(List<Integer> daily) {
+    @SuppressLint({"SetTextI18n", "DefaultLocale"})
+    private void getDailyRecoveredCasesFromAPI(WorldometersData worldometersData) {
+        dailyRecoveredCaseTv.setText(worldometersData.getTodayRecovered());
+        float recoveryRate = (Float.parseFloat(worldometersData.getRecovered()) / Float.parseFloat(worldometersData.getCases())) * 100.00f;
+        dailyRecoveredRateTv.setText(String.format("%.02f", recoveryRate) + "%");
+    }
+
+    private void getDailyCasesFromAPI(List<Integer> pastWeekCases, List<String> pastWeekLabels) {
+
         DailyCases dailyCases = new DailyCases();
 
-        Log.d("test",daily.toString());
+        String day = LocalDate.now().getDayOfWeek().name();
+        String date = LocalDate.now().toString();
+        int dayIndex = daysList.indexOf(day);
 
-        for(int i=1; i < daily.size(); i++){
-            int temp = daily.get(0);
-            daily.set(i,daily.get(i) - daily.get(0));
-            daily.set(0,daily.get(i) + temp);
+        for(int i=0; i<pastWeekLabels.size(); i++)
+            pastWeekLabels.set(i, pastWeekLabels.get(i).substring(0, pastWeekLabels.get(i).length()-10));
 
-            Log.d("test","i"+i+daily.get(i) + "daily" + daily.get(i-1));
+        Log.i("CovidDatafromApi labels in string",pastWeekLabels.toString());
+
+        for(int i=0; i < pastWeekCases.size()-1; i++) {
+            pastWeekCases.set(i, pastWeekCases.get(i+1) - pastWeekCases.get(i));
         }
 
-        daily=daily.subList(1,daily.size());
-        dailyCases.setDailyValues(daily);
+        pastWeekCases = pastWeekCases.subList(0,pastWeekCases.size()-1);
+
+//        int tempDayIndex;
+//        if(pastWeekLabels.contains(date)) {
+//            tempDayIndex = pastWeekLabels.indexOf(date);
+//            Log.i("pastWeekLabels: True", tempDayIndex + " " + pastWeekLabels + " " + date);
+//        }
+//        else {
+//            tempDayIndex = pastWeekLabels.indexOf(LocalDate.now().minusDays(1).toString());
+//            Log.i("pastWeekLabels: False", LocalDate.now().minusDays(1).toString() + " " +tempDayIndex + " " + pastWeekLabels + " " + date);
+//        }
+
+        int tempDayIndex = dayIndex;
+        int tempNumIndex = pastWeekCases.size()-1;
+        boolean inflated = false;
+        int[] orderedDailyCases = new int[7];
+        while(!inflated) {
+            orderedDailyCases[tempDayIndex] = pastWeekCases.get(tempNumIndex);
+            tempDayIndex -= 1;
+            tempNumIndex -= 1;
+            if(tempDayIndex==-1)
+                tempDayIndex=6;
+            if(tempDayIndex==dayIndex)
+                inflated = true;
+        }
+
+        pastWeekCases = new ArrayList<Integer>();
+        for (int i : orderedDailyCases)
+            pastWeekCases.add(i);
+
+
+        Log.d("Day index @ Stat Fragment= ",dayIndex + " " + date + " API date = " + pastWeekLabels.get(pastWeekLabels.size()-1));
+        Log.d("Day index @ Stat Fragment= ", "orderedDailyCases = " + Arrays.toString(orderedDailyCases));
+
+        dailyCases.setDailyValues(pastWeekCases);
         dailyCasesProgress = dailyCases.setProgressValues();
-        Log.d("Kotlin set daily cases @ Statistics Fragment", dailyCasesProgress.toString());
+        Log.d("Kotlin set daily cases @ Statistics Fragment Date", dailyCasesProgress.toString());
 
         setProgressBar(dailyCasesProgress, dailyCases);
     }
@@ -168,14 +215,13 @@ public class StatisticsFragment extends Fragment {
     private void setProgressBar(List<Integer> list, DailyCases dailyCases) {
         int maxProgress = Collections.max(list);
         String day = LocalDate.now().getDayOfWeek().name();
-        List<String> daysList = Arrays.asList("MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY");
         List<ProgressBar> progressBarList = Arrays.asList(progMon, progTue, progWed, progThurs, progFri, progSat, progSun);
-        int index = daysList.indexOf(day);
+        int dayIndex = daysList.indexOf(day);
         for (int i = 0; i < dailyCasesProgress.size(); i++) {
-            if(i == index) {
+            if(i == dayIndex) {
                 progressBarList.get(i).setProgressDrawable(getResources().getDrawable(R.drawable.progress_vertical_selected));
                 int previousDay = 0;
-                if(index==0)
+                if(dayIndex==0)
                     previousDay = dailyCases.getDailyCasesList().get(list.size()-1);
                 else
                     previousDay = dailyCases.getDailyCasesList().get(i-1);
@@ -195,8 +241,7 @@ public class StatisticsFragment extends Fragment {
     }
 
     private int calculateChange(int previousDayCases, Integer todayCases) {
-        int percentageChange = ((todayCases-previousDayCases) * 100)/previousDayCases;
-        return percentageChange;
+        return ((todayCases-previousDayCases) * 100)/previousDayCases;
     }
 
     private void progressBarHooker(View view) {
@@ -209,6 +254,8 @@ public class StatisticsFragment extends Fragment {
         progSun = view.findViewById(R.id.progressStatSun);
         dailyCasesTv = view.findViewById(R.id.tvStatsNewDailyCases);
         dailyIncreaseTv = view.findViewById(R.id.tvStatsDailyIncreasePercentage);
+        dailyRecoveredCaseTv = view.findViewById(R.id.tvStatsTodayRecovered);
+        dailyRecoveredRateTv = view.findViewById(R.id.tvStatsRecoveryRate);
     }
 
     private void showTotalCaseChart(View view) {
