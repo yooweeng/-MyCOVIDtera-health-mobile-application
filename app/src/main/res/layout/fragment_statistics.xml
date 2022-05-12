@@ -144,16 +144,17 @@
                         android:layout_height="match_parent"
                         android:orientation="vertical"
                         android:layout_weight="1">
+
                         <ProgressBar
                             android:id="@+id/progressStatMon"
+                            style="@android:style/Widget.ProgressBar.Horizontal"
                             android:layout_width="15dp"
                             android:layout_height="match_parent"
-                            style="@android:style/Widget.ProgressBar.Horizontal"
-                            android:progressDrawable="@drawable/progress_vertical_unselected"
-                            android:progress="80"
-                            android:max="100"
                             android:layout_gravity="center"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:max="100"
+                            android:progress="80"
+                            android:progressDrawable="@drawable/progress_vertical_unselected" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

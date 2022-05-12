@@ -13,10 +13,13 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.embeddedprogrammingassignment.apiclient.CovidData;
-import com.example.embeddedprogrammingassignment.apiclient.CovidDataController;
-import com.example.embeddedprogrammingassignment.apiclient.CovidDataRepository;
-import com.example.embeddedprogrammingassignment.apiclient.CovidDataService;
+import com.example.embeddedprogrammingassignment.apiclient.Covid19.Covid19Data;
+import com.example.embeddedprogrammingassignment.apiclient.Covid19.Covid19DataController;
+import com.example.embeddedprogrammingassignment.apiclient.Covid19.Covid19DataRepository;
+import com.example.embeddedprogrammingassignment.apiclient.Covid19.Covid19DataService;
+import com.example.embeddedprogrammingassignment.apiclient.Worldometers.WorldometersData;
+import com.example.embeddedprogrammingassignment.apiclient.Worldometers.WorldometersDataController;
+import com.example.embeddedprogrammingassignment.apiclient.Worldometers.WorldometersDataService;
 import com.example.embeddedprogrammingassignment.fragments.statistics.DailyCases;
 import com.example.embeddedprogrammingassignment.fragments.statistics.GraphMarkerView;
 import com.example.embeddedprogrammingassignment.R;
@@ -53,6 +56,7 @@ public class StatisticsFragment extends Fragment {
     List<Integer> dailyCasesProgress;
     ProgressBar progMon, progTue, progWed, progThurs, progFri, progSat, progSun;
     TextView dailyCasesTv, dailyIncreaseTv;
+    WorldometersData worldometersData;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,12 +65,61 @@ public class StatisticsFragment extends Fragment {
 
         progressBarHooker(view);
 
-        DailyCases dailyCases = new DailyCases();
-        dailyCases.setDailyValues();
-        dailyCasesProgress = dailyCases.setProgressValues();
-        Log.d("Kotlin set daily cases @ Statistics Fragment", dailyCasesProgress.toString());
+        //can implement yesterday today filter
+        WorldometersDataService worldometersDataService = new WorldometersDataService();
+        WorldometersDataController worldometersDataController = new WorldometersDataController(worldometersDataService);
+        Call<WorldometersData> worldometerCall = worldometersDataController.findAll(true);
 
-        setProgressBar(dailyCasesProgress, dailyCases);
+        worldometerCall.enqueue(new Callback<WorldometersData>() {
+            @Override
+            public void onResponse(Call<WorldometersData> call, Response<WorldometersData> response) {
+                WorldometersData responseBody = response.body();
+
+                Log.i("CovidDatafromApi","onResponse: status code " + response.code());
+
+                Log.i("CovidDatafromApi","Response body: " + responseBody);
+
+                worldometersData = responseBody;
+                Log.i("CovidDatafromApi","worldometers data " + worldometersData.getTodayCases());
+            }
+
+            @Override
+            public void onFailure(Call<WorldometersData> call, Throwable t) {
+                Log.i("CovidDatafromApi","onFailure: " + t.getMessage());
+            }
+        });
+
+        Covid19DataService covid19DataService = new Covid19DataService();
+        Covid19DataController covid19DataController = new Covid19DataController(covid19DataService);
+        Call<List<Covid19Data>> covid19Call = covid19DataController.findAll("2022-01-01T00:00:00Z",LocalDate.now()+"T00:00:00Z");
+
+        covid19Call.enqueue(new Callback<List<Covid19Data>>() {
+            @Override
+            public void onResponse(Call<List<Covid19Data>> call, Response<List<Covid19Data>> response) {
+                List<Covid19Data> responseBody = response.body();
+
+                Log.i("CovidDatafromApi","onResponse: status code " + response.code());
+
+                Log.i("CovidDatafromApi","Response body: " + responseBody.get(responseBody.size()-1));
+
+                List<Covid19Data> temp = responseBody.subList(responseBody.size()-9,responseBody.size()-1);
+                List<Integer> pastWeek = new ArrayList<>();
+                temp.forEach(object -> {pastWeek.add(Integer.parseInt(object.getConfirmed()));
+                    Log.i("CovidDatafromApi",object.getConfirmed());
+                });
+                test(pastWeek);
+            }
+
+            @Override
+            public void onFailure(Call<List<Covid19Data>> call, Throwable t) {
+
+            }
+        });
+
+        Log.i("CovidDatafromApi","worldometers data at statistic frag");
+
+
+
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("stats/total_cases");
@@ -90,29 +143,29 @@ public class StatisticsFragment extends Fragment {
             }
         });
 
-        //can implement yesterday today filter
-        CovidDataService covidDataService = new CovidDataService();
-        CovidDataController covidDataController = new CovidDataController(covidDataService);
-        Call<CovidData> call = covidDataController.findAll(true);
-
-        call.enqueue(new Callback<CovidData>() {
-            @Override
-            public void onResponse(Call<CovidData> call, Response<CovidData> response) {
-                CovidData responseBody = response.body();
-
-                Log.i("CovidDatafromApi","onResponse: status code " + response.code());
-
-                Log.i("CovidDatafromApi","Response body: " + responseBody);
-            }
-
-            @Override
-            public void onFailure(Call<CovidData> call, Throwable t) {
-                Log.i("CovidDatafromApi","onFailure: " + t.getMessage());
-            }
-        });
-
         // Inflate the layout for this fragment
         return view;
+    }
+
+    private void test(List<Integer> daily) {
+        DailyCases dailyCases = new DailyCases();
+
+        Log.d("test",daily.toString());
+
+        for(int i=1; i < daily.size(); i++){
+            int temp = daily.get(0);
+            daily.set(i,daily.get(i) - daily.get(0));
+            daily.set(0,daily.get(i) + temp);
+
+            Log.d("test","i"+i+daily.get(i) + "daily" + daily.get(i-1));
+        }
+
+        daily=daily.subList(1,daily.size());
+        dailyCases.setDailyValues(daily);
+        dailyCasesProgress = dailyCases.setProgressValues();
+        Log.d("Kotlin set daily cases @ Statistics Fragment", dailyCasesProgress.toString());
+
+        setProgressBar(dailyCasesProgress, dailyCases);
     }
 
     @SuppressLint({"UseCompatLoadingForDrawables", "SetTextI18n"})
@@ -130,8 +183,8 @@ public class StatisticsFragment extends Fragment {
                     previousDay = dailyCases.getDailyCasesList().get(list.size()-1);
                 else
                     previousDay = dailyCases.getDailyCasesList().get(i-1);
-                String change = calculateChange(previousDay, dailyCases.getDailyCasesList().get(i));
-                if (change.contains("-"))
+                int change = calculateChange(previousDay, dailyCases.getDailyCasesList().get(i));
+                if (change < 0)
                     dailyIncreaseTv.setText(change+"%↓");
                 else
                     dailyIncreaseTv.setText(change+"%↑");
@@ -145,9 +198,9 @@ public class StatisticsFragment extends Fragment {
         }
     }
 
-    private String calculateChange(int previousDayCases, Integer todayCases) {
-        Float percentageChange = ((todayCases-previousDayCases) * 100.0f)/previousDayCases;
-        return percentageChange.toString();
+    private int calculateChange(int previousDayCases, Integer todayCases) {
+        int percentageChange = ((todayCases-previousDayCases) * 100)/previousDayCases;
+        return percentageChange;
     }
 
     private void progressBarHooker(View view) {

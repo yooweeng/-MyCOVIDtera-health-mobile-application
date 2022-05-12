@@ -1,10 +1,10 @@
-package com.example.embeddedprogrammingassignment.apiclient;
+package com.example.embeddedprogrammingassignment.apiclient.Worldometers;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class CovidDataService {
+public class WorldometersDataService {
 
     private static Retrofit retrofit;
     private static String WORLDOMETERS_API_URL = "https://corona.lmao.ninja/v2/countries/";
@@ -19,8 +19,8 @@ public class CovidDataService {
         return retrofit;
     }
 
-    public Call<CovidData> findAll(boolean isYesterday){
-        CovidDataRepository repository = getRetrofitInstance().create(CovidDataRepository.class);
+    public Call<WorldometersData> findAll(boolean isYesterday){
+        WorldometersDataRepository repository = getRetrofitInstance().create(WorldometersDataRepository.class);
         return repository.findAll(isYesterday);
     }
 }

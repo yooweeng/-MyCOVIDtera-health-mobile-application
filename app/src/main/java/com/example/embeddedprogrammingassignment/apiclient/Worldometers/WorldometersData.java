@@ -1,6 +1,6 @@
-package com.example.embeddedprogrammingassignment.apiclient;
+package com.example.embeddedprogrammingassignment.apiclient.Worldometers;
 
-public class CovidData {
+public class WorldometersData {
     String updated;
     String country;
     Country countryInfo;
