@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import com.example.embeddedprogrammingassignment.apiclient.Covid19.Covid19Data;
 import com.example.embeddedprogrammingassignment.apiclient.Covid19.Covid19DataController;
-import com.example.embeddedprogrammingassignment.apiclient.Covid19.Covid19DataRepository;
 import com.example.embeddedprogrammingassignment.apiclient.Covid19.Covid19DataService;
 import com.example.embeddedprogrammingassignment.apiclient.Worldometers.WorldometersData;
 import com.example.embeddedprogrammingassignment.apiclient.Worldometers.WorldometersDataController;
@@ -107,7 +106,7 @@ public class StatisticsFragment extends Fragment {
                 temp.forEach(object -> {pastWeek.add(Integer.parseInt(object.getConfirmed()));
                     Log.i("CovidDatafromApi",object.getConfirmed());
                 });
-                test(pastWeek);
+                getDailyCasesFromAPI(pastWeek);
             }
 
             @Override
@@ -117,9 +116,6 @@ public class StatisticsFragment extends Fragment {
         });
 
         Log.i("CovidDatafromApi","worldometers data at statistic frag");
-
-
-
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("stats/total_cases");
@@ -147,7 +143,7 @@ public class StatisticsFragment extends Fragment {
         return view;
     }
 
-    private void test(List<Integer> daily) {
+    private void getDailyCasesFromAPI(List<Integer> daily) {
         DailyCases dailyCases = new DailyCases();
 
         Log.d("test",daily.toString());

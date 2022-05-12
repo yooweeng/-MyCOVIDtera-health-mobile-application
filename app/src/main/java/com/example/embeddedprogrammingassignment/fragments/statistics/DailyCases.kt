@@ -18,15 +18,10 @@ class DailyCases {
 
     fun setProgressValues(): MutableList<Int> {
         val total = dailyCasesList.sum()
-
         var progress = mutableListOf<Int>()
-
         dailyCasesList.forEach {
-
             val roundOff = ((it.toFloat() / total.toFloat()) *100.0).roundToInt()
-
             progress.add(roundOff)
-
         }
 
         Log.d("Kotlin set progress function dailycaseslist @ Statistics Fragment", dailyCasesList.toString())

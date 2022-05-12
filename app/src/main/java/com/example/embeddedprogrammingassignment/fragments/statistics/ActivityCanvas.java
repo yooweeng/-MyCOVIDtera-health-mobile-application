@@ -1,4 +1,4 @@
-package com.example.embeddedprogrammingassignment;
+package com.example.embeddedprogrammingassignment.fragments.statistics;
 
 import android.content.Context;
 import android.graphics.Canvas;
