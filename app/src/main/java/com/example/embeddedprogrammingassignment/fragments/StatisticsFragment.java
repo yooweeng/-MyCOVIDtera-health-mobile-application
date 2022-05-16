@@ -157,12 +157,12 @@ public class StatisticsFragment extends Fragment {
 
         DailyCases dailyCases = new DailyCases();
 
-        String day = LocalDate.now().getDayOfWeek().name();
-        String date = LocalDate.now().toString();
-        int dayIndex = daysList.indexOf(day);
-
         for(int i=0; i<pastWeekLabels.size(); i++)
             pastWeekLabels.set(i, pastWeekLabels.get(i).substring(0, pastWeekLabels.get(i).length()-10));
+
+        String day = LocalDate.parse(pastWeekLabels.get(pastWeekLabels.size()-1)).getDayOfWeek().toString();
+        String date = LocalDate.now().toString();
+        int dayIndex = daysList.indexOf(day);
 
         Log.i("CovidDatafromApi labels in string",pastWeekLabels.toString());
 
@@ -208,13 +208,12 @@ public class StatisticsFragment extends Fragment {
         dailyCasesProgress = dailyCases.setProgressValues();
         Log.d("Kotlin set daily cases @ Statistics Fragment Date", dailyCasesProgress.toString());
 
-        setProgressBar(dailyCasesProgress, dailyCases);
+        setProgressBar(dailyCasesProgress, dailyCases, day);
     }
 
     @SuppressLint({"UseCompatLoadingForDrawables", "SetTextI18n"})
-    private void setProgressBar(List<Integer> list, DailyCases dailyCases) {
+    private void setProgressBar(List<Integer> list, DailyCases dailyCases, String day) {
         int maxProgress = Collections.max(list);
-        String day = LocalDate.now().getDayOfWeek().name();
         List<ProgressBar> progressBarList = Arrays.asList(progMon, progTue, progWed, progThurs, progFri, progSat, progSun);
         int dayIndex = daysList.indexOf(day);
         for (int i = 0; i < dailyCasesProgress.size(); i++) {
