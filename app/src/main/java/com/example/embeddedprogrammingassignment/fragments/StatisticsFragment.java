@@ -36,11 +36,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -161,7 +165,7 @@ public class StatisticsFragment extends Fragment {
             pastWeekLabels.set(i, pastWeekLabels.get(i).substring(0, pastWeekLabels.get(i).length()-10));
 
         String day = LocalDate.parse(pastWeekLabels.get(pastWeekLabels.size()-1)).getDayOfWeek().toString();
-        String date = LocalDate.now().toString();
+
         int dayIndex = daysList.indexOf(day);
 
         Log.i("CovidDatafromApi labels in string",pastWeekLabels.toString());
@@ -171,16 +175,6 @@ public class StatisticsFragment extends Fragment {
         }
 
         pastWeekCases = pastWeekCases.subList(0,pastWeekCases.size()-1);
-
-//        int tempDayIndex;
-//        if(pastWeekLabels.contains(date)) {
-//            tempDayIndex = pastWeekLabels.indexOf(date);
-//            Log.i("pastWeekLabels: True", tempDayIndex + " " + pastWeekLabels + " " + date);
-//        }
-//        else {
-//            tempDayIndex = pastWeekLabels.indexOf(LocalDate.now().minusDays(1).toString());
-//            Log.i("pastWeekLabels: False", LocalDate.now().minusDays(1).toString() + " " +tempDayIndex + " " + pastWeekLabels + " " + date);
-//        }
 
         int tempDayIndex = dayIndex;
         int tempNumIndex = pastWeekCases.size()-1;
@@ -201,7 +195,7 @@ public class StatisticsFragment extends Fragment {
             pastWeekCases.add(i);
 
 
-        Log.d("Day index @ Stat Fragment= ",dayIndex + " " + date + " API date = " + pastWeekLabels.get(pastWeekLabels.size()-1));
+        Log.d("Day index @ Stat Fragment= ",dayIndex + " " + " API date = " + pastWeekLabels.get(pastWeekLabels.size()-1));
         Log.d("Day index @ Stat Fragment= ", "orderedDailyCases = " + Arrays.toString(orderedDailyCases));
 
         dailyCases.setDailyValues(pastWeekCases);
@@ -261,6 +255,16 @@ public class StatisticsFragment extends Fragment {
         // Hooker
         LineChart lineChart = view.findViewById(R.id.statisticsLineChart);
 
+        ArrayList<ILineDataSet> iLineDataSets = new ArrayList<>();
+        LineDataSet lineDataSet = new LineDataSet(total_cases_data, "Daily Cases");
+        lineDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+        lineDataSet.setDrawValues(false);
+        lineDataSet.setColor(R.color.purple_title);
+        lineDataSet.setLineWidth(2f);
+        lineDataSet.setValueTextSize(10f);
+
+        iLineDataSets.add(lineDataSet);
+
         // Axis Line
         XAxis xAxis = lineChart.getXAxis();
         YAxis leftAxis = lineChart.getAxisLeft();
@@ -280,6 +284,8 @@ public class StatisticsFragment extends Fragment {
         xAxis.setEnabled(true);
         xAxis.setSpaceMin(0.5f);
         xAxis.setSpaceMax(0.5f);
+        xAxis.setLabelCount(total_cases_label.size());
+        xAxis.setCenterAxisLabels(true);
         lineChart.getDescription().setEnabled(false);
         rightAxis.setEnabled(false);
         rightAxis.setGranularity(1f);
@@ -293,13 +299,7 @@ public class StatisticsFragment extends Fragment {
         GraphMarkerView mv = new GraphMarkerView(requireContext(), R.layout.layout_graph_marker_view, xAxisLabels);
         lineChart.setMarker(mv);
 
-        LineDataSet lineDataSet = new LineDataSet(total_cases_data, "Daily Cases");
-        lineDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-        lineDataSet.setDrawValues(false);
-        lineDataSet.setColor(R.color.purple_title);
-        lineDataSet.setLineWidth(2f);
-        ArrayList<ILineDataSet> iLineDataSets = new ArrayList<>();
-        iLineDataSets.add(lineDataSet);
+
 
         LineData lineData = new LineData(iLineDataSets);
         lineChart.setData(lineData);
