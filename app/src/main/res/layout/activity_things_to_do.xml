@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".fragments.home.things_to_do.ThingsToDoActivity">
 
-    <androidx.viewpager.widget.ViewPager
+    <com.jem.liquidswipe.LiquidSwipeViewPager
         android:id="@+id/vpThingsToDo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

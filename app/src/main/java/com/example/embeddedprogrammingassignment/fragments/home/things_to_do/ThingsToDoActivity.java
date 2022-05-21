@@ -11,11 +11,13 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import android.os.Bundle;
 
 import com.example.embeddedprogrammingassignment.R;
+import com.jem.liquidswipe.LiquidSwipeViewPager;
 
 public class ThingsToDoActivity extends AppCompatActivity {
 
     private static final int NUM_PAGE = 3;
-    ViewPager viewPager;
+    LiquidSwipeViewPager viewPager;
+    // https://github.com/Chrisvin/LiquidSwipe
     ScreenSlidePagerAdapter pagerAdapter;
 
     @Override
@@ -39,14 +41,11 @@ public class ThingsToDoActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    DoOneFragment tab1 = new DoOneFragment();
-                    return tab1;
+                    return new DoOneFragment();
                 case 1:
-                    DoTwoFragment tab2 = new DoTwoFragment();
-                    return tab2;
+                    return new DoTwoFragment();
                 case 2:
-                    DoThreeFragment tab3 = new DoThreeFragment();
-                    return tab3;
+                    return new DoThreeFragment();
             }
             return null;
         }
