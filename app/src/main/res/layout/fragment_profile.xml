@@ -15,7 +15,7 @@
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
             android:layout_marginEnd="25dp"
             android:layout_marginTop="5dp"
@@ -80,6 +80,11 @@
                     android:text="Name"
                     android:textColor="@color/black_txt"
                     android:textSize="16sp" />
+
+                <include layout="@layout/cardview_user_vaccine_doses"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"

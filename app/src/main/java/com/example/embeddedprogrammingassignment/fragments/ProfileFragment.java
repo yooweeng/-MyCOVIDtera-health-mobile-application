@@ -63,11 +63,12 @@ public class ProfileFragment extends Fragment {
         setDetails(nameTv, nricTv, phoneTv);
         setDetails(nameVaxTv, nricVaxTv, phoneVaxTv);
 
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("activeUser", Parcels.wrap(user));
+
         editProfileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("activeUser", Parcels.wrap(user));
                 Navigation.findNavController(view).navigate(R.id.action_profileFragment_to_editProfileFragment, bundle);
             }
         });

@@ -9,16 +9,17 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
+
         <TextView
+            android:id="@+id/tvThingsToDoLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tvThingsToDoLabel"
-            android:text="Things To Do"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="70dp"
-            android:textSize="30sp"
             android:fontFamily="@font/amiko_bold"
-            android:textColor="@color/white"/>
+            android:text="Things To Do"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/tvThingsToDo2"
@@ -56,21 +57,18 @@
                 android:gravity="center_horizontal"
                 android:text="Wash your hands regularly!"
                 android:textColor="@color/white"
-                android:textSize="30sp" />
+                android:textSize="24sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginEnd="25dp"
-                android:layout_marginBottom="25dp"
+                android:layout_margin="40dp"
                 android:fontFamily="@font/amiko_semibold"
                 android:gravity="center_horizontal"
                 android:text="Use warm water and soap to wash your hands for at least 30 seconds! Clean your wrists, between fingers, and also your fingernails. Using antibacterial soap will eliminate 99% of the bacterias!"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout

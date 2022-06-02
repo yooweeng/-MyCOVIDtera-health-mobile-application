@@ -3,22 +3,17 @@ package com.example.embeddedprogrammingassignment.fragments.trace
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import com.budiyev.android.codescanner.AutoFocusMode
-import com.budiyev.android.codescanner.CodeScanner
-import com.budiyev.android.codescanner.CodeScannerView
-import com.budiyev.android.codescanner.DecodeCallback
-import com.budiyev.android.codescanner.ErrorCallback
-import com.budiyev.android.codescanner.ScanMode
+import com.budiyev.android.codescanner.*
 import com.example.embeddedprogrammingassignment.R
+import com.example.embeddedprogrammingassignment.modal.User
+import org.parceler.Parcels
 
 private const val CAMERA_REQUEST_CODE = 101
 
@@ -29,12 +24,22 @@ class CheckInScanFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_trace_check_in_scan, container, false)
+
+        var user: User? = null
+
+        user = Parcels.unwrap<User>(
+            requireArguments().getParcelable("activeUser")
+        )
+        val bundle = Bundle()
+        bundle.putParcelable("activeUser", Parcels.wrap<User>(user))
+
         setupPermission()
-        codeScanner(view)
+        codeScanner(view, bundle)
+
         return view
     }
 
-    private fun codeScanner(view: View) {
+    private fun codeScanner(view: View, bundle: Bundle) {
         val codeScannerID = view.findViewById<CodeScannerView>(R.id.scanScanCode)
 
         codeScanner = CodeScanner(requireContext(), codeScannerID)
@@ -55,7 +60,7 @@ class CheckInScanFragment : Fragment() {
                     if (result.contains("http://") || result.contains("www.") || result.contains("https://")) {
                         Log.i("Website", result)
                         codeScanner.stopPreview()
-                        Navigation.findNavController(view).navigate(R.id.action_checkInScanFragment_to_checkInSuccessfulFragment)
+                        Navigation.findNavController(view).navigate(R.id.action_checkInScanFragment_to_checkInSuccessfulFragment, bundle)
                     }
                 }
             }
