@@ -2,7 +2,6 @@ package com.example.embeddedprogrammingassignment.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,12 +12,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.embeddedprogrammingassignment.MainActivity;
-import com.example.embeddedprogrammingassignment.fragments.HomeFragment;
 import com.example.embeddedprogrammingassignment.modal.Announcements;
 import com.example.embeddedprogrammingassignment.R;
 import com.example.embeddedprogrammingassignment.webView_announcement;
@@ -28,16 +24,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.parceler.Parcels;
-
 import java.util.ArrayList;
 
-public class announcementPageAdapter extends RecyclerView.Adapter<announcementPageAdapter.MyViewHolder> {
+public class AnnouncementPageAdapter extends RecyclerView.Adapter<AnnouncementPageAdapter.MyViewHolder> {
     Context context;
     ArrayList<Announcements> list;
-    int clickCount;
 
-    public announcementPageAdapter(Context context, ArrayList<Announcements> list) {
+    public AnnouncementPageAdapter(Context context, ArrayList<Announcements> list) {
         this.context = context;
         this.list = list;
     }
@@ -58,12 +51,9 @@ public class announcementPageAdapter extends RecyclerView.Adapter<announcementPa
         holder.numberOfClicks.setText(announcements.getNumberOfClicks());
 
         holder.readMore.setOnClickListener(v -> {
-            clickCount = Integer.parseInt(list.get(position).getNumberOfClicks());
-            Log.d("click1", String.valueOf(clickCount));
+            announcements.setNumberOfClicks(String.valueOf(Integer.parseInt(announcements.getNumberOfClicks())+1));
             Intent intent = new Intent(context, webView_announcement.class);
             intent.putExtra("url", list.get(position).getUrl());
-            clickCount++;
-            Log.d("click2", String.valueOf(clickCount) + announcements.getId());
 
             FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
             DatabaseReference databaseReference = firebaseDatabase.getReference("announcements");
@@ -71,10 +61,9 @@ public class announcementPageAdapter extends RecyclerView.Adapter<announcementPa
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(snapshot.exists()) {
-                        databaseReference.child(announcements.getId()).child("numberOfClicks").setValue(String.valueOf(clickCount));
-                        holder.numberOfClicks.setText(String.valueOf(clickCount));
-                        Log.d("click3", String.valueOf(clickCount) + announcements.getId());
-//                        context.startActivity(intent);
+                        databaseReference.child(announcements.getId()).child("numberOfClicks").setValue(announcements.getNumberOfClicks());
+                        holder.numberOfClicks.setText(announcements.getNumberOfClicks());
+                        context.startActivity(intent);
                     }
                 }
 

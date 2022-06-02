@@ -27,4 +27,16 @@ public class Announcements {
     public String getNumberOfClicks() { return numberOfClicks; }
 
     public String getId() { return id; }
+
+    @Override
+    public String toString() {
+        return "Announcements{" +
+                "title='" + title + '\'' +
+                ", caption='" + caption + '\'' +
+                ", url='" + url + '\'' +
+                ", urlToImage='" + urlToImage + '\'' +
+                ", id='" + id + '\'' +
+                ", numberOfClicks='" + numberOfClicks + '\'' +
+                '}';
+    }
 }

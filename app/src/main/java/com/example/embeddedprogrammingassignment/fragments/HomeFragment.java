@@ -1,5 +1,6 @@
 package com.example.embeddedprogrammingassignment.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +24,7 @@ import com.cpacm.library.transformers.CyclePageTransformer;
 import com.example.embeddedprogrammingassignment.modal.Announcements;
 import com.example.embeddedprogrammingassignment.R;
 import com.example.embeddedprogrammingassignment.adapter.ThingsToDoAdapter;
-import com.example.embeddedprogrammingassignment.adapter.announcementPageAdapter;
+import com.example.embeddedprogrammingassignment.adapter.AnnouncementPageAdapter;
 import com.example.embeddedprogrammingassignment.modal.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -50,7 +52,7 @@ public class HomeFragment extends Fragment {
     RecyclerView recyclerView;
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("announcements");
     ArrayList<Announcements> list = new ArrayList<>();
-    announcementPageAdapter announcementPageAdapter;
+    AnnouncementPageAdapter announcementPageAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,8 +76,8 @@ public class HomeFragment extends Fragment {
         hotlinePhone = view.findViewById(R.id.hotlineCard);
         recyclerView = view.findViewById(R.id.announcementContent);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        announcementPageAdapter = new announcementPageAdapter(getActivity(), list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        announcementPageAdapter = new AnnouncementPageAdapter(getContext(), list);
         recyclerView.setAdapter(announcementPageAdapter);
         sopViolation = view.findViewById(R.id.violationCard);
 
@@ -121,8 +123,9 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-    public void readAnnouncement(){
-        databaseReference.addValueEventListener(new ValueEventListener() {
+    private void readAnnouncement(){
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -130,6 +133,7 @@ public class HomeFragment extends Fragment {
 
                     Announcements announcements = dataSnapshot.getValue(Announcements.class);
                     list.add(announcements);
+                    Log.d("click000", String.valueOf(announcements));
                 }
                 announcementPageAdapter.notifyDataSetChanged();
             }
