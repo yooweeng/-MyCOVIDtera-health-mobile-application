@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.home.VaccinationFragment"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <include
+                layout="@layout/cardview_user_profile_without_status" />
+
+            <TextView
+                android:id="@+id/tvVaccination"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/amiko_bold"
+                android:text="Appointment(s): "
+                android:textColor="@color/purple_btn"
+                android:textSize="24sp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="1. Are you interested to take COVID-19 vaccine?"
+                        android:fontFamily="@font/amiko_bold"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"/>
+
+                    <GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:columnCount="2"
+                        android:rowCount="1">
+
+                        <Button
+                            android:id="@+id/btnQ1Yes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_rowWeight="1"
+                            android:layout_columnWeight="1"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/amiko_bold"
+                            android:textSize="15sp"
+                            android:text="Yes"
+                            android:backgroundTint="@color/purple_btn"
+                            app:cornerRadius="20dp"
+                            android:elevation="8dp"/>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnQ1No"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_rowWeight="1"
+                            android:layout_columnWeight="1"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/amiko_bold"
+                            android:textSize="15sp"
+                            android:text="No"
+                            android:textColor="@color/black"
+                            android:backgroundTint="@color/white"
+                            app:strokeColor="@color/purple_btn"
+                            app:strokeWidth="1dp"
+                            app:cornerRadius="20dp"
+                            android:elevation="8dp"/>
+                    </GridLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="2. Do you have any comorbidities?"
+                        android:fontFamily="@font/amiko_bold"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"/>
+
+                    <GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:columnCount="2"
+                        android:rowCount="1">
+
+                        <Button
+                            android:id="@+id/btnQ2Yes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_rowWeight="1"
+                            android:layout_columnWeight="1"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/amiko_bold"
+                            android:textSize="15sp"
+                            android:text="Yes"
+                            android:backgroundTint="@color/purple_btn"
+                            app:cornerRadius="20dp"
+                            android:elevation="8dp"/>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnQ2No"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_rowWeight="1"
+                            android:layout_columnWeight="1"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/amiko_bold"
+                            android:textSize="15sp"
+                            android:text="No"
+                            android:textColor="@color/black"
+                            android:backgroundTint="@color/white"
+                            app:strokeColor="@color/purple_btn"
+                            app:strokeWidth="1dp"
+                            app:cornerRadius="20dp"
+                            android:elevation="8dp"/>
+                    </GridLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="3. Please select your preferably date?"
+                        android:fontFamily="@font/amiko_bold"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"/>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/etVaccinationDate"
+                        android:hint="Select Preferably Date"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/vaccinationDate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:maxLength="12"
+                            android:inputType="numberSigned" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="3. Please select your preferably date?"
+                        android:fontFamily="@font/amiko_bold"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"/>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/etVaccinationLocation"
+                        android:hint="Select Preferably Location"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+                        <AutoCompleteTextView
+                            android:id="@+id/RegisterGenderDropDown"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="none"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <Button
+                        android:id="@+id/btnCheckInQR"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="4dp"
+                        android:backgroundTint="@color/purple_btn"
+                        android:text="Submit"
+                        android:textColor="@color/white" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+    </FrameLayout>
+</ScrollView>

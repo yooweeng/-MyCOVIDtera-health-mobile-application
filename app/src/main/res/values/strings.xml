@@ -27,6 +27,25 @@
         <item>Labuan</item>
         <item>Putrajaya</item>
     </string-array>
+
+    <string-array name="PPV">
+        <item>PPV Persada International Convention Centre</item>
+        <item>KK Masai</item>
+        <item>KK Rengit</item>
+        <item>PPV Segamat Central</item>
+        <item>PPV Simpang Renggam</item>
+        <item>PPV Offsite Subang Parade</item>
+        <item>PPV Dewan Orang Ramai Ampang Mewah</item>
+        <item>PPV Sepang International Circuit</item>
+        <item>Dewan MPKK Bandar Cassia</item>
+        <item>Sunshine Bertam</item>
+        <item>KK Kuala Pilah</item>
+        <item>Dewan Persada Tampin</item>
+        <item>PPV Encore</item>
+        <item>PPV Uni Klinik Im2</item>
+        <item>Dewan Api Larat</item>
+        <item>Dewan Kuala Rompin</item>
+    </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
