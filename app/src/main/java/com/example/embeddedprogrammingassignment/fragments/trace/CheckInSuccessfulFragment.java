@@ -11,11 +11,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.embeddedprogrammingassignment.R;
+import com.example.embeddedprogrammingassignment.modal.User;
+
+import org.parceler.Parcels;
 
 
 public class CheckInSuccessfulFragment extends Fragment {
 
     Button checkoutBtn;
+    User user;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -23,12 +27,17 @@ public class CheckInSuccessfulFragment extends Fragment {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_trace_checkin_successful, container, false);
 
+        assert getArguments() != null;
+        user = Parcels.unwrap(getArguments().getParcelable("activeUser"));
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("activeUser", Parcels.wrap(user));
+
         checkoutBtn=view.findViewById(R.id.btnCheckout);
 
         checkoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(view).navigate(R.id.action_checkInSuccessfulFragment_to_traceFragment);
+                Navigation.findNavController(v).navigate(R.id.action_checkInSuccessfulFragment_to_traceFragment, bundle);
             }
         });
 

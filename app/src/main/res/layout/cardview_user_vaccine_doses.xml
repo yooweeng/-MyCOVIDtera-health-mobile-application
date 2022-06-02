@@ -26,7 +26,7 @@
             android:fontFamily="@font/amiko_bold"
             android:text="Dose X:"
             android:textColor="@color/black_txt"
-            android:textSize="28sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -34,7 +34,7 @@
             android:text="Date: 28-Mar-2021 14:27:31"
             android:fontFamily="@font/amiko_semibold"
             android:textColor="@color/black_txt"
-            android:textSize="20sp"
+            android:textSize="16sp"
             />
 
         <TextView
@@ -43,7 +43,7 @@
             android:text="Manufacturer: Pfizer"
             android:fontFamily="@font/amiko_semibold"
             android:textColor="@color/black_txt"
-            android:textSize="20sp"
+            android:textSize="16sp"
             />
 
         <TextView
@@ -52,7 +52,7 @@
             android:text="Location: Penang Hospital"
             android:fontFamily="@font/amiko_semibold"
             android:textColor="@color/black_txt"
-            android:textSize="20sp"
+            android:textSize="16sp"
             />
 
         <TextView
@@ -61,7 +61,7 @@
             android:text="Batch Number: XA1234"
             android:fontFamily="@font/amiko_semibold"
             android:textColor="@color/black_txt"
-            android:textSize="20sp"
+            android:textSize="16sp"
             />
 
     </LinearLayout>

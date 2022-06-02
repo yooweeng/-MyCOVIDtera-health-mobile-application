@@ -9,16 +9,17 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
+
         <TextView
+            android:id="@+id/tvThingsToDoLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tvThingsToDoLabel"
-            android:text="Things To Do"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="70dp"
-            android:textSize="30sp"
             android:fontFamily="@font/amiko_bold"
-            android:textColor="@color/white"/>
+            android:text="Things To Do"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/tvThingsToDo3"
@@ -37,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tvThingsToDoLabel"
             android:orientation="vertical"
-            android:layout_marginTop="-20dp">
+            >
 
             <com.airbnb.lottie.LottieAnimationView
                 android:layout_width="match_parent"
@@ -49,25 +50,26 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:layout_gravity="center"
                 android:fontFamily="@font/amiko_bold"
-                android:text="Practice sanitizing!"
+                android:text="Use sanitizers!"
                 android:textColor="@color/white"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:gravity="center_horizontal"
-                android:textSize="30sp" />
+                android:textSize="24sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="25dp"
+                android:layout_margin="40dp"
                 android:fontFamily="@font/amiko_semibold"
                 android:gravity="center_horizontal"
-                android:text="Ajasdjkasdhjkas Ajasdjkasdhjkas AjasdjkasdhjkasAjasdjkasdhjkas Ajasdjkasdhjkas"
+                android:text="Use an alcohol-based hand sanitizer that contains at least 60% alcohol. Can be used on surfaces to kill germs as well! Hand sanitizers are a convenient alternative to handwashing with soap!"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout

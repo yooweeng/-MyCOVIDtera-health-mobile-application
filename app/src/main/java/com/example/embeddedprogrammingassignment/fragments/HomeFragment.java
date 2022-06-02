@@ -41,10 +41,11 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
-    CardView riskStatus,selfReport, hotlinePhone;
+    CardView riskStatus,selfReport, hotlinePhone, sopViolation;
     SimpleViewPager thingsToDoSlider;
     ThingsToDoAdapter thingsToDoAdapter;
     User user;
+    Bundle passingBundle;
 
     RecyclerView recyclerView;
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("announcements");
@@ -58,6 +59,8 @@ public class HomeFragment extends Fragment {
         if (bundle != null) {
             user = Parcels.unwrap(getArguments().getParcelable("activeUser"));
         }
+        passingBundle = new Bundle();
+        passingBundle.putParcelable("activeUser", Parcels.wrap(user));
         thingsToDoAdapter = new ThingsToDoAdapter(getContext());
     }
 
@@ -74,6 +77,7 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         announcementPageAdapter = new announcementPageAdapter(getActivity(), list);
         recyclerView.setAdapter(announcementPageAdapter);
+        sopViolation = view.findViewById(R.id.violationCard);
 
         riskStatus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +99,13 @@ public class HomeFragment extends Fragment {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
                 intent.setData(Uri.parse("tel: 01234567789"));
                 startActivity(intent);
+            }
+        });
+
+        sopViolation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_sopViolationFragment, passingBundle);
             }
         });
 

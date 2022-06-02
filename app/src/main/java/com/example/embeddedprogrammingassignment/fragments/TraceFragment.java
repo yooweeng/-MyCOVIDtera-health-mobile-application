@@ -26,7 +26,7 @@ public class TraceFragment extends Fragment {
 
     TextView fragmentTitleTv, nricTv, phoneTv, stateTv, nameTv;
     ImageView fragmentEditProfileBtn;
-    Button checkInBtn;
+    Button checkInBtn, checkInHistoryBtn;
     User user;
 
     @Override
@@ -34,8 +34,9 @@ public class TraceFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_trace, container, false);
 
-        assert getArguments() != null;
         user = Parcels.unwrap(getArguments().getParcelable("activeUser"));
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("activeUser", Parcels.wrap(user));
 
         fragmentTitleTv = view.findViewById(R.id.tvCarduserFragmentTitle);
         fragmentTitleTv.setText("Check-in");
@@ -57,7 +58,15 @@ public class TraceFragment extends Fragment {
         checkInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_traceFragment_to_checkInScanFragment);
+                Navigation.findNavController(view).navigate(R.id.action_traceFragment_to_checkInScanFragment, bundle);
+            }
+        });
+
+        checkInHistoryBtn = view.findViewById(R.id.btnCheckInHistory);
+        checkInHistoryBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(view).navigate(R.id.action_traceFragment_to_qrHistoryFragment, bundle);
             }
         });
 
