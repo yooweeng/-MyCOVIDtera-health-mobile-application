@@ -106,7 +106,6 @@ public class ProfileFragment extends Fragment {
                         .show();
             }
         });
-
         // Inflate the layout for this fragment
         return view;
     }

@@ -323,11 +323,67 @@
                     android:layout_marginTop="25dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
-                    android:text="Total Cases in Malaysia (2022)"
+                    android:text="Total Cases in Malaysia"
                     android:fontFamily="@font/amiko_bold"
                     android:textColor="@color/black_txt"
-                    android:textSize="16sp"
-                    android:textAlignment="center"/>
+                    android:textSize="24sp"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="5dp"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Daily Cases"
+                            android:fontFamily="@font/amiko_bold"
+                            android:textColor="@color/black_txt"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+17329"
+                            android:textSize="22sp"
+                            android:fontFamily="@font/amiko_bold"
+                            android:textColor="@color/purple_title"/>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total Cases"
+                            android:fontFamily="@font/amiko_bold"
+                            android:textColor="@color/black_txt"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="502912"
+                            android:textSize="22sp"
+                            android:fontFamily="@font/amiko_bold"
+                            android:textColor="@color/purple_title"/>
+                    </LinearLayout>
+
+
+                </LinearLayout>
                 <com.github.mikephil.charting.charts.LineChart
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
@@ -340,6 +396,97 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="25dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="5dp"
+            android:backgroundTint="@color/purple_title">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tvStatsRvalueTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/amiko_semibold"
+                    android:text="R Value"
+                    android:textColor="@color/white"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvStatsRvalueTitle"
+                    android:layout_centerInParent="true"
+                    android:layout_marginBottom="25dp"
+                    android:fontFamily="@font/amiko_bold"
+                    android:text="0.88"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="26sp" />
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="25dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="5dp"
+            android:backgroundTint="@color/black">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tvStatsDeathsTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/amiko_semibold"
+                    android:text="Total Deaths"
+                    android:textColor="@color/white"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvStatsDeathTotal"
+                    android:layout_below="@+id/tvStatsDeathsTitle"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/amiko_bold"
+                    android:text="32133"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="26sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvStatsDeathToday"
+                    android:layout_below="@+id/tvStatsDeathTotal"
+                    android:fontFamily="@font/amiko_semibold"
+                    android:text="(+1000 Today)"
+                    android:textColor="@color/white"
+                    android:textAlignment="center"
+                    android:layout_marginBottom="25dp"
+                    />
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
 
 </ScrollView>

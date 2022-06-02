@@ -28,7 +28,7 @@ public class CheckInSuccessfulFragment extends Fragment {
         checkoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(view).navigate(R.id.action_checkInSuccessfulFragment_to_traceFragment);
+                Navigation.findNavController(v).navigate(R.id.action_checkInSuccessfulFragment_to_traceFragment);
             }
         });
 
