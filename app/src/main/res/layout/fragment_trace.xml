@@ -16,7 +16,7 @@
             layout="@layout/cardview_user_profile" />
 
         <Button
-            android:id="@+id/btnRegister"
+            android:id="@+id/btnCheckInHistory"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
