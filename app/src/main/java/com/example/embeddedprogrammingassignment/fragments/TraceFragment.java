@@ -26,7 +26,7 @@ public class TraceFragment extends Fragment {
 
     TextView fragmentTitleTv, nricTv, phoneTv, stateTv, nameTv;
     ImageView fragmentEditProfileBtn;
-    Button checkInBtn;
+    Button checkInBtn, checkInHistoryBtn;
     User user;
 
     @Override
@@ -58,6 +58,14 @@ public class TraceFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Navigation.findNavController(view).navigate(R.id.action_traceFragment_to_checkInScanFragment);
+            }
+        });
+
+        checkInHistoryBtn = view.findViewById(R.id.btnCheckInHistory);
+        checkInHistoryBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(view).navigate(R.id.action_traceFragment_to_qrHistoryFragment);
             }
         });
 

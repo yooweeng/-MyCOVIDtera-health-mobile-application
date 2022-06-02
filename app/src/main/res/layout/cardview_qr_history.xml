@@ -10,16 +10,19 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tvQrHistoryDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="eg. 28-Mar-2022"/>
+            android:text="28-Mar-2022"/>
 
         <TextView
+            android:id="@+id/tvQrHistoryLocation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="eg. Xiamen University Malaysia"/>
+            android:text="Xiamen University Malaysia"/>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvQrHistoryItem"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
