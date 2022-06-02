@@ -31,10 +31,11 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
-    CardView riskStatus,selfReport, hotlinePhone;
+    CardView riskStatus,selfReport, hotlinePhone, sopViolation;
     SimpleViewPager thingsToDoSlider;
     ThingsToDoAdapter thingsToDoAdapter;
     User user;
+    Bundle passingBundle;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,6 +44,8 @@ public class HomeFragment extends Fragment {
         if (bundle != null) {
             user = Parcels.unwrap(getArguments().getParcelable("activeUser"));
         }
+        passingBundle = new Bundle();
+        passingBundle.putParcelable("activeUser", Parcels.wrap(user));
         thingsToDoAdapter = new ThingsToDoAdapter(getContext());
     }
 
@@ -54,6 +57,7 @@ public class HomeFragment extends Fragment {
         riskStatus=view.findViewById(R.id.riskStatusCard);
         selfReport=view.findViewById(R.id.selfReportCard);
         hotlinePhone = view.findViewById(R.id.hotlineCard);
+        sopViolation = view.findViewById(R.id.violationCard);
 
         riskStatus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +79,13 @@ public class HomeFragment extends Fragment {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
                 intent.setData(Uri.parse("tel: 01234567789"));
                 startActivity(intent);
+            }
+        });
+
+        sopViolation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_sopViolationFragment, passingBundle);
             }
         });
 
