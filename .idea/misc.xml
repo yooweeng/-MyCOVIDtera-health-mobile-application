@@ -8,7 +8,7 @@
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/drawable/ic_straight_line_black.xml" value="0.2165" />
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/activity_check_in_scan.xml" value="0.15534420289855072" />
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/activity_forget_password.xml" value="0.10078125" />
-        <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/activity_login.xml" value="0.264" />
+        <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/activity_main.xml" value="0.22842105263157894" />
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/activity_register.xml" value="0.21557971014492755" />
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/activity_things_to_do.xml" value="0.17617753623188406" />
@@ -29,6 +29,8 @@
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/fragment_qr_history.xml" value="0.1102077687443541" />
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/fragment_risk_status.xml" value="0.11197916666666667" />
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/fragment_self_report_covid.xml" value="0.4" />
+        <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/fragment_sop_violation.xml" value="0.264" />
+        <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/fragment_statistics.xml" value="0.152" />
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/fragment_statistics.xml" value="0.4" />
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/fragment_trace.xml" value="0.152" />
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/layout_graph_marker_view.xml" value="0.10625" />
@@ -82,6 +84,18 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/MyCOVIDtera/app/src/main/res/layout/layout_things_scroll.xml" value="0.2151268115942029" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MyCOVIDtera/app/src/main/res/layout/register_gender_dropdown_item.xml" value="0.1140625" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MyCOVIDtera/app/src/main/res/layout/register_state_dropdown_item.xml" value="0.21557971014492755" />
+        <entry key="..\:/Users/User/Documents/Embedded Programming/MyCOVIDtera/app/src/main/res/drawable/button_border.xml" value="0.15" />
+        <entry key="..\:/Users/User/Documents/Embedded Programming/MyCOVIDtera/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/Users/User/Documents/Embedded Programming/MyCOVIDtera/app/src/main/res/layout/activity_register.xml" value="0.25" />
+        <entry key="..\:/Users/User/Documents/Embedded Programming/MyCOVIDtera/app/src/main/res/layout/cardview_announcement.xml" value="0.25" />
+        <entry key="..\:/Users/User/Documents/Embedded Programming/MyCOVIDtera/app/src/main/res/layout/cardview_historyitem.xml" value="0.25" />
+        <entry key="..\:/Users/User/Documents/Embedded Programming/MyCOVIDtera/app/src/main/res/layout/cardview_qr_history.xml" value="0.25" />
+        <entry key="..\:/Users/User/Documents/Embedded Programming/MyCOVIDtera/app/src/main/res/layout/cardview_user_profile.xml" value="0.25" />
+        <entry key="..\:/Users/User/Documents/Embedded Programming/MyCOVIDtera/app/src/main/res/layout/cardview_user_profile_without_status.xml" value="0.25" />
+        <entry key="..\:/Users/User/Documents/Embedded Programming/MyCOVIDtera/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/Users/User/Documents/Embedded Programming/MyCOVIDtera/app/src/main/res/layout/fragment_trace.xml" value="0.1" />
+        <entry key="..\:/Users/User/Documents/Embedded Programming/MyCOVIDtera/app/src/main/res/layout/fragment_vaccination.xml" value="0.2" />
+        <entry key="..\:/Users/User/Documents/Embedded Programming/MyCOVIDtera/app/src/main/res/layout/webview_announcement.xml" value="0.25" />
         <entry key="..\:/Users/User/Documents/Mobile Application System Design/MyCOVIDtera/app/src/main/res/drawable/bg_main_material.xml" value="0.14635416666666667" />
         <entry key="..\:/Users/User/Documents/Mobile Application System Design/MyCOVIDtera/app/src/main/res/drawable/button_login.xml" value="0.14635416666666667" />
         <entry key="..\:/Users/User/Documents/Mobile Application System Design/MyCOVIDtera/app/src/main/res/drawable/circle_indicator.xml" value="0.14635416666666667" />

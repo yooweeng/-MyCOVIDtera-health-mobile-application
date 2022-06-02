@@ -21,6 +21,9 @@
         <action
             android:id="@+id/action_homeFragment_to_homeFaqFragment"
             app:destination="@id/homeFaqFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_sopViolationFragment"
+            app:destination="@id/sopViolationFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -103,6 +106,15 @@
         <action
             android:id="@+id/action_checkInScanFragment_to_checkInSuccessfulFragment"
             app:destination="@id/checkInSuccessfulFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sopViolationFragment"
+        android:name="com.example.embeddedprogrammingassignment.fragments.home.SopViolationFragment"
+        android:label="Report SOP Violation"
+        tools:layout="@layout/fragment_sop_violation">
+        <action
+            android:id="@+id/action_sopViolationFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeFaqFragment"
