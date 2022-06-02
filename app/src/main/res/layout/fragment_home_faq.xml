@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.home.homeFaqFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="General"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="25dp"
+        android:textColor="@color/black_txt"
+        android:textSize="24sp"
+        android:fontFamily="@font/amiko_bold"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvFaqGeneral"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Information Privacy"
+        android:textColor="@color/black_txt"
+        android:textSize="24sp"
+        android:fontFamily="@font/amiko_bold"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="15dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvFaqInformationPrivacy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    </LinearLayout>
+</ScrollView>

@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,11 +36,26 @@ public class QrHistoryAdapter extends RecyclerView.Adapter<QrHistoryAdapter.qrHi
 
     @Override
     public void onBindViewHolder(@NonNull QrHistoryAdapter.qrHistoryViewHolder holder, int position) {
-        holder.tvQrHistoryDate.setText(qrHistories.get(position).getDate());
-        holder.tvQrHistoryLocation.setText(qrHistories.get(position).getLocation());
+        QrHistory previousQrHistory = new QrHistory();
+        if(position >= 1){
+            previousQrHistory = qrHistories.get(position - 1);
+        }
+        if(qrHistories.get(position).getDate().equals(previousQrHistory.getDate())){
+            holder.tvQrHistoryDate.setVisibility(View.GONE);
+        }
+        else{
+            holder.tvQrHistoryDate.setText(qrHistories.get(position).getDate());
+        }
+        if(qrHistories.get(position).getLocation().equals(previousQrHistory.getLocation())){
+            holder.tvQrHistoryLocation.setVisibility(View.GONE);
+        }
+        else{
+            holder.tvQrHistoryLocation.setText(qrHistories.get(position).getLocation());
+        }
         HistoryItemAdapter historyItemAdapter = new HistoryItemAdapter(qrHistories.get(position).getDetails());
         holder.rvQrHistoryItem.setAdapter(historyItemAdapter);
         holder.rvQrHistoryItem.setLayoutManager(new LinearLayoutManager(context));
+        holder.rvQrHistoryItem.addItemDecoration(new DividerItemDecoration(context,LinearLayoutManager.VERTICAL));
     }
 
     @Override

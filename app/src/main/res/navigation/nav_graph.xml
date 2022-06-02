@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_homeFragment_to_riskStatusFragment"
             app:destination="@id/riskStatusFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_homeFaqFragment"
+            app:destination="@id/homeFaqFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -101,4 +104,9 @@
             android:id="@+id/action_checkInScanFragment_to_checkInSuccessfulFragment"
             app:destination="@id/checkInSuccessfulFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/homeFaqFragment"
+        android:name="com.example.embeddedprogrammingassignment.fragments.home.homeFaqFragment"
+        android:label="FAQs"
+        tools:layout="@layout/fragment_home_faq" />
 </navigation>

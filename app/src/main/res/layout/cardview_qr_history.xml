@@ -2,24 +2,35 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:backgroundTint="#00FFFFFF"
+    app:cardElevation="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginBottom="20dp">
 
         <TextView
             android:id="@+id/tvQrHistoryDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="28-Mar-2022"/>
+            android:fontFamily="@font/amiko_bold"
+            android:textColor="@color/blue_header"
+            android:textSize="20sp"
+            android:text="28-Mar-2022" />
 
         <TextView
             android:id="@+id/tvQrHistoryLocation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Xiamen University Malaysia"/>
+            android:fontFamily="@font/amiko_bold"
+            android:textColor="@color/blue_header"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"
+            android:text="Xiamen University Malaysia" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvQrHistoryItem"

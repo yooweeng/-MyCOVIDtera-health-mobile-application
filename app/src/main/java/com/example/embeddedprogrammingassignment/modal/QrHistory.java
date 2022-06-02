@@ -7,6 +7,12 @@ public class QrHistory {
     String location;
     ArrayList<HistoryItem> details;
 
+    public QrHistory() {
+        this.date = "";
+        this.location = "";
+        this.details = details;
+    }
+
     public QrHistory(String date, String location, ArrayList<HistoryItem> details) {
         this.date = date;
         this.location = location;

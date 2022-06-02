@@ -22,6 +22,8 @@ public class QrHistoryFragment extends Fragment {
 
     ArrayList<QrHistory> qrHistories = new ArrayList<>();
     ArrayList<HistoryItem> historyItems = new ArrayList<>();
+    ArrayList<HistoryItem> historyItems2 = new ArrayList<>();
+    ArrayList<HistoryItem> historyItems3 = new ArrayList<>();
     RecyclerView qrHistoryRv;
 
     public QrHistoryFragment() {
@@ -36,8 +38,13 @@ public class QrHistoryFragment extends Fragment {
         qrHistoryRv = view.findViewById(R.id.rvCheckInHistory);
 
         historyItems.add(new HistoryItem(R.drawable.icon_checkin,"Xiamen University Malaysia", "28-March-2022 07:00:24"));
-        historyItems.add(new HistoryItem(R.drawable.icon_checkin,"Xiamen University Malaysia", "28-March-2022 07:00:24"));
         qrHistories.add(new QrHistory("28-March-2022","Xiamen University Malaysia",historyItems));
+        historyItems2.add(new HistoryItem(R.drawable.icon_checkin,"Pavilion, Kuala Lumpur", "27-March-2022 12:03:14"));
+        historyItems2.add(new HistoryItem(R.drawable.icon_checkout,"Pavilion, Kuala Lumpur", "27-March-2022 12:38:41"));
+        qrHistories.add(new QrHistory("27-March-2022","Pavilion, Kuala Lumpur",historyItems2));
+        historyItems3.add(new HistoryItem(R.drawable.icon_checkin,"Lot 88, Kuala Lumpur", "27-March-2022 09:13:13"));
+        historyItems3.add(new HistoryItem(R.drawable.icon_checkout,"Lot 88, Kuala Lumpur", "27-March-2022 10:07:01"));
+        qrHistories.add(new QrHistory("27-March-2022","Lot 88, Kuala Lumpur",historyItems3));
 
         QrHistoryAdapter qrHistoryAdapter = new QrHistoryAdapter(qrHistories);
         qrHistoryRv.setAdapter(qrHistoryAdapter);

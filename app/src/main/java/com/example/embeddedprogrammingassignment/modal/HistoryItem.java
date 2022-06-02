@@ -1,9 +1,17 @@
 package com.example.embeddedprogrammingassignment.modal;
 
+import com.example.embeddedprogrammingassignment.R;
+
 public class HistoryItem {
     int image;
     String location;
     String time;
+
+    public HistoryItem() {
+        this.image = R.drawable.icon_default;
+        this.location = "";
+        this.time = "";
+    }
 
     public HistoryItem(int image, String location, String time) {
         this.image = image;

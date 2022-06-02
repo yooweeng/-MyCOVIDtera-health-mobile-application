@@ -31,7 +31,7 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
-    CardView riskStatus,selfReport, hotlinePhone;
+    CardView riskStatus,selfReport, hotlinePhone, faqs;
     SimpleViewPager thingsToDoSlider;
     ThingsToDoAdapter thingsToDoAdapter;
     User user;
@@ -54,6 +54,7 @@ public class HomeFragment extends Fragment {
         riskStatus=view.findViewById(R.id.riskStatusCard);
         selfReport=view.findViewById(R.id.selfReportCard);
         hotlinePhone = view.findViewById(R.id.hotlineCard);
+        faqs = view.findViewById(R.id.faqCard);
 
         riskStatus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +76,13 @@ public class HomeFragment extends Fragment {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
                 intent.setData(Uri.parse("tel: 01234567789"));
                 startActivity(intent);
+            }
+        });
+
+        faqs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_homeFaqFragment);
             }
         });
 

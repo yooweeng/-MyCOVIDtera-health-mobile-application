@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
                                                     R.id.statisticsFragment,
                                                     R.id.traceFragment,
                                                     R.id.profileFragment,
+                                                    R.id.qrHistoryFragment,
                                                     R.id.action_homeFragment_to_thingsToDoActivity,
                                                     R.id.checkInSuccessfulFragment);
 
