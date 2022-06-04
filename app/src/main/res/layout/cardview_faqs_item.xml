@@ -53,7 +53,7 @@
             android:fontFamily="@font/amiko_semibold"
             android:text="xxxxxxxxxxxxx xxxxxxxxxxxxx xxxxx"
             android:textColor="@color/black_txt"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
 
     </LinearLayout>
 

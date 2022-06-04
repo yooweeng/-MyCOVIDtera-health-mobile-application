@@ -13,14 +13,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="230dp"
-                android:background="@color/blue_bg"
-                >
+                android:paddingBottom="10dp"
+                android:background="@color/blue_bg">
 
                 <TextView
                     android:id="@+id/textView2"
@@ -43,7 +42,7 @@
                     android:fontFamily="@font/amiko_semibold"
                     android:text="User status:"
                     android:textColor="@color/black_txt"
-                    android:textSize="20sp"
+                    android:textSize="22sp"
                     app:layout_constraintStart_toStartOf="@+id/textView2"
                     app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -61,7 +60,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <com.google.android.material.card.MaterialCardView
-                android:layout_height="400dp"
+                android:layout_height="360dp"
                 android:layout_width="match_parent"
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="25dp"
@@ -73,8 +72,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    >
+                    android:layout_height="match_parent">
 
                     <TextView
                         android:id="@+id/textView4"
@@ -85,7 +83,7 @@
                         android:fontFamily="@font/amiko_bold"
                         android:text="Status"
                         android:textColor="@color/black_txt"
-                        android:textSize="28sp"
+                        android:textSize="24sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -98,7 +96,7 @@
                         android:fontFamily="@font/amiko_semibold"
                         android:text="Successful"
                         android:textColor="@color/green_warning"
-                        android:textSize="28sp"
+                        android:textSize="24sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -236,14 +234,11 @@
                     <Button
                         android:id="@+id/btnCheckout"
                         android:layout_width="match_parent"
-                        android:layout_height="60dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
-                        android:layout_marginTop="22dp"
                         android:layout_marginEnd="15dp"
-                        android:layout_marginBottom="7dp"
                         android:backgroundTint="@color/purple_btn"
                         android:text="Checkout"
-                        android:textAllCaps="false"
                         android:textColor="@color/white"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"

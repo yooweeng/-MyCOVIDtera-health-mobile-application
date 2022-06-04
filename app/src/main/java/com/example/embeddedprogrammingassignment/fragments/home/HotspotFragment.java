@@ -36,6 +36,8 @@ public class HotspotFragment extends Fragment {
 
     SupportMapFragment supportMapFragment;
     FusedLocationProviderClient client;
+    TextView tvCases;
+    User user;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,12 @@ public class HotspotFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home_hotspot, container, false);
+
+        tvCases = view.findViewById(R.id.tvZoneCases);
+
+        user = Parcels.unwrap(getArguments().getParcelable("activeUser"));
+
+        tvCases.setText("Hi " + user.getName() + ", there has been 28 reported case(s) of COVID-19 within a 1 km radius from your current position in the last 14 days.");
 
         // Initialize map fragment
         supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.googleMaps);

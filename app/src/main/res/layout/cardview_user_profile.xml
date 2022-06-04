@@ -21,7 +21,7 @@
             android:fontFamily="@font/amiko_bold"
             android:text="Profile"
             android:textColor="@color/black_txt"
-            android:textSize="30sp"
+            android:textSize="27sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

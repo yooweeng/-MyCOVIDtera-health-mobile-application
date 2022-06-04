@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -24,7 +25,7 @@
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="25dp"
                 android:layout_marginEnd="25dp"
-                android:layout_marginBottom="-20dp">
+                android:layout_marginBottom="-35dp">
 
                 <TextView
                     android:id="@+id/tvServicesTitle"
@@ -33,13 +34,14 @@
                     android:fontFamily="@font/amiko_bold"
                     android:text="Services"
                     android:textColor="@color/black_txt"
-                    android:textSize="30sp" />
+                    android:textSize="27sp" />
 
                 <GridLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:columnCount="4"
-                    android:rowCount="1">
+                    android:rowCount="1"
+                    android:translationY="-10dp">
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/riskStatusCard"
@@ -200,7 +202,7 @@
                     android:layout_height="wrap_content"
                     android:columnCount="4"
                     android:rowCount="1"
-                    android:translationY="-30dp">
+                    android:translationY="-35dp">
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/hotlineCard"
@@ -364,7 +366,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="18dp"
             android:layout_marginEnd="25dp"
             android:orientation="vertical">
             <TextView
@@ -374,7 +376,7 @@
                 android:fontFamily="@font/amiko_bold"
                 android:text="Things To Do"
                 android:textColor="@color/black_txt"
-                android:textSize="30sp"
+                android:textSize="24sp"
                 android:layout_marginBottom="-10dp"/>
 
             <com.cpacm.library.SimpleViewPager
@@ -392,7 +394,7 @@
                 android:fontFamily="@font/amiko_bold"
                 android:text="Announcements"
                 android:textColor="@color/black_txt"
-                android:textSize="30sp" />
+                android:textSize="24sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/announcementContent"
@@ -402,4 +404,4 @@
             </androidx.recyclerview.widget.RecyclerView>
         </LinearLayout>
     </LinearLayout>
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

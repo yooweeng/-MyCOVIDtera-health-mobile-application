@@ -8,17 +8,20 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:paddingBottom="10dp">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cvq1"
-            android:layout_width="360dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:cardElevation="30dp"
+            app:cardElevation="8dp"
             app:cardCornerRadius="10dp">
 
             <LinearLayout
@@ -44,7 +47,7 @@
                     android:layout_height="30dp"
                     android:text="Fever"
                     android:textColor="@color/black_txt"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:fontFamily="@font/amiko_semibold"/>
 
                 <com.google.android.material.checkbox.MaterialCheckBox
@@ -53,7 +56,7 @@
                     android:layout_height="30dp"
                     android:text="Cough"
                     android:textColor="@color/black_txt"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:fontFamily="@font/amiko_semibold"/>
 
                 <com.google.android.material.checkbox.MaterialCheckBox
@@ -62,7 +65,7 @@
                     android:layout_height="30dp"
                     android:text="Difficulty in breathing"
                     android:textColor="@color/black_txt"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:fontFamily="@font/amiko_semibold"/>
 
                 <com.google.android.material.checkbox.MaterialCheckBox
@@ -71,7 +74,7 @@
                     android:layout_height="30dp"
                     android:text="Sore throat"
                     android:textColor="@color/black_txt"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:fontFamily="@font/amiko_semibold"/>
 
                 <com.google.android.material.checkbox.MaterialCheckBox
@@ -80,7 +83,7 @@
                     android:layout_height="30dp"
                     android:text="Headache"
                     android:textColor="@color/black_txt"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:fontFamily="@font/amiko_semibold"/>
 
                 <com.google.android.material.checkbox.MaterialCheckBox
@@ -89,7 +92,7 @@
                     android:layout_height="30dp"
                     android:text="Lost of smell"
                     android:textColor="@color/black_txt"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:fontFamily="@font/amiko_semibold"/>
 
                 <com.google.android.material.checkbox.MaterialCheckBox
@@ -98,7 +101,7 @@
                     android:layout_height="30dp"
                     android:text="Loss of taste"
                     android:textColor="@color/black_txt"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:fontFamily="@font/amiko_semibold"/>
 
                 <com.google.android.material.checkbox.MaterialCheckBox
@@ -107,7 +110,7 @@
                     android:layout_height="30dp"
                     android:text="Chills"
                     android:textColor="@color/black_txt"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:fontFamily="@font/amiko_semibold"/>
 
                 <com.google.android.material.checkbox.MaterialCheckBox
@@ -116,7 +119,7 @@
                     android:layout_height="30dp"
                     android:text="Diarrhea"
                     android:textColor="@color/black_txt"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:fontFamily="@font/amiko_semibold"/>
 
                 <com.google.android.material.checkbox.MaterialCheckBox
@@ -125,7 +128,7 @@
                     android:layout_height="30dp"
                     android:text="Fatique"
                     android:textColor="@color/black_txt"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:fontFamily="@font/amiko_semibold"/>
 
                 <com.google.android.material.checkbox.MaterialCheckBox
@@ -134,17 +137,17 @@
                     android:layout_height="30dp"
                     android:text="Nausea or vomiting"
                     android:textColor="@color/black_txt"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:fontFamily="@font/amiko_semibold"/>
 
                 <com.google.android.material.checkbox.MaterialCheckBox
                     android:layout_width="match_parent"
                     style="@style/Widget.AppCompat.CompoundButton.RadioButton"
-                    android:layout_height="50dp"
+                    android:layout_height="30dp"
                     android:fontFamily="@font/amiko_semibold"
                     android:text="Runny nose or nausal congestion"
                     android:textColor="@color/black_txt"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
@@ -152,11 +155,11 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cvq2"
-            android:layout_width="360dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             app:cardCornerRadius="10dp"
-            app:cardElevation="30dp"
+            app:cardElevation="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cvq1">
@@ -186,7 +189,6 @@
                     android:id="@+id/tgq2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     app:singleSelection="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -200,7 +202,6 @@
                         android:text="Yes"
                         android:backgroundTint="@color/white"
                         android:textColor="@color/black_txt"
-                        android:textSize="17dp"
                         app:cornerRadius="5dp"
                         android:elevation="2dp"/>
 
@@ -212,7 +213,6 @@
                         android:backgroundTint="@color/white"
                         android:text="No"
                         android:textColor="@color/black_txt"
-                        android:textSize="17dp"
                         app:cornerRadius="5dp"
                         android:elevation="2dp" />
 
@@ -224,11 +224,11 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cvq3"
-            android:layout_width="360dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             app:cardCornerRadius="10dp"
-            app:cardElevation="30dp"
+            app:cardElevation="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cvq2">
@@ -258,7 +258,6 @@
                     android:id="@+id/tgq3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     app:singleSelection="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -272,7 +271,6 @@
                         android:backgroundTint="@color/white"
                         android:text="Yes"
                         android:textColor="@color/black_txt"
-                        android:textSize="17dp"
                         app:cornerRadius="5dp"
                         android:elevation="2dp"
                         app:layout_constraintStart_toStartOf="parent"
@@ -286,7 +284,6 @@
                         android:backgroundTint="@color/white"
                         android:text="No"
                         android:textColor="@color/black_txt"
-                        android:textSize="17dp"
                         app:cornerRadius="5dp"
                         android:elevation="2dp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -301,11 +298,11 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cvq4"
-            android:layout_width="360dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             app:cardCornerRadius="10dp"
-            app:cardElevation="30dp"
+            app:cardElevation="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cvq3">
@@ -335,7 +332,6 @@
                     android:id="@+id/tgq4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     app:singleSelection="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -349,7 +345,6 @@
                         android:backgroundTint="@color/white"
                         android:text="Yes"
                         android:textColor="@color/black_txt"
-                        android:textSize="17dp"
                         app:cornerRadius="5dp"
                         android:elevation="2dp"
                         app:layout_constraintStart_toStartOf="parent"
@@ -363,7 +358,6 @@
                         android:backgroundTint="@color/white"
                         android:text="No"
                         android:textColor="@color/black_txt"
-                        android:textSize="17dp"
                         app:cornerRadius="5dp"
                         android:elevation="2dp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -377,13 +371,12 @@
 
         <Button
             android:id="@+id/btnSubmitRiskStatus"
-            android:layout_width="320dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:backgroundTint="@color/purple_btn"
             android:fontFamily="@font/amiko_semibold"
             android:text="Submit"
-            android:textAllCaps="false"
             android:textColor="#ffff"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

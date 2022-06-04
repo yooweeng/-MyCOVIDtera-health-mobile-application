@@ -29,7 +29,7 @@
                 android:fontFamily="@font/amiko_bold"
                 android:text="Appointment(s): "
                 android:textColor="@color/purple_btn"
-                android:textSize="24sp" />
+                android:textSize="20sp" />
 
             <include
                 android:id="@+id/bookVaccinationCardview"

@@ -46,7 +46,7 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
-    CardView riskStatus,selfReport, hotlinePhone, sopViolation, faqs, hotspot, vaccination;
+    CardView riskStatus,selfReport, hotlinePhone, sopViolation, faqs, hotspot, vaccination, sopGuidelines;
     SimpleViewPager thingsToDoSlider;
     ThingsToDoAdapter thingsToDoAdapter;
     User user;
@@ -81,11 +81,13 @@ public class HomeFragment extends Fragment {
         recyclerView = view.findViewById(R.id.announcementContent);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setNestedScrollingEnabled(false);
         announcementPageAdapter = new AnnouncementPageAdapter(getContext(), list);
         recyclerView.setAdapter(announcementPageAdapter);
         sopViolation = view.findViewById(R.id.violationCard);
         hotspot = view.findViewById(R.id.hotspotCard);
         vaccination = view.findViewById(R.id.vaccinationCard);
+        sopGuidelines = view.findViewById(R.id.guidelineCard);
 
         riskStatus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,7 +129,7 @@ public class HomeFragment extends Fragment {
         hotspot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_hotspotFragment);
+                Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_hotspotFragment, passingBundle);
             }
         });
 
@@ -135,6 +137,13 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_vaccinationFragment, passingBundle);
+            }
+        });
+
+        sopGuidelines.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_sopGuidelinesFragment);
             }
         });
 

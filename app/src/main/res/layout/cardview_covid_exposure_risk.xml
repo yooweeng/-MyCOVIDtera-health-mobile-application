@@ -52,7 +52,7 @@
             android:fontFamily="@font/nunito_sans_bold"
             android:text="You are at High Risk!"
             android:textColor="@color/black_txt"
-            android:textSize="22sp" />
+            android:textSize="20sp" />
 
     </RelativeLayout>
 </com.google.android.material.card.MaterialCardView>

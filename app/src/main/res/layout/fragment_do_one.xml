@@ -66,6 +66,7 @@
                 android:textColor="@color/black_txt"
                 android:layout_gravity="center"
                 android:layout_margin="40dp"
+                android:justificationMode="inter_word"
                 android:gravity="center_horizontal"/>
         </LinearLayout>
 

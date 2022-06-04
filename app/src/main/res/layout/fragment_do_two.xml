@@ -68,7 +68,8 @@
                 android:gravity="center_horizontal"
                 android:text="Use warm water and soap to wash your hands for at least 30 seconds! Clean your wrists, between fingers, and also your fingernails. Using antibacterial soap will eliminate 99% of the bacterias!"
                 android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:justificationMode="inter_word"/>
         </LinearLayout>
 
         <LinearLayout

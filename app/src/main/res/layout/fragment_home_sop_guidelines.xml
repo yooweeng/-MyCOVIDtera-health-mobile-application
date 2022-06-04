@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="25dp"
+    android:layout_marginEnd="25dp"
+    android:layout_marginBottom="25dp"
+    android:orientation="vertical"
+    tools:context=".fragments.home.SopGuidelinesFragment">
+
+    <com.cpacm.library.SimpleViewPager
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:id="@+id/sopGuidelineSlider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1. Wear a face mask when in public"
+            android:textColor="@color/black"
+            android:fontFamily="@font/amiko_semibold"
+            android:textSize="16sp"
+            android:justificationMode="inter_word"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="2. Operation hours must adhere to the permit or licence"
+            android:textColor="@color/black"
+            android:fontFamily="@font/amiko_semibold"
+            android:textSize="16sp"
+            android:justificationMode="inter_word"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="3. Maintain hand hygiene"
+            android:textColor="@color/black"
+            android:fontFamily="@font/amiko_semibold"
+            android:textSize="16sp"
+            android:justificationMode="inter_word"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="4. Maintain a safe distance from others (at least 1 metre), even if they don’t appear to be sick."
+            android:textColor="@color/black"
+            android:fontFamily="@font/amiko_semibold"
+            android:textSize="16sp"
+            android:justificationMode="inter_word"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="5. Perform Covid-19 tests according to the National Testing Strategy"
+            android:textColor="@color/black"
+            android:fontFamily="@font/amiko_semibold"
+            android:textSize="16sp"
+            android:justificationMode="inter_word"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="6. Manage suspected or confirmed Covid-19 cases according to the Health Ministry’s guidelines"
+            android:textColor="@color/black"
+            android:fontFamily="@font/amiko_semibold"
+            android:textSize="16sp"
+            android:justificationMode="inter_word"/>
+
+    </LinearLayout>
+</LinearLayout>

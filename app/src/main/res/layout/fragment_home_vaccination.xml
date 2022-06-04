@@ -46,8 +46,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:layout_marginTop="20dp">
+                    android:layout_marginEnd="15dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -61,16 +60,16 @@
                             android:fontFamily="@font/amiko_bold"
                             android:text="Vaccine 1: "
                             android:textColor="@color/black"
-                            android:textSize="24sp" />
+                            android:textSize="20sp" />
 
                         <TextView
                             android:id="@+id/tvVaccine1Status"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/amiko_bold"
+                            android:fontFamily="@font/amiko_semibold"
                             android:text="Completed"
                             android:textColor="@color/black"
-                            android:textSize="24sp"
+                            android:textSize="20sp"
                             android:visibility="gone"/>
                     </LinearLayout>
 
@@ -95,16 +94,16 @@
                             android:fontFamily="@font/amiko_bold"
                             android:text="Vaccine 2: "
                             android:textColor="@color/black"
-                            android:textSize="24sp" />
+                            android:textSize="20sp" />
 
                         <TextView
                             android:id="@+id/tvVaccine2Status"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/amiko_bold"
+                            android:fontFamily="@font/amiko_semibold"
                             android:text="Not Available"
                             android:textColor="@color/black"
-                            android:textSize="24sp"
+                            android:textSize="20sp"
                             android:visibility="visible"/>
                     </LinearLayout>
 
@@ -130,16 +129,16 @@
                             android:fontFamily="@font/amiko_bold"
                             android:text="Vaccine 3: "
                             android:textColor="@color/black"
-                            android:textSize="24sp" />
+                            android:textSize="20sp" />
 
                         <TextView
                             android:id="@+id/tvVaccine3Status"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/amiko_bold"
+                            android:fontFamily="@font/amiko_semibold"
                             android:text="Not Available"
                             android:textColor="@color/black"
-                            android:textSize="24sp"
+                            android:textSize="20sp"
                             android:visibility="visible"/>
                     </LinearLayout>
 

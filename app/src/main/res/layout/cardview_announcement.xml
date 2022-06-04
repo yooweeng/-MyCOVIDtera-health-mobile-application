@@ -47,7 +47,7 @@
                     android:maxLines="2"
                     android:text="TITLE"
                     android:textColor="@color/black"
-                    android:textSize="45px" />
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
@@ -70,7 +70,7 @@
                     android:lines="3"
                     android:text="CAPTION"
                     android:textColor="@color/black"
-                    android:textSize="33px" />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -85,29 +85,27 @@
                     android:layout_marginStart="12dp">
 
                     <ImageView
+                        android:id="@+id/ivNoOfClicks"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/show"
                         android:layout_centerVertical="true"
-                        android:id="@+id/ivNoOfClicks"/>
+                        android:src="@drawable/show" />
 
                     <TextView
                         android:id="@+id/tvNoOfClicks"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginTop="22dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="19dp"
                         android:layout_toEndOf="@+id/ivNoOfClicks"
                         android:fontFamily="@font/amiko_semibold"
-                        android:text="Number of Clicks"
-                        android:layout_marginLeft="5dp"/>
+                        android:text="Number of Clicks" />
 
                     <TextView
                         android:id="@+id/tvNoOfLikes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginTop="22dp"
+                        android:layout_marginTop="19dp"
                         android:layout_marginRight="20dp"
                         android:layout_toLeftOf="@+id/btnReadMore"
                         android:fontFamily="@font/amiko_semibold"
@@ -119,21 +117,22 @@
                         android:layout_height="55dp"
                         android:layout_centerVertical="true"
                         android:layout_toLeftOf="@id/tvNoOfLikes"
-                        app:lottie_rawRes="@raw/heart"
-                        android:scaleType="fitCenter"/>
+                        android:translationX="2dp"
+                        android:scaleType="fitCenter"
+                        app:lottie_rawRes="@raw/heart" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnReadMore"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
                         android:layout_marginEnd="20dp"
                         android:backgroundTint="@color/black"
                         android:text="Read more"
                         android:textColor="@color/white"
-                        android:textSize="12dp"
-                        app:cornerRadius="15dp"
-                        android:layout_centerVertical="true"/>
+                        android:textSize="12sp"
+                        app:cornerRadius="15dp" />
                 </RelativeLayout>
             </LinearLayout>
         </LinearLayout>

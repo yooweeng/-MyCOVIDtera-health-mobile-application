@@ -69,7 +69,8 @@
                 android:gravity="center_horizontal"
                 android:text="Use an alcohol-based hand sanitizer that contains at least 60% alcohol. Can be used on surfaces to kill germs as well! Hand sanitizers are a convenient alternative to handwashing with soap!"
                 android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:justificationMode="inter_word"/>
         </LinearLayout>
 
         <LinearLayout
