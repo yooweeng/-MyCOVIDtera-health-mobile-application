@@ -84,13 +84,43 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginStart="12dp">
 
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/show"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/ivNoOfClicks"/>
+
                     <TextView
                         android:id="@+id/tvNoOfClicks"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
                         android:layout_marginTop="22dp"
+                        android:layout_toEndOf="@+id/ivNoOfClicks"
                         android:fontFamily="@font/amiko_semibold"
-                        android:text="Number of Clicks" />
+                        android:text="Number of Clicks"
+                        android:layout_marginLeft="5dp"/>
+
+                    <TextView
+                        android:id="@+id/tvNoOfLikes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="22dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_toLeftOf="@+id/btnReadMore"
+                        android:fontFamily="@font/amiko_semibold"
+                        android:text="No of Likes" />
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/lottieHeartAnnouncements"
+                        android:layout_width="50dp"
+                        android:layout_height="55dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@id/tvNoOfLikes"
+                        app:lottie_rawRes="@raw/heart"
+                        android:scaleType="fitCenter"/>
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnReadMore"
@@ -102,7 +132,8 @@
                         android:text="Read more"
                         android:textColor="@color/white"
                         android:textSize="12dp"
-                        app:cornerRadius="15dp" />
+                        app:cornerRadius="15dp"
+                        android:layout_centerVertical="true"/>
                 </RelativeLayout>
             </LinearLayout>
         </LinearLayout>

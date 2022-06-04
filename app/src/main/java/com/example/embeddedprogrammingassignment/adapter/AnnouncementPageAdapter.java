@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
 import com.example.embeddedprogrammingassignment.modal.Announcements;
 import com.example.embeddedprogrammingassignment.R;
@@ -49,6 +50,23 @@ public class AnnouncementPageAdapter extends RecyclerView.Adapter<AnnouncementPa
         holder.title.setText(announcements.getTitle());
         holder.caption.setText(announcements.getCaption());
         holder.numberOfClicks.setText(announcements.getNumberOfClicks());
+        holder.numberOfLikes.setText(announcements.getNumberOfClicks()); // need to change to getNumberofLikes!!!
+
+        holder.likesLottie.setOnClickListener(view -> {
+
+            if(holder.likesLottie.isSelected()) {
+                holder.likesLottie.setProgress(0.2F);
+                holder.likesLottie.setSpeed(-1);
+            } else {
+                holder.likesLottie.setProgress(0);
+                holder.likesLottie.setSpeed(1);
+            }
+
+            Log.i("Is lottie selected?", String.valueOf(holder.likesLottie.isSelected()));
+
+            holder.likesLottie.playAnimation();
+            holder.likesLottie.setSelected(!holder.likesLottie.isSelected());
+        });
 
         holder.readMore.setOnClickListener(v -> {
             announcements.setNumberOfClicks(String.valueOf(Integer.parseInt(announcements.getNumberOfClicks())+1));
@@ -85,10 +103,11 @@ public class AnnouncementPageAdapter extends RecyclerView.Adapter<AnnouncementPa
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView title, caption, numberOfClicks;
+        TextView title, caption, numberOfClicks, numberOfLikes;
         CardView cardView;
         ImageView imageView;
         Button readMore;
+        LottieAnimationView likesLottie;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -99,6 +118,10 @@ public class AnnouncementPageAdapter extends RecyclerView.Adapter<AnnouncementPa
             cardView = itemView.findViewById(R.id.cvReads);
             readMore = itemView.findViewById(R.id.btnReadMore);
             numberOfClicks = itemView.findViewById(R.id.tvNoOfClicks);
+            numberOfLikes = itemView.findViewById(R.id.tvNoOfLikes);
+            likesLottie = itemView.findViewById(R.id.lottieHeartAnnouncements);
+
+            likesLottie.setSelected(false); // Just for demo, need to call from database later
         }
     }
 }
