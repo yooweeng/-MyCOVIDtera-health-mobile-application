@@ -21,7 +21,7 @@ class SopViolationFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view: View? = inflater.inflate(R.layout.fragment_sop_violation, container, false)
+        val view: View? = inflater.inflate(R.layout.fragment_home_sop_violation, container, false)
 
         val user: User? = Parcels.unwrap<User>(
             requireArguments().getParcelable("activeUser")

@@ -101,8 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
         assert navHostFragment != null;
         NavController navController = navHostFragment.getNavController();
-        navController.setGraph(R.navigation.nav_graph);
-
+        navController.setGraph(R.navigation.nav_graph, bundle);
 
         AppBarConfiguration appBarConfiguration =
                 new AppBarConfiguration.Builder(navController.getGraph()).build();

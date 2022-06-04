@@ -398,7 +398,6 @@
                 android:id="@+id/announcementContent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fitsSystemWindows="true"
                 android:padding="2dp">
             </androidx.recyclerview.widget.RecyclerView>
         </LinearLayout>

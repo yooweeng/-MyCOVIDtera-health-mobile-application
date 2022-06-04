@@ -24,6 +24,15 @@
         <action
             android:id="@+id/action_homeFragment_to_sopViolationFragment"
             app:destination="@id/sopViolationFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_hotspotFragment"
+            app:destination="@id/hotspotFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_vaccinationFragment"
+            app:destination="@id/vaccinationFragment" />
+        <action
+            android:id="@+id/action_homeFragment_self"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -115,6 +124,29 @@
         <action
             android:id="@+id/action_sopViolationFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/hotspotFragment"
+        android:name="com.example.embeddedprogrammingassignment.fragments.home.HotspotFragment"
+        android:label="Hotspot"
+        tools:layout="@layout/fragment_home_hotspot" />
+    <fragment
+        android:id="@+id/vaccinationFragment"
+        android:name="com.example.embeddedprogrammingassignment.fragments.home.VaccinationFragment"
+        android:label="Vaccination"
+        tools:layout="@layout/fragment_home_vaccination">
+        <action
+            android:id="@+id/action_vaccinationFragment_to_appointmentFragment"
+            app:destination="@id/appointmentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/appointmentFragment"
+        android:name="com.example.embeddedprogrammingassignment.fragments.home.AppointmentFragment"
+        android:label="fragment_home_appointment"
+        tools:layout="@layout/fragment_home_appointment" >
+        <action
+            android:id="@+id/action_appointmentFragment_to_vaccinationFragment"
+            app:destination="@id/vaccinationFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeFaqFragment"

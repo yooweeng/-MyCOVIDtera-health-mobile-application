@@ -3,18 +3,21 @@ package com.example.embeddedprogrammingassignment.fragments;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +46,7 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
-    CardView riskStatus,selfReport, hotlinePhone, faqs, sopViolation;
+    CardView riskStatus,selfReport, hotlinePhone, sopViolation, faqs, hotspot, vaccination;
     SimpleViewPager thingsToDoSlider;
     ThingsToDoAdapter thingsToDoAdapter;
     User user;
@@ -81,6 +84,8 @@ public class HomeFragment extends Fragment {
         announcementPageAdapter = new AnnouncementPageAdapter(getContext(), list);
         recyclerView.setAdapter(announcementPageAdapter);
         sopViolation = view.findViewById(R.id.violationCard);
+        hotspot = view.findViewById(R.id.hotspotCard);
+        vaccination = view.findViewById(R.id.vaccinationCard);
 
         riskStatus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,6 +124,20 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        hotspot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_hotspotFragment);
+            }
+        });
+
+        vaccination.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_vaccinationFragment, passingBundle);
+            }
+        });
+
         thingsToDoSlider = view.findViewById(R.id.svpHomeThingsToDoSlider);
         thingsToDoSlider.setAdapter(thingsToDoAdapter);
         thingsToDoSlider.startAutoScroll(true);
@@ -141,9 +160,9 @@ public class HomeFragment extends Fragment {
 
                     Announcements announcements = dataSnapshot.getValue(Announcements.class);
                     list.add(announcements);
-                    Log.d("click000", String.valueOf(announcements));
                 }
                 announcementPageAdapter.notifyDataSetChanged();
+
             }
 
             @Override
