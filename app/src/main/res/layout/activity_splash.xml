@@ -55,7 +55,7 @@
         android:fontFamily="@font/nunito_sans_bold"
         android:text="@string/app_desc"
         android:textColor="@color/purple_btn"
-        android:textSize="17sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/tvDeveloped"

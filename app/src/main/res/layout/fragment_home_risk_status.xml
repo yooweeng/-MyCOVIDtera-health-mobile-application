@@ -8,10 +8,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:paddingBottom="10dp">
+        android:layout_height="match_parent">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cvq1"
@@ -21,16 +18,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/cvq2"
             app:cardElevation="8dp"
-            app:cardCornerRadius="10dp">
+            app:cardCornerRadius="10dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:paddingLeft="25dp"
-                android:paddingRight="25dp"
+                android:padding="12dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -39,7 +36,8 @@
                     android:fontFamily="@font/amiko_bold"
                     android:text="1. What symptoms of COVID-19 are you exhibiting?"
                     android:textColor="@color/black_txt"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    />
 
                 <com.google.android.material.checkbox.MaterialCheckBox
                     android:layout_width="match_parent"
@@ -48,7 +46,8 @@
                     android:text="Fever"
                     android:textColor="@color/black_txt"
                     android:textSize="16sp"
-                    android:fontFamily="@font/amiko_semibold"/>
+                    android:fontFamily="@font/amiko_semibold"
+                    android:buttonTint="@color/purple_title"/>
 
                 <com.google.android.material.checkbox.MaterialCheckBox
                     android:layout_width="match_parent"
@@ -57,7 +56,8 @@
                     android:text="Cough"
                     android:textColor="@color/black_txt"
                     android:textSize="16sp"
-                    android:fontFamily="@font/amiko_semibold"/>
+                    android:fontFamily="@font/amiko_semibold"
+                    android:buttonTint="@color/purple_title"/>
 
                 <com.google.android.material.checkbox.MaterialCheckBox
                     android:layout_width="match_parent"
@@ -66,7 +66,8 @@
                     android:text="Difficulty in breathing"
                     android:textColor="@color/black_txt"
                     android:textSize="16sp"
-                    android:fontFamily="@font/amiko_semibold"/>
+                    android:fontFamily="@font/amiko_semibold"
+                    android:buttonTint="@color/purple_title"/>
 
                 <com.google.android.material.checkbox.MaterialCheckBox
                     android:layout_width="match_parent"
@@ -75,7 +76,8 @@
                     android:text="Sore throat"
                     android:textColor="@color/black_txt"
                     android:textSize="16sp"
-                    android:fontFamily="@font/amiko_semibold"/>
+                    android:fontFamily="@font/amiko_semibold"
+                    android:buttonTint="@color/purple_title"/>
 
                 <com.google.android.material.checkbox.MaterialCheckBox
                     android:layout_width="match_parent"
@@ -84,7 +86,8 @@
                     android:text="Headache"
                     android:textColor="@color/black_txt"
                     android:textSize="16sp"
-                    android:fontFamily="@font/amiko_semibold"/>
+                    android:fontFamily="@font/amiko_semibold"
+                    android:buttonTint="@color/purple_title"/>
 
                 <com.google.android.material.checkbox.MaterialCheckBox
                     android:layout_width="match_parent"
@@ -93,7 +96,8 @@
                     android:text="Lost of smell"
                     android:textColor="@color/black_txt"
                     android:textSize="16sp"
-                    android:fontFamily="@font/amiko_semibold"/>
+                    android:fontFamily="@font/amiko_semibold"
+                    android:buttonTint="@color/purple_title"/>
 
                 <com.google.android.material.checkbox.MaterialCheckBox
                     android:layout_width="match_parent"
@@ -102,7 +106,8 @@
                     android:text="Loss of taste"
                     android:textColor="@color/black_txt"
                     android:textSize="16sp"
-                    android:fontFamily="@font/amiko_semibold"/>
+                    android:fontFamily="@font/amiko_semibold"
+                    android:buttonTint="@color/purple_title"/>
 
                 <com.google.android.material.checkbox.MaterialCheckBox
                     android:layout_width="match_parent"
@@ -111,7 +116,8 @@
                     android:text="Chills"
                     android:textColor="@color/black_txt"
                     android:textSize="16sp"
-                    android:fontFamily="@font/amiko_semibold"/>
+                    android:fontFamily="@font/amiko_semibold"
+                    android:buttonTint="@color/purple_title"/>
 
                 <com.google.android.material.checkbox.MaterialCheckBox
                     android:layout_width="match_parent"
@@ -120,7 +126,8 @@
                     android:text="Diarrhea"
                     android:textColor="@color/black_txt"
                     android:textSize="16sp"
-                    android:fontFamily="@font/amiko_semibold"/>
+                    android:fontFamily="@font/amiko_semibold"
+                    android:buttonTint="@color/purple_title"/>
 
                 <com.google.android.material.checkbox.MaterialCheckBox
                     android:layout_width="match_parent"
@@ -129,7 +136,8 @@
                     android:text="Fatique"
                     android:textColor="@color/black_txt"
                     android:textSize="16sp"
-                    android:fontFamily="@font/amiko_semibold"/>
+                    android:fontFamily="@font/amiko_semibold"
+                    android:buttonTint="@color/purple_title"/>
 
                 <com.google.android.material.checkbox.MaterialCheckBox
                     android:layout_width="match_parent"
@@ -138,16 +146,19 @@
                     android:text="Nausea or vomiting"
                     android:textColor="@color/black_txt"
                     android:textSize="16sp"
-                    android:fontFamily="@font/amiko_semibold"/>
+                    android:fontFamily="@font/amiko_semibold"
+                    android:buttonTint="@color/purple_title"/>
 
                 <com.google.android.material.checkbox.MaterialCheckBox
                     android:layout_width="match_parent"
                     style="@style/Widget.AppCompat.CompoundButton.RadioButton"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/amiko_semibold"
                     android:text="Runny nose or nausal congestion"
                     android:textColor="@color/black_txt"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:buttonTint="@color/purple_title"
+                    />
 
             </LinearLayout>
 
@@ -158,6 +169,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
             app:cardCornerRadius="10dp"
             app:cardElevation="8dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -168,10 +181,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingLeft="25dp"
-                android:paddingTop="10dp"
-                android:paddingRight="25dp"
-                android:paddingBottom="10dp">
+                android:padding="12dp"
+                >
 
                 <TextView
                     android:id="@+id/tvLabelq2"
@@ -231,16 +242,16 @@
             app:cardElevation="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cvq2">
+            app:layout_constraintTop_toBottomOf="@id/cvq2"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingLeft="25dp"
-                android:paddingTop="10dp"
-                android:paddingRight="25dp"
-                android:paddingBottom="10dp">
+                android:padding="12dp"
+                >
 
                 <TextView
                     android:id="@+id/tvLabelq3"
@@ -301,6 +312,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
             app:cardCornerRadius="10dp"
             app:cardElevation="8dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -311,10 +324,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingLeft="25dp"
-                android:paddingTop="10dp"
-                android:paddingRight="25dp"
-                android:paddingBottom="10dp">
+                android:padding="12dp">
 
                 <TextView
                     android:id="@+id/tvLabelq4"
@@ -377,6 +387,9 @@
             android:backgroundTint="@color/purple_btn"
             android:fontFamily="@font/amiko_semibold"
             android:text="Submit"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="10dp"
             android:textColor="#ffff"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

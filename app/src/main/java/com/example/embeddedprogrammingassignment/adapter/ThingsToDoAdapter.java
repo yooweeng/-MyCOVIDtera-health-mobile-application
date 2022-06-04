@@ -20,11 +20,12 @@ public class ThingsToDoAdapter extends PagerAdapter {
 
     List<Integer> images;
     LayoutInflater layoutInflater;
-    Boolean firstItem = true;
+    int id;
 
-    public ThingsToDoAdapter(Context context) {
+    public ThingsToDoAdapter(Context context, int id) {
         images = getImagesList();
         layoutInflater = LayoutInflater.from(context);
+        this.id = id;
     }
 
     private List<Integer> getImagesList() {
@@ -57,7 +58,7 @@ public class ThingsToDoAdapter extends PagerAdapter {
         iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_thingsToDoActivity);
+                Navigation.findNavController(view).navigate(id);
             }
         });
 

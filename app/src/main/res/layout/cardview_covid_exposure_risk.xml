@@ -38,7 +38,7 @@
             android:fontFamily="@font/amiko_semibold"
             android:text="Status"
             android:textColor="@color/black_txt"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/tvCardviewCovidRisk"
@@ -52,7 +52,7 @@
             android:fontFamily="@font/nunito_sans_bold"
             android:text="You are at High Risk!"
             android:textColor="@color/black_txt"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
     </RelativeLayout>
 </com.google.android.material.card.MaterialCardView>

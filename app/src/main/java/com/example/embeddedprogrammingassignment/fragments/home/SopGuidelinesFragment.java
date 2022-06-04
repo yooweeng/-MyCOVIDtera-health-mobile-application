@@ -21,7 +21,7 @@ public class SopGuidelinesFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sopGuidelineAdapter = new ThingsToDoAdapter(getContext());
+        sopGuidelineAdapter = new ThingsToDoAdapter(getContext(), R.id.action_sopGuidelinesFragment_to_thingsToDoActivity);
     }
 
     @Override

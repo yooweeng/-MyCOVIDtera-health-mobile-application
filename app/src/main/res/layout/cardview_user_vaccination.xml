@@ -42,7 +42,7 @@
                 android:justificationMode="inter_word"
                 android:text="Alvin Yeoh Yi Wei"
                 android:textColor="@color/black_txt"
-                android:textSize="24sp" />
+                android:textSize="20sp" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -71,7 +71,7 @@
                 android:fontFamily="@font/amiko_semibold"
                 android:text="NRIC"
                 android:textColor="@color/black_txt"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tvVaccinationNRIC"
@@ -82,7 +82,7 @@
                 android:fontFamily="@font/amiko_semibold"
                 android:text="000514020149"
                 android:textColor="@color/black_txt"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tvVaccinationPhoneText"
@@ -92,7 +92,7 @@
                 android:fontFamily="@font/amiko_semibold"
                 android:text="Phone Number"
                 android:textColor="@color/black_txt"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tvVaccinationPhone"
@@ -103,7 +103,7 @@
                 android:fontFamily="@font/amiko_semibold"
                 android:text="0124872800"
                 android:textColor="@color/black_txt"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tvProfileStateText"
@@ -113,7 +113,7 @@
                 android:fontFamily="@font/amiko_semibold"
                 android:text="State"
                 android:textColor="@color/black_txt"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tvVaccinationState"
@@ -124,7 +124,7 @@
                 android:fontFamily="@font/amiko_semibold"
                 android:text="Negeri Sembilan"
                 android:textColor="@color/black_txt"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
         </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>

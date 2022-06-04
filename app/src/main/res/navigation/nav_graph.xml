@@ -31,9 +31,6 @@
             android:id="@+id/action_homeFragment_to_vaccinationFragment"
             app:destination="@id/vaccinationFragment" />
         <action
-            android:id="@+id/action_homeFragment_self"
-            app:destination="@id/homeFragment" />
-        <action
             android:id="@+id/action_homeFragment_to_sopGuidelinesFragment"
             app:destination="@id/sopGuidelinesFragment" />
     </fragment>
@@ -70,7 +67,7 @@
     <fragment
         android:id="@+id/qrHistoryFragment"
         android:name="com.example.embeddedprogrammingassignment.fragments.trace.QrHistoryFragment"
-        android:label="fragment_qr_history"
+        android:label="Check-in History"
         tools:layout="@layout/fragment_trace_qr_history" >
         <action
             android:id="@+id/action_qrHistoryFragment_to_traceFragment"
@@ -123,7 +120,7 @@
         android:id="@+id/sopViolationFragment"
         android:name="com.example.embeddedprogrammingassignment.fragments.home.SopViolationFragment"
         android:label="Report SOP Violation"
-        tools:layout="@layout/fragment_sop_violation">
+        tools:layout="@layout/fragment_home_sop_violation">
         <action
             android:id="@+id/action_sopViolationFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
@@ -160,5 +157,9 @@
         android:id="@+id/sopGuidelinesFragment"
         android:name="com.example.embeddedprogrammingassignment.fragments.home.SopGuidelinesFragment"
         android:label="SOP Guidelines"
-        tools:layout="@layout/fragment_home_sop_guidelines" />
+        tools:layout="@layout/fragment_home_sop_guidelines" >
+        <action
+            android:id="@+id/action_sopGuidelinesFragment_to_thingsToDoActivity"
+            app:destination="@id/thingsToDoActivity" />
+    </fragment>
 </navigation>

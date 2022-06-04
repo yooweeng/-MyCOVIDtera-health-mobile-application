@@ -66,7 +66,7 @@ public class HomeFragment extends Fragment {
         }
         passingBundle = new Bundle();
         passingBundle.putParcelable("activeUser", Parcels.wrap(user));
-        thingsToDoAdapter = new ThingsToDoAdapter(getContext());
+        thingsToDoAdapter = new ThingsToDoAdapter(getContext(), R.id.action_homeFragment_to_thingsToDoActivity);
     }
 
     @Override

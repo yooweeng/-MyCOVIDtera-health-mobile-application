@@ -13,15 +13,15 @@
         android:paddingLeft="25dp"
         android:paddingRight="25dp"
         android:paddingTop="25dp"
-        android:background="@color/blue_bg">
+        >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/amiko_bold"
-            android:text="Check-in History"
+            android:text="Past Locations"
             android:textColor="@color/black_txt"
-            android:textSize="24sp"
+            android:textSize="27sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

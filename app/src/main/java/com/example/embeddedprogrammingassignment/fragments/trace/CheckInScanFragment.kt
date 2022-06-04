@@ -56,12 +56,14 @@ class CheckInScanFragment : Fragment() {
                 activity?.runOnUiThread {
                     // Write code here
                     val result: String = it.text
+                    codeScanner.stopPreview()
+                    Navigation.findNavController(view).navigate(R.id.action_checkInScanFragment_to_checkInSuccessfulFragment, bundle)
+
                     // if this is json file
-                    if (result.contains("http://") || result.contains("www.") || result.contains("https://")) {
-                        Log.i("Website", result)
-                        codeScanner.stopPreview()
-                        Navigation.findNavController(view).navigate(R.id.action_checkInScanFragment_to_checkInSuccessfulFragment, bundle)
-                    }
+//                    if (result.contains("http://") || result.contains("www.") || result.contains("https://")) {
+//                        codeScanner.stopPreview()
+//                        Navigation.findNavController(view).navigate(R.id.action_checkInScanFragment_to_checkInSuccessfulFragment, bundle)
+//                    }
                 }
             }
 
