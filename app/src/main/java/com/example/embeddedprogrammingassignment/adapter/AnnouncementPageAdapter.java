@@ -29,11 +29,13 @@ import java.util.ArrayList;
 
 public class AnnouncementPageAdapter extends RecyclerView.Adapter<AnnouncementPageAdapter.MyViewHolder> {
     Context context;
-    ArrayList<Announcements> list;
+    ArrayList<Announcements> announcementList;
+    String nric;
 
-    public AnnouncementPageAdapter(Context context, ArrayList<Announcements> list) {
+    public AnnouncementPageAdapter(Context context, ArrayList<Announcements> list, String nric) {
         this.context = context;
-        this.list = list;
+        this.announcementList = list;
+        this.nric = nric;
     }
 
     @NonNull
@@ -46,32 +48,75 @@ public class AnnouncementPageAdapter extends RecyclerView.Adapter<AnnouncementPa
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Announcements announcements = list.get(position);
+        Announcements announcements = announcementList.get(position);
+
+        FirebaseDatabase.getInstance().getReference("likes").child(announcements.getId()).child(nric).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    Log.i("Lottie working?", "onDataChange: like->unlike");
+                    holder.likesLottie.setProgress(.5F);
+                    holder.likesLottie.setSelected(true);
+                    holder.likesLottie.reverseAnimationSpeed();
+                }
+                else {
+                    Log.i("Lottie working?", "onDataChange: unlike->like");
+                    holder.likesLottie.setSelected(false);
+                    holder.likesLottie.setProgress(0);
+                    holder.likesLottie.setSpeed(1);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         holder.title.setText(announcements.getTitle());
         holder.caption.setText(announcements.getCaption());
         holder.numberOfClicks.setText(announcements.getNumberOfClicks());
-        holder.numberOfLikes.setText(announcements.getNumberOfClicks()); // need to change to getNumberofLikes!!!
+        holder.numberOfLikes.setText(announcements.getNumberOfLikes());
 
         holder.likesLottie.setOnClickListener(view -> {
 
+            // If is liked
             if(holder.likesLottie.isSelected()) {
-                holder.likesLottie.setProgress(0.2F);
-                holder.likesLottie.setSpeed(-1);
+                holder.likesLottie.setProgress(0.5F);
+                holder.likesLottie.setSpeed(-2);
+                FirebaseDatabase.getInstance().getReference().child("likes").child(announcements.getId()).child(nric).removeValue();
+                announcements.setNumberOfLikes(String.valueOf(Integer.parseInt(announcements.getNumberOfLikes())-1));
             } else {
+                // did not like
                 holder.likesLottie.setProgress(0);
                 holder.likesLottie.setSpeed(1);
+                FirebaseDatabase.getInstance().getReference().child("likes").child(announcements.getId()).child(nric).setValue(true);
+                announcements.setNumberOfLikes(String.valueOf(Integer.parseInt(announcements.getNumberOfLikes())+1));
             }
-
-            Log.i("Is lottie selected?", String.valueOf(holder.likesLottie.isSelected()));
 
             holder.likesLottie.playAnimation();
             holder.likesLottie.setSelected(!holder.likesLottie.isSelected());
+            Log.i("Is lottie selected?", String.valueOf(holder.likesLottie.isSelected()));
+            FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+            DatabaseReference databaseReference = firebaseDatabase.getReference("announcements");
+            databaseReference.child(announcements.getId()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    databaseReference.child(announcements.getId()).child("numberOfLikes").setValue(announcements.getNumberOfLikes());
+                    holder.numberOfLikes.setText(announcements.getNumberOfLikes());
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
         });
 
         holder.readMore.setOnClickListener(v -> {
             announcements.setNumberOfClicks(String.valueOf(Integer.parseInt(announcements.getNumberOfClicks())+1));
             Intent intent = new Intent(context, webView_announcement.class);
-            intent.putExtra("url", list.get(position).getUrl());
+            intent.putExtra("url", announcementList.get(position).getUrl());
 
             FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
             DatabaseReference databaseReference = firebaseDatabase.getReference("announcements");
@@ -93,12 +138,12 @@ public class AnnouncementPageAdapter extends RecyclerView.Adapter<AnnouncementPa
         });
 
         // set image on card
-        Glide.with(context).load(list.get(position).getUrlToImage()).into(holder.imageView);
+        Glide.with(context).load(announcementList.get(position).getUrlToImage()).into(holder.imageView);
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return announcementList.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -121,7 +166,6 @@ public class AnnouncementPageAdapter extends RecyclerView.Adapter<AnnouncementPa
             numberOfLikes = itemView.findViewById(R.id.tvNoOfLikes);
             likesLottie = itemView.findViewById(R.id.lottieHeartAnnouncements);
 
-            likesLottie.setSelected(false); // Just for demo, need to call from database later
         }
     }
 }

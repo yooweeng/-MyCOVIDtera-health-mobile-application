@@ -82,7 +82,7 @@ public class HomeFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setNestedScrollingEnabled(false);
-        announcementPageAdapter = new AnnouncementPageAdapter(getContext(), list);
+        announcementPageAdapter = new AnnouncementPageAdapter(getContext(), list, user.getNric());
         recyclerView.setAdapter(announcementPageAdapter);
         sopViolation = view.findViewById(R.id.violationCard);
         hotspot = view.findViewById(R.id.hotspotCard);
