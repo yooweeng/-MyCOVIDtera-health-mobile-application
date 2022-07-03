@@ -7,7 +7,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class WorldometersDataService {
 
     private static Retrofit retrofit;
-    private static String WORLDOMETERS_API_URL = "https://corona.lmao.ninja/v2/countries/";
+    // private static String WORLDOMETERS_API_URL = "https://corona.lmao.ninja/v2/countries/";
+    private static String WORLDOMETERS_API_URL = "https://disease.sh/v2/countries/";
 
     public static Retrofit getRetrofitInstance(){
         if(retrofit == null){
