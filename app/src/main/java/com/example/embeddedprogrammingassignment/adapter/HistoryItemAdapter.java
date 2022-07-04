@@ -31,7 +31,12 @@ public class HistoryItemAdapter extends RecyclerView.Adapter<HistoryItemAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull HistoryItemAdapter.HistoryItemViewHolder holder, int position) {
-        holder.status.setImageResource(historyItems.get(position).getImage());
+        if(historyItems.get(position).getIsCheckIn().equals("true")){
+            holder.status.setImageResource(R.drawable.icon_checkin);
+        }
+        else if(historyItems.get(position).getIsCheckIn().equals("false")){
+            holder.status.setImageResource(R.drawable.icon_checkout);
+        }
         holder.location.setText(historyItems.get(position).getLocation());
         holder.date.setText(historyItems.get(position).getTime());
     }

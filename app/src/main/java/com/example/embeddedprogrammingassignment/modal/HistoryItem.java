@@ -3,28 +3,25 @@ package com.example.embeddedprogrammingassignment.modal;
 import com.example.embeddedprogrammingassignment.R;
 
 public class HistoryItem {
-    int image;
+    String isCheckIn;
     String location;
     String time;
 
     public HistoryItem() {
-        this.image = R.drawable.icon_default;
-        this.location = "";
-        this.time = "";
     }
 
-    public HistoryItem(int image, String location, String time) {
-        this.image = image;
+    public HistoryItem(String isCheckIn, String location, String time) {
+        this.isCheckIn = isCheckIn;
         this.location = location;
         this.time = time;
     }
 
-    public int getImage() {
-        return image;
+    public String getIsCheckIn() {
+        return isCheckIn;
     }
 
-    public void setImage(int image) {
-        this.image = image;
+    public void setIsCheckIn(String isCheckIn) {
+        this.isCheckIn = isCheckIn;
     }
 
     public String getLocation() {
@@ -46,7 +43,7 @@ public class HistoryItem {
     @Override
     public String toString() {
         return "HistoryItem{" +
-                "image=" + image +
+                "isCheckIn='" + isCheckIn + '\'' +
                 ", location='" + location + '\'' +
                 ", time='" + time + '\'' +
                 '}';
