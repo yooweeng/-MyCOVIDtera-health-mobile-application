@@ -96,40 +96,27 @@ public class StatisticsFragment extends Fragment {
 
                 Log.i("CovidDatafromApi Covid19Dataservice","Response body: " + responseBody.get(responseBody.size()-1));
 
-                List<Covid19Data> temp = responseBody.subList(responseBody.size()-8,responseBody.size());
+                List<Covid19Data> pastWeekListTemp = responseBody.subList(responseBody.size()-8,responseBody.size());
                 List<Integer> pastWeekCases = new ArrayList<>();
                 List<String> pastWeekDayLabels = new ArrayList<>();
-                temp.forEach(object -> {
+
+
+                for(int i=0; i<responseBody.size(); i++) {
+                    total_cases_data.add(new Entry(i, Float.parseFloat(responseBody.get(i).getConfirmed())));
+                    String[] tempSplit = responseBody.get(i).getDate().split("T");
+                    total_cases_label.add(tempSplit[0]);
+                }
+
+                pastWeekListTemp.forEach(object -> {
                     pastWeekCases.add(Integer.parseInt(object.getConfirmed()));
                     pastWeekDayLabels.add(object.getDate());
                 });
                 getDailyCasesFromAPI(pastWeekCases, pastWeekDayLabels);
+                showTotalCaseChart(view);
             }
 
             @Override
             public void onFailure(Call<List<Covid19Data>> call, Throwable t) {
-
-            }
-        });
-
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("stats/total_cases");
-
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.hasChildren()) {
-                    for(DataSnapshot ds : snapshot.getChildren()) {
-                        PointValueLabel pvl = ds.getValue(PointValueLabel.class);
-                        total_cases_data.add(new Entry(pvl.getxValue(), pvl.getyValue()));
-                        total_cases_label.add(pvl.getxLabel());
-                    }
-                    showTotalCaseChart(view);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
@@ -273,9 +260,10 @@ public class StatisticsFragment extends Fragment {
 
         xAxis.setValueFormatter(new com.github.mikephil.charting.formatter.IndexAxisValueFormatter(xAxisLabels));
         xAxis.setGranularity(1f);
-        xAxis.setEnabled(true);
-        xAxis.setSpaceMin(0.5f);
-        xAxis.setSpaceMax(0.5f);
+        xAxis.setEnabled(false);
+        leftAxis.setEnabled(false);
+        xAxis.setSpaceMin(6f);
+        xAxis.setSpaceMax(6f);
         xAxis.setLabelCount(total_cases_label.size());
         xAxis.setCenterAxisLabels(true);
         lineChart.getDescription().setEnabled(false);
