@@ -37,6 +37,12 @@
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/register_gender_dropdown_item.xml" value="0.10078125" />
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/layout/toolbar_back_button.xml" value="0.1" />
         <entry key="..\:/Users/USER/Desktop/MyCOVIDtera/app/src/main/res/menu/navbar.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/USER/Desktop/SWE401 Mobile/class/MyCOVIDtera/app/src/main/res/drawable/button_login.xml" value="0.1125" />
+        <entry key="..\:/Users/USER/Desktop/SWE401 Mobile/class/MyCOVIDtera/app/src/main/res/drawable/ic_straight_line_black.xml" value="0.1125" />
+        <entry key="..\:/Users/USER/Desktop/SWE401 Mobile/class/MyCOVIDtera/app/src/main/res/drawable/main_material_design.xml" value="0.1125" />
+        <entry key="..\:/Users/USER/Desktop/SWE401 Mobile/class/MyCOVIDtera/app/src/main/res/drawable/navbar_selector.xml" value="0.1125" />
+        <entry key="..\:/Users/USER/Desktop/SWE401 Mobile/class/MyCOVIDtera/app/src/main/res/drawable/progress_vertical_selected.xml" value="0.1125" />
+        <entry key="..\:/Users/USER/Desktop/SWE401 Mobile/class/MyCOVIDtera/app/src/main/res/drawable/progress_vertical_unselected.xml" value="0.1125" />
         <entry key="..\:/Users/USER/Desktop/SWE401 Mobile/class/MyCOVIDtera/app/src/main/res/layout/activity_forget_password.xml" value="0.19519927536231885" />
         <entry key="..\:/Users/USER/Desktop/SWE401 Mobile/class/MyCOVIDtera/app/src/main/res/layout/activity_login.xml" value="0.19519927536231885" />
         <entry key="..\:/Users/USER/Desktop/SWE401 Mobile/class/MyCOVIDtera/app/src/main/res/layout/activity_main.xml" value="0.19519927536231885" />
@@ -46,7 +52,7 @@
         <entry key="..\:/Users/USER/Desktop/SWE401 Mobile/class/MyCOVIDtera/app/src/main/res/layout/cardview_announcement.xml" value="0.16" />
         <entry key="..\:/Users/USER/Desktop/SWE401 Mobile/class/MyCOVIDtera/app/src/main/res/layout/cardview_appointment_details.xml" value="0.264" />
         <entry key="..\:/Users/USER/Desktop/SWE401 Mobile/class/MyCOVIDtera/app/src/main/res/layout/cardview_book_vaccination.xml" value="0.16" />
-        <entry key="..\:/Users/USER/Desktop/SWE401 Mobile/class/MyCOVIDtera/app/src/main/res/layout/cardview_covid_exposure_risk.xml" value="0.19519927536231885" />
+        <entry key="..\:/Users/USER/Desktop/SWE401 Mobile/class/MyCOVIDtera/app/src/main/res/layout/cardview_covid_exposure_risk.xml" value="0.264" />
         <entry key="..\:/Users/USER/Desktop/SWE401 Mobile/class/MyCOVIDtera/app/src/main/res/layout/cardview_faqs_item.xml" value="0.19519927536231885" />
         <entry key="..\:/Users/USER/Desktop/SWE401 Mobile/class/MyCOVIDtera/app/src/main/res/layout/cardview_historyitem.xml" value="0.2" />
         <entry key="..\:/Users/USER/Desktop/SWE401 Mobile/class/MyCOVIDtera/app/src/main/res/layout/cardview_qr_history.xml" value="0.264" />
