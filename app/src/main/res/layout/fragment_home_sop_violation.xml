@@ -20,11 +20,12 @@
             android:hint="Title"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             >
+
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tvSopTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                />
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -75,14 +76,15 @@
             app:counterEnabled="true"
             app:counterMaxLength="120"
             >
+
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tvSopDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="top|start"
                 android:inputType="textMultiLine"
                 android:lines="6"
-                android:gravity="top|start"
-                android:maxLength="120"
-                />
+                android:maxLength="120" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
