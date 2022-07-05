@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.embeddedprogrammingassignment.MainActivity;
 import com.example.embeddedprogrammingassignment.R;
+import com.example.embeddedprogrammingassignment.modal.HealthRiskAssessment;
 import com.example.embeddedprogrammingassignment.modal.User;
 import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.google.android.material.checkbox.MaterialCheckBox;
@@ -41,6 +42,7 @@ public class RiskStatusFragment extends Fragment {
     TextView statusTv, riskTv;
     CardView riskCv;
     User user;
+    HealthRiskAssessment assessment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -149,6 +151,13 @@ public class RiskStatusFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
+                assessment = new HealthRiskAssessment(sym1.isChecked(), sym2.isChecked(), sym3.isChecked(), sym4.isChecked(),
+                                                        sym5.isChecked(), sym6.isChecked(), sym7.isChecked(), sym8.isChecked(),
+                                                        sym9.isChecked(), sym10.isChecked(), sym11.isChecked(), sym12.isChecked(),
+                                                        q2YesBtn.isSelected(), q3YesBtn.isSelected(), q4YesBtn.isSelected());
+
+                FirebaseDatabase.getInstance().getReference("healthAssessment").child(user.getNric()).setValue(assessment);
+
                 int score = 0;
                 boolean isSelected = false;
                 isSelected = (q2YesBtn.isSelected() || q2NoBtn.isSelected()) && (q3YesBtn.isSelected() || q3NoBtn.isSelected()) && (q4YesBtn.isSelected() || q4NoBtn.isSelected());
@@ -176,14 +185,16 @@ public class RiskStatusFragment extends Fragment {
                 String riskStatus = "No Exposure Detected";
                 if(score==0 && q1Sym<3) {
                     riskStatus = "No Exposure Detected";
-                } else if (score>1 && q1Sym<4) {
+                } else if (score<=1 && q1Sym<=4) {
                     riskStatus = "You are at High Risk";
-                } else if (score>2 && q1Sym>4) {
+                } else if (score>=2 && q1Sym>4) {
                     riskStatus = "You are positive for COVID-19";
                 }
 
                 FirebaseDatabase.getInstance().getReference("risks").child(user.getNric()).child("risk").setValue(riskStatus);
                 ((MainActivity) requireActivity()).getUser();
+
+                Toast.makeText(requireContext(), "Health assessment updated.", Toast.LENGTH_SHORT).show();
             }
         });
 
