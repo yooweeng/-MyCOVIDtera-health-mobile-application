@@ -151,4 +151,5 @@
         <include
             layout="@layout/cardview_covid_exposure_risk"
             />
+
 </LinearLayout>

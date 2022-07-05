@@ -27,8 +27,8 @@
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:layout_marginStart="20dp"
-            android:src="@drawable/risk_green"
-            android:tint="@color/white"
+            android:src="@drawable/risk_red"
+            android:tint="@android:color/transparent"
             tools:ignore="UseAppTint" />
 
         <TextView
