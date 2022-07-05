@@ -49,9 +49,10 @@ class CheckInScanFragment : Fragment() {
         user = Parcels.unwrap<User>(
                 requireArguments().getParcelable("activeUser")
         )
+        val currRisk: String? = requireArguments().getString("currUserRisk")
         val bundle = Bundle()
         bundle.putParcelable("activeUser", Parcels.wrap<User>(user))
-
+        bundle.putString("currUserRisk", currRisk)
         val codeScannerID = view.findViewById<CodeScannerView>(R.id.scanScanCode)
 
         codeScanner = CodeScanner(requireContext(), codeScannerID)
@@ -88,6 +89,7 @@ class CheckInScanFragment : Fragment() {
                     val now: LocalDateTime = LocalDateTime.now()
                     val format: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy HH:mm:ss")
                     val formatDateTime: String = now.format(format)
+
                     val formatOnlyDate: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy")
                     val formatDate: String = now.format(formatOnlyDate)
 
@@ -96,6 +98,8 @@ class CheckInScanFragment : Fragment() {
                     historyItems.add(historyItem)
                     val qrHistory = QrHistory(formatDate, qrCode.location, historyItems)
 
+                    bundle.putString("location", qrCode.location)
+                    bundle.putString("dateTime", formatDateTime)
 //        historyItems.add(new HistoryItem(true,"Xiamen University Malaysia", "28-March-2022 07:00:24"));
 //        qrHistories.add(new QrHistory("28-March-2022","Xiamen University Malaysia",historyItems));
 //        historyItems2.add(new HistoryItem(true,"Pavilion, Kuala Lumpur", "27-March-2022 12:03:14"));

@@ -48,7 +48,7 @@ public class TraceFragment extends Fragment {
         user = Parcels.unwrap(getArguments().getParcelable("activeUser"));
         Bundle bundle = new Bundle();
         bundle.putParcelable("activeUser", Parcels.wrap(user));
-
+        bundle.putString("currUserRisk", userRisk);
         fragmentTitleTv = view.findViewById(R.id.tvCarduserFragmentTitle);
         fragmentTitleTv.setText("Check-in");
 
