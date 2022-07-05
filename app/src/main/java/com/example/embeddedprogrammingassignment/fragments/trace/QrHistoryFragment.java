@@ -16,11 +16,14 @@ import com.example.embeddedprogrammingassignment.R;
 import com.example.embeddedprogrammingassignment.adapter.QrHistoryAdapter;
 import com.example.embeddedprogrammingassignment.modal.HistoryItem;
 import com.example.embeddedprogrammingassignment.modal.QrHistory;
+import com.example.embeddedprogrammingassignment.modal.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -35,6 +38,8 @@ public class QrHistoryFragment extends Fragment {
     FirebaseDatabase rootNode;
     DatabaseReference reference;
 
+    User user;
+
     public QrHistoryFragment() {
         // Required empty public constructor
     }
@@ -44,10 +49,14 @@ public class QrHistoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_trace_qr_history, container, false);
 
+        user = Parcels.unwrap(getArguments().getParcelable("activeUser"));
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("activeUser", Parcels.wrap(user));
+
         qrHistoryRv = view.findViewById(R.id.rvCheckInHistory);
 
         rootNode = FirebaseDatabase.getInstance();
-        reference = rootNode.getReference("history").child("000514020234");
+        reference = rootNode.getReference("history").child(user.getNric());
 
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -78,7 +87,7 @@ public class QrHistoryFragment extends Fragment {
 
                     if (i == snapshot.getChildrenCount()) {
                         Collections.reverse(qrHistories);
-                        QrHistoryAdapter qrHistoryAdapter = new QrHistoryAdapter(qrHistories);
+                        QrHistoryAdapter qrHistoryAdapter = new QrHistoryAdapter(qrHistories, user);
                         qrHistoryRv.setAdapter(qrHistoryAdapter);
                         qrHistoryRv.setLayoutManager(new LinearLayoutManager(getContext()));
                     }

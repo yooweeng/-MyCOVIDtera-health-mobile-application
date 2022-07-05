@@ -181,9 +181,11 @@ public class MainActivity extends AppCompatActivity {
         FirebaseDatabase.getInstance().getReference("risks").child(currActiveAcc).child("risk").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                currRisk[0] = (String) snapshot.getValue();
-                Log.i("currRisk@main", currRisk[0]);
-                bundle.putString("currUserRisk", currRisk[0]);
+                if(snapshot.exists()){
+                    currRisk[0] = (String) snapshot.getValue();
+                    Log.i("currRisk@main", currRisk[0]);
+                    bundle.putString("currUserRisk", currRisk[0]);
+                }
             }
 
             @Override

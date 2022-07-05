@@ -37,21 +37,21 @@ class CheckInScanFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_trace_check_in_scan, container, false)
 
-        var user: User? = null
-
-        user = Parcels.unwrap<User>(
-            requireArguments().getParcelable("activeUser")
-        )
-        val bundle = Bundle()
-        bundle.putParcelable("activeUser", Parcels.wrap<User>(user))
-
         setupPermission()
-        codeScanner(view, bundle)
+        codeScanner(view)
 
         return view
     }
 
-    private fun codeScanner(view: View, bundle: Bundle) {
+    private fun codeScanner(view: View) {
+
+        var user: User? = null
+        user = Parcels.unwrap<User>(
+                requireArguments().getParcelable("activeUser")
+        )
+        val bundle = Bundle()
+        bundle.putParcelable("activeUser", Parcels.wrap<User>(user))
+
         val codeScannerID = view.findViewById<CodeScannerView>(R.id.scanScanCode)
 
         codeScanner = CodeScanner(requireContext(), codeScannerID)
@@ -71,13 +71,13 @@ class CheckInScanFragment : Fragment() {
                     val qrCode: QrCode = JsonToObjectConverter.JsonToObject(result)
 
                     rootNode = FirebaseDatabase.getInstance()
-                    reference = rootNode!!.getReference("history").child("000514020234")
+                    reference = rootNode!!.getReference("history").child(user.nric)
 
                     reference!!.addListenerForSingleValueEvent(object : ValueEventListener {
                         override fun onDataChange(snapshot: DataSnapshot) {
                             for (dataSnapshot in snapshot.children) {
                                 Log.i("resultchildcount", snapshot.childrenCount.toString())
-                                i=snapshot.childrenCount -1
+                                i=snapshot.childrenCount
                             }
                         }
 
@@ -106,7 +106,7 @@ class CheckInScanFragment : Fragment() {
 //        qrHistories.add(new QrHistory("27-March-2022","Lot 88, Kuala Lumpur",historyItems3));
 
                     Handler().postDelayed({
-                        reference!!.child("history"+(i+1)).setValue(qrHistory)
+                        reference!!.child("history"+i).setValue(qrHistory)
                         Log.i("result", i.toString())
                         Log.i("result2", result)
                         Log.i("result3", qrCode.toString())
