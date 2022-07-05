@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -69,37 +70,38 @@ class CheckInScanFragment : Fragment() {
                 activity?.runOnUiThread {
 
                     val result: String = it.text
-                    val qrCode: QrCode = JsonToObjectConverter.JsonToObject(result)
+                    if (result.contains("location") && result.contains("isCheckIn")) {
+                        val qrCode: QrCode = JsonToObjectConverter.JsonToObject(result)
 
-                    rootNode = FirebaseDatabase.getInstance()
-                    reference = rootNode!!.getReference("history").child(user.nric)
+                        rootNode = FirebaseDatabase.getInstance()
+                        reference = rootNode!!.getReference("history").child(user.nric)
 
-                    reference!!.addListenerForSingleValueEvent(object : ValueEventListener {
-                        override fun onDataChange(snapshot: DataSnapshot) {
-                            for (dataSnapshot in snapshot.children) {
-                                Log.i("resultchildcount", snapshot.childrenCount.toString())
-                                i=snapshot.childrenCount
+                        reference!!.addListenerForSingleValueEvent(object : ValueEventListener {
+                            override fun onDataChange(snapshot: DataSnapshot) {
+                                for (dataSnapshot in snapshot.children) {
+                                    Log.i("resultchildcount", snapshot.childrenCount.toString())
+                                    i=snapshot.childrenCount
+                                }
                             }
-                        }
 
-                        override fun onCancelled(error: DatabaseError) {}
-                    })
+                            override fun onCancelled(error: DatabaseError) {}
+                        })
 
-                    //get current time and date
-                    val now: LocalDateTime = LocalDateTime.now()
-                    val format: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy HH:mm:ss")
-                    val formatDateTime: String = now.format(format)
+                        //get current time and date
+                        val now: LocalDateTime = LocalDateTime.now()
+                        val format: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy HH:mm:ss")
+                        val formatDateTime: String = now.format(format)
 
-                    val formatOnlyDate: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy")
-                    val formatDate: String = now.format(formatOnlyDate)
+                        val formatOnlyDate: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy")
+                        val formatDate: String = now.format(formatOnlyDate)
 
-                    val historyItem = HistoryItem(qrCode.isCheckIn, qrCode.location, formatDateTime)
-                    val historyItems = ArrayList<HistoryItem>()
-                    historyItems.add(historyItem)
-                    val qrHistory = QrHistory(formatDate, qrCode.location, historyItems)
+                        val historyItem = HistoryItem(qrCode.isCheckIn, qrCode.location, formatDateTime)
+                        val historyItems = ArrayList<HistoryItem>()
+                        historyItems.add(historyItem)
+                        val qrHistory = QrHistory(formatDate, qrCode.location, historyItems)
 
-                    bundle.putString("location", qrCode.location)
-                    bundle.putString("dateTime", formatDateTime)
+                        bundle.putString("location", qrCode.location)
+                        bundle.putString("dateTime", formatDateTime)
 //        historyItems.add(new HistoryItem(true,"Xiamen University Malaysia", "28-March-2022 07:00:24"));
 //        qrHistories.add(new QrHistory("28-March-2022","Xiamen University Malaysia",historyItems));
 //        historyItems2.add(new HistoryItem(true,"Pavilion, Kuala Lumpur", "27-March-2022 12:03:14"));
@@ -109,22 +111,20 @@ class CheckInScanFragment : Fragment() {
 //        historyItems3.add(new HistoryItem(false,"Lot 88, Kuala Lumpur", "27-March-2022 10:07:01"));
 //        qrHistories.add(new QrHistory("27-March-2022","Lot 88, Kuala Lumpur",historyItems3));
 
-                    Handler().postDelayed({
-                        reference!!.child("history"+i).setValue(qrHistory)
-                        Log.i("result", i.toString())
-                        Log.i("result2", result)
-                        Log.i("result3", qrCode.toString())
-                        Log.i("result3", formatDate.toString())
-                    }, 2000)
+                        Handler().postDelayed({
+                            reference!!.child("history"+i).setValue(qrHistory)
+                            Log.i("result", i.toString())
+                            Log.i("result2", result)
+                            Log.i("result3", qrCode.toString())
+                            Log.i("result3", formatDate.toString())
+                        }, 2000)
 
-                    codeScanner.stopPreview()
-                    Navigation.findNavController(view).navigate(R.id.action_checkInScanFragment_to_checkInSuccessfulFragment, bundle)
-
-                    // if this is json file
-//                    if (result.contains("http://") || result.contains("www.") || result.contains("https://")) {
-//                        codeScanner.stopPreview()
-//                        Navigation.findNavController(view).navigate(R.id.action_checkInScanFragment_to_checkInSuccessfulFragment, bundle)
-//                    }
+                        codeScanner.stopPreview()
+                        Navigation.findNavController(view).navigate(R.id.action_checkInScanFragment_to_checkInSuccessfulFragment, bundle)
+                    }
+                    else{
+                        Toast.makeText(context, "Invalid qr code.", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
 
