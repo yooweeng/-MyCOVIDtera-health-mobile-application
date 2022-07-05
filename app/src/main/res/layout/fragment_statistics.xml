@@ -352,6 +352,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:id="@+id/tvStatsDailyMalaysia"
                             android:text="+17329"
                             android:textSize="22sp"
                             android:fontFamily="@font/amiko_bold"
@@ -375,6 +376,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:id="@+id/tvStatsTotalMalaysia"
                             android:text="502912"
                             android:textSize="22sp"
                             android:fontFamily="@font/amiko_bold"
@@ -417,7 +419,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/amiko_semibold"
-                    android:text="R Value"
+                    android:text="Case per people"
                     android:textColor="@color/white"
                     android:textSize="24sp" />
 
@@ -431,7 +433,8 @@
                     android:text="0.88"
                     android:textAlignment="center"
                     android:textColor="@color/white"
-                    android:textSize="26sp" />
+                    android:textSize="26sp"
+                    android:id="@+id/tvStatsCasePerPeople"/>
             </RelativeLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -463,16 +466,17 @@
                     android:textSize="24sp" />
 
                 <TextView
+                    android:id="@+id/tvStatsDeathTotal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tvStatsDeathTotal"
                     android:layout_below="@+id/tvStatsDeathsTitle"
                     android:layout_centerInParent="true"
                     android:fontFamily="@font/amiko_bold"
                     android:text="32133"
                     android:textAlignment="center"
                     android:textColor="@color/white"
-                    android:textSize="26sp" />
+                    android:textSize="26sp"
+                    />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

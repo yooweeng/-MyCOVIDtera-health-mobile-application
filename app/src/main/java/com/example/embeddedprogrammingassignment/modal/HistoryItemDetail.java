@@ -1,27 +1,17 @@
 package com.example.embeddedprogrammingassignment.modal;
 
-import com.example.embeddedprogrammingassignment.R;
-
-public class HistoryItem {
-    String isCheckIn;
+public class HistoryItemDetail {
     String location;
+    String isCheckIn;
     String time;
 
-    public HistoryItem() {
+    public HistoryItemDetail() {
     }
 
-    public HistoryItem(String isCheckIn, String location, String time) {
-        this.isCheckIn = isCheckIn;
+    public HistoryItemDetail(String location, String isCheckIn, String time) {
         this.location = location;
-        this.time = time;
-    }
-
-    public String getIsCheckIn() {
-        return isCheckIn;
-    }
-
-    public void setIsCheckIn(String isCheckIn) {
         this.isCheckIn = isCheckIn;
+        this.time = time;
     }
 
     public String getLocation() {
@@ -30,6 +20,14 @@ public class HistoryItem {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getIsCheckIn() {
+        return isCheckIn;
+    }
+
+    public void setIsCheckIn(String isCheckIn) {
+        this.isCheckIn = isCheckIn;
     }
 
     public String getTime() {
@@ -42,9 +40,9 @@ public class HistoryItem {
 
     @Override
     public String toString() {
-        return "HistoryItem{" +
-                "isCheckIn='" + isCheckIn + '\'' +
-                ", location='" + location + '\'' +
+        return "HistoryItemDetail{" +
+                "location='" + location + '\'' +
+                ", isCheckIn='" + isCheckIn + '\'' +
                 ", time='" + time + '\'' +
                 '}';
     }

@@ -1,10 +1,15 @@
 package com.example.embeddedprogrammingassignment.fragments;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -34,19 +39,23 @@ public class ProfileFragment extends Fragment {
 
     }
 
-    TextView nricTv, phoneTv, stateTv, nameTv;
+    TextView nricTv, phoneTv, stateTv, nameTv, riskTv, riskTitleTv;
     TextView nricVaxTv, phoneVaxTv, nameVaxTv;
-    ImageView editProfileBtn;
+    ImageView editProfileBtn, riskIv;
     LottieAnimationView lottieBtn;
     Button logOutBtn;
     User user;
+    CardView covidRiskCv;
 
+    @SuppressLint({"SetTextI18n", "ResourceAsColor"})
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         user = Parcels.unwrap(getArguments().getParcelable("activeUser"));
+        String userRisk = getArguments().getString("currUserRisk");
+        Log.i("currRisk@profile", userRisk);
 
         nameTv = view.findViewById(R.id.tvProfileName);
         nricTv = view.findViewById(R.id.tvProfileNRIC);
@@ -58,6 +67,27 @@ public class ProfileFragment extends Fragment {
         phoneVaxTv = view.findViewById(R.id.tvProfileVaxStatusPhone);
         lottieBtn = view.findViewById(R.id.lottieProfileLogoutBtn);
         logOutBtn = view.findViewById(R.id.btnProfileLogout);
+        covidRiskCv = view.findViewById(R.id.cvCovidExposureRisk);
+        riskTv = view.findViewById(R.id.tvCardviewCovidRisk);
+        riskTitleTv = view.findViewById(R.id.tvCardviewCovidTitle);
+        riskIv = view.findViewById(R.id.ivCardviewCovidRisk);
+
+        riskTv.setText(userRisk);
+        if(userRisk.equals("No Exposure Detected")) {
+            riskIv.setImageResource(R.drawable.risk_green);
+            covidRiskCv.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.green_warning));
+        } else if (userRisk.equals("You are at High Risk")) {
+            riskTitleTv.setTextColor(R.color.black);
+            riskTv.setTextColor(R.color.black);
+            riskIv.setImageResource(R.drawable.risk_warning);
+            riskIv.setImageTintList(ColorStateList.valueOf(R.color.black_txt));
+            covidRiskCv.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.yellow_warning));
+        } else {
+            riskIv.setImageResource(R.drawable.risk_red);
+            riskIv.setImageTintList(ColorStateList.valueOf(Color.TRANSPARENT));
+            covidRiskCv.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.red_warning));
+        }
+
 
         stateTv.setText(user.getState());
         setDetails(nameTv, nricTv, phoneTv);
@@ -65,6 +95,7 @@ public class ProfileFragment extends Fragment {
 
         Bundle bundle = new Bundle();
         bundle.putParcelable("activeUser", Parcels.wrap(user));
+        bundle.putString("currUserRisk", userRisk);
 
         editProfileBtn.setOnClickListener(new View.OnClickListener() {
             @Override

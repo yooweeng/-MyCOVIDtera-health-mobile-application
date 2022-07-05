@@ -1,19 +1,15 @@
 package com.example.embeddedprogrammingassignment.modal;
 
-import com.example.embeddedprogrammingassignment.R;
-
-public class HistoryItem {
+public class QrCode {
     String isCheckIn;
     String location;
-    String time;
 
-    public HistoryItem() {
+    public QrCode() {
     }
 
-    public HistoryItem(String isCheckIn, String location, String time) {
+    public QrCode(String isCheckIn, String location) {
         this.isCheckIn = isCheckIn;
         this.location = location;
-        this.time = time;
     }
 
     public String getIsCheckIn() {
@@ -32,20 +28,11 @@ public class HistoryItem {
         this.location = location;
     }
 
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
     @Override
     public String toString() {
-        return "HistoryItem{" +
+        return "QrCode{" +
                 "isCheckIn='" + isCheckIn + '\'' +
                 ", location='" + location + '\'' +
-                ", time='" + time + '\'' +
                 '}';
     }
 }

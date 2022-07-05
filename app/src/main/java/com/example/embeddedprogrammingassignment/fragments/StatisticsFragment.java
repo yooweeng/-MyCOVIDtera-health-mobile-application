@@ -36,15 +36,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -58,7 +54,7 @@ public class StatisticsFragment extends Fragment {
     private List<String> total_cases_label = new ArrayList<>();
     List<Integer> dailyCasesProgress;
     ProgressBar progMon, progTue, progWed, progThurs, progFri, progSat, progSun;
-    TextView dailyCasesTv, dailyIncreaseTv, dailyRecoveredCaseTv, dailyRecoveredRateTv;
+    TextView dailyCasesTv, dailyIncreaseTv, dailyRecoveredCaseTv, dailyRecoveredRateTv, dailyDeathsTv, totalDeathsTv, totalMalaysiaTv, dailyMalaysiaTv, casePerPeopleTv;
     WorldometersData worldometersData;
     List<String> daysList = Arrays.asList("MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY");
 
@@ -78,11 +74,9 @@ public class StatisticsFragment extends Fragment {
             @Override
             public void onResponse(Call<WorldometersData> call, Response<WorldometersData> response) {
                 WorldometersData responseBody = response.body();
-                Log.i("CovidDatafromApi","onResponse: status code " + response.code());
-                Log.i("CovidDatafromApi","Response body: " + responseBody);
+                Log.i("CovidDatafromApi Worldometers","Response body: " + responseBody);
                 worldometersData = responseBody;
-                Log.i("CovidDatafromApi","worldometers data " + worldometersData.getTodayCases());
-                getDailyRecoveredCasesFromAPI(worldometersData);
+                getCasesFromWorldometerAPI(worldometersData);
             }
 
             @Override
@@ -100,48 +94,29 @@ public class StatisticsFragment extends Fragment {
             public void onResponse(Call<List<Covid19Data>> call, Response<List<Covid19Data>> response) {
                 List<Covid19Data> responseBody = response.body();
 
-                Log.i("CovidDatafromApi","onResponse: status code " + response.code());
-                Log.i("CovidDatafromApi","onResponse: ResponseBody " + responseBody.get(responseBody.size()-1));
-                Log.i("CovidDatafromApi","Response body: " + responseBody.get(responseBody.size()-1));
+                Log.i("CovidDatafromApi Covid19Dataservice","Response body: " + responseBody.get(responseBody.size()-1));
 
-                List<Covid19Data> temp = responseBody.subList(responseBody.size()-8,responseBody.size());
+                List<Covid19Data> pastWeekListTemp = responseBody.subList(responseBody.size()-8,responseBody.size());
                 List<Integer> pastWeekCases = new ArrayList<>();
                 List<String> pastWeekDayLabels = new ArrayList<>();
-                temp.forEach(object -> {
+
+
+                for(int i=0; i<responseBody.size(); i++) {
+                    total_cases_data.add(new Entry(i, Float.parseFloat(responseBody.get(i).getConfirmed())));
+                    String[] tempSplit = responseBody.get(i).getDate().split("T");
+                    total_cases_label.add(tempSplit[0]);
+                }
+
+                pastWeekListTemp.forEach(object -> {
                     pastWeekCases.add(Integer.parseInt(object.getConfirmed()));
                     pastWeekDayLabels.add(object.getDate());
-                    Log.i("CovidDatafromApi",object.getConfirmed());
-                    Log.i("CovidDatafromApi",object.getDate());
                 });
                 getDailyCasesFromAPI(pastWeekCases, pastWeekDayLabels);
+                showTotalCaseChart(view);
             }
 
             @Override
             public void onFailure(Call<List<Covid19Data>> call, Throwable t) {
-
-            }
-        });
-
-        Log.i("CovidDatafromApi","worldometers data at statistic frag");
-
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("stats/total_cases");
-
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.hasChildren()) {
-                    for(DataSnapshot ds : snapshot.getChildren()) {
-                        PointValueLabel pvl = ds.getValue(PointValueLabel.class);
-                        total_cases_data.add(new Entry(pvl.getxValue(), pvl.getyValue()));
-                        total_cases_label.add(pvl.getxLabel());
-                    }
-                    showTotalCaseChart(view);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
@@ -151,10 +126,15 @@ public class StatisticsFragment extends Fragment {
     }
 
     @SuppressLint({"SetTextI18n", "DefaultLocale"})
-    private void getDailyRecoveredCasesFromAPI(WorldometersData worldometersData) {
+    private void getCasesFromWorldometerAPI(WorldometersData worldometersData) {
         dailyRecoveredCaseTv.setText(worldometersData.getTodayRecovered());
         float recoveryRate = (Float.parseFloat(worldometersData.getRecovered()) / Float.parseFloat(worldometersData.getCases())) * 100.00f;
         dailyRecoveredRateTv.setText(String.format("%.02f", recoveryRate) + "%");
+        dailyDeathsTv.setText(("(+") + worldometersData.getTodayDeaths()+" today)");
+        totalDeathsTv.setText(worldometersData.getDeaths());
+        dailyMalaysiaTv.setText(worldometersData.getTodayCases());
+        totalMalaysiaTv.setText(worldometersData.getCases());
+        casePerPeopleTv.setText(worldometersData.getOneCasePerPeople());
     }
 
     private void getDailyCasesFromAPI(List<Integer> pastWeekCases, List<String> pastWeekLabels) {
@@ -194,13 +174,8 @@ public class StatisticsFragment extends Fragment {
         for (int i : orderedDailyCases)
             pastWeekCases.add(i);
 
-
-        Log.d("Day index @ Stat Fragment= ",dayIndex + " " + " API date = " + pastWeekLabels.get(pastWeekLabels.size()-1));
-        Log.d("Day index @ Stat Fragment= ", "orderedDailyCases = " + Arrays.toString(orderedDailyCases));
-
         dailyCases.setDailyValues(pastWeekCases);
         dailyCasesProgress = dailyCases.setProgressValues();
-        Log.d("Kotlin set daily cases @ Statistics Fragment Date", dailyCasesProgress.toString());
 
         setProgressBar(dailyCasesProgress, dailyCases, day);
     }
@@ -229,7 +204,6 @@ public class StatisticsFragment extends Fragment {
                 progressBarList.get(i).setProgressDrawable(getResources().getDrawable(R.drawable.progress_vertical_unselected));
             progressBarList.get(i).setProgress(Math.round(list.get(i)));
             progressBarList.get(i).setMax(maxProgress);
-            Log.d("Progress to int", ""+Math.round(list.get(i)));
         }
     }
 
@@ -249,6 +223,11 @@ public class StatisticsFragment extends Fragment {
         dailyIncreaseTv = view.findViewById(R.id.tvStatsDailyIncreasePercentage);
         dailyRecoveredCaseTv = view.findViewById(R.id.tvStatsTodayRecovered);
         dailyRecoveredRateTv = view.findViewById(R.id.tvStatsRecoveryRate);
+        dailyDeathsTv = view.findViewById(R.id.tvStatsDeathToday);
+        totalDeathsTv = view.findViewById(R.id.tvStatsDeathTotal);
+        totalMalaysiaTv = view.findViewById(R.id.tvStatsTotalMalaysia);
+        dailyMalaysiaTv = view.findViewById(R.id.tvStatsDailyMalaysia);
+        casePerPeopleTv = view.findViewById(R.id.tvStatsCasePerPeople);
     }
 
     private void showTotalCaseChart(View view) {
@@ -281,9 +260,10 @@ public class StatisticsFragment extends Fragment {
 
         xAxis.setValueFormatter(new com.github.mikephil.charting.formatter.IndexAxisValueFormatter(xAxisLabels));
         xAxis.setGranularity(1f);
-        xAxis.setEnabled(true);
-        xAxis.setSpaceMin(0.5f);
-        xAxis.setSpaceMax(0.5f);
+        xAxis.setEnabled(false);
+        leftAxis.setEnabled(false);
+        xAxis.setSpaceMin(6f);
+        xAxis.setSpaceMax(6f);
         xAxis.setLabelCount(total_cases_label.size());
         xAxis.setCenterAxisLabels(true);
         lineChart.getDescription().setEnabled(false);

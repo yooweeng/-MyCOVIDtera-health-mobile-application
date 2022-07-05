@@ -72,6 +72,9 @@
         <action
             android:id="@+id/action_qrHistoryFragment_to_traceFragment"
             app:destination="@id/traceFragment" />
+        <action
+            android:id="@+id/action_qrHistoryFragment_self"
+            app:destination="@id/qrHistoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/statisticsFragment"

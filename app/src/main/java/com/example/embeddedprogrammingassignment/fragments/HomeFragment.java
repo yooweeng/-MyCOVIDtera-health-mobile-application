@@ -82,7 +82,7 @@ public class HomeFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setNestedScrollingEnabled(false);
-        announcementPageAdapter = new AnnouncementPageAdapter(getContext(), list);
+        announcementPageAdapter = new AnnouncementPageAdapter(getContext(), list, user.getNric());
         recyclerView.setAdapter(announcementPageAdapter);
         sopViolation = view.findViewById(R.id.violationCard);
         hotspot = view.findViewById(R.id.hotspotCard);
@@ -92,14 +92,14 @@ public class HomeFragment extends Fragment {
         riskStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_riskStatusFragment);
+                Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_riskStatusFragment, passingBundle);
             }
         });
 
         selfReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_selfReportCovidFragment);
+                Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_selfReportCovidFragment, passingBundle);
             }
         });
 

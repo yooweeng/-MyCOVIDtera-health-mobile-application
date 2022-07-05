@@ -2,7 +2,7 @@ package com.example.embeddedprogrammingassignment.modal;
 
 public class Announcements {
 
-    String title, caption, url, urlToImage, id, numberOfClicks;
+    String title, caption, url, urlToImage, id, numberOfClicks, numberOfLikes;
 
     public void setNumberOfClicks(String numberOfClicks) {
         this.numberOfClicks = numberOfClicks;
@@ -14,6 +14,14 @@ public class Announcements {
 
     public String getCaption() {
         return caption;
+    }
+
+    public String getNumberOfLikes() {
+        return numberOfLikes;
+    }
+
+    public void setNumberOfLikes(String numberOfLikes) {
+        this.numberOfLikes = numberOfLikes;
     }
 
     public String getUrl() {
@@ -37,6 +45,7 @@ public class Announcements {
                 ", urlToImage='" + urlToImage + '\'' +
                 ", id='" + id + '\'' +
                 ", numberOfClicks='" + numberOfClicks + '\'' +
+                ", numberOfLikes='" + numberOfLikes + '\'' +
                 '}';
     }
 }

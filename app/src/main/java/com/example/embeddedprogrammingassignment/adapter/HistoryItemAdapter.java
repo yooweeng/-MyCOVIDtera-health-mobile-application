@@ -1,24 +1,48 @@
 package com.example.embeddedprogrammingassignment.adapter;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.embeddedprogrammingassignment.R;
 import com.example.embeddedprogrammingassignment.modal.HistoryItem;
+import com.example.embeddedprogrammingassignment.modal.HistoryItemDetail;
+import com.example.embeddedprogrammingassignment.modal.QrHistory;
+import com.example.embeddedprogrammingassignment.modal.User;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import org.parceler.Parcels;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class HistoryItemAdapter extends RecyclerView.Adapter<HistoryItemAdapter.HistoryItemViewHolder> {
     ArrayList<HistoryItem> historyItems;
+    int parentPosition;
+    User user;
 
-    public HistoryItemAdapter(ArrayList<HistoryItem> historyItems) {
+    FirebaseDatabase rootNode;
+    DatabaseReference reference;
+
+    public HistoryItemAdapter(ArrayList<HistoryItem> historyItems, int parentPosition, User user) {
         this.historyItems = historyItems;
+        this.parentPosition = parentPosition;
+        this.user = user;
     }
 
     @NonNull
@@ -31,9 +55,38 @@ public class HistoryItemAdapter extends RecyclerView.Adapter<HistoryItemAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull HistoryItemAdapter.HistoryItemViewHolder holder, int position) {
-        holder.status.setImageResource(historyItems.get(position).getImage());
+
+        rootNode = FirebaseDatabase.getInstance();
+        reference = rootNode.getReference("history").child(user.getNric()).child("history"+parentPosition).child("details");
+
+        if(historyItems.size() > 1){
+            holder.btnCheckout.setVisibility(View.GONE);
+        }
+        if(historyItems.get(position).getIsCheckIn().equals("true")){
+            holder.status.setImageResource(R.drawable.icon_checkin);
+        }
+        else if(historyItems.get(position).getIsCheckIn().equals("false")){
+            holder.status.setImageResource(R.drawable.icon_checkout);
+        }
         holder.location.setText(historyItems.get(position).getLocation());
         holder.date.setText(historyItems.get(position).getTime());
+
+        holder.btnCheckout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LocalDateTime now = LocalDateTime.now();
+                DateTimeFormatter format= DateTimeFormatter.ofPattern("dd-MMMM-yyyy HH:mm:ss");
+                String formatDateTime  = now.format(format);
+
+                HistoryItemDetail historyItemDetail = new HistoryItemDetail(historyItems.get(position).getLocation(),"false",formatDateTime);
+                reference.child("1").setValue(historyItemDetail);
+
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("activeUser", Parcels.wrap(user));
+                Navigation.findNavController(holder.itemView).navigate(R.id.action_qrHistoryFragment_self, bundle);
+            }
+        });
+
     }
 
     @Override
@@ -45,6 +98,7 @@ public class HistoryItemAdapter extends RecyclerView.Adapter<HistoryItemAdapter.
 
         TextView location,date;
         ImageView status;
+        Button btnCheckout;
 
         public HistoryItemViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -52,6 +106,7 @@ public class HistoryItemAdapter extends RecyclerView.Adapter<HistoryItemAdapter.
             location = itemView.findViewById(R.id.tvHistoryItemLocation);
             date = itemView.findViewById(R.id.tvHistoryItemDate);
             status = itemView.findViewById(R.id.ivHistoryItemStatus);
+            btnCheckout = itemView.findViewById(R.id.btnCheckoutHistoryItem);
         }
     }
 }

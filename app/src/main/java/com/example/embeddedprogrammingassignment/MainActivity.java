@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavArgument;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.NavOptions;
@@ -17,6 +18,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -88,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        readUserRiskFromDB(currActiveAcc);
     }
 
     private void setNavigationComponent() {
@@ -143,14 +147,45 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String currActiveAcc = intent.getStringExtra("nric");
 
+        readUserInfoFromDB(currActiveAcc);
+        readUserRiskFromDB(currActiveAcc);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                updateBottomNav(1, bundle);
+            }
+        }, 2000);
+
+    }
+
+    private void readUserInfoFromDB(String currActiveAcc) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
         reference.child(currActiveAcc).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 user = snapshot.getValue(User.class);
-                Log.d("MainActivity user @ update ", user.toString());
                 bundle.putParcelable("activeUser", Parcels.wrap(user));
-                updateBottomNav(1, bundle);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void readUserRiskFromDB(String currActiveAcc) {
+        final String[] currRisk = {""};
+
+        FirebaseDatabase.getInstance().getReference("risks").child(currActiveAcc).child("risk").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    currRisk[0] = (String) snapshot.getValue();
+                    Log.i("currRisk@main", currRisk[0]);
+                    bundle.putString("currUserRisk", currRisk[0]);
+                }
             }
 
             @Override

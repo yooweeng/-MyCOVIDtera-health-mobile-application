@@ -1,6 +1,7 @@
 package com.example.embeddedprogrammingassignment.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.embeddedprogrammingassignment.R;
 import com.example.embeddedprogrammingassignment.modal.QrHistory;
+import com.example.embeddedprogrammingassignment.modal.User;
 
 import java.util.ArrayList;
 
@@ -20,9 +22,11 @@ public class QrHistoryAdapter extends RecyclerView.Adapter<QrHistoryAdapter.qrHi
 
     ArrayList<QrHistory> qrHistories;
     Context context;
+    User user;
 
-    public QrHistoryAdapter(ArrayList<QrHistory> qrHistories) {
+    public QrHistoryAdapter(ArrayList<QrHistory> qrHistories, User user) {
         this.qrHistories = qrHistories;
+        this.user = user;
     }
 
     @NonNull
@@ -52,7 +56,7 @@ public class QrHistoryAdapter extends RecyclerView.Adapter<QrHistoryAdapter.qrHi
         else{
             holder.tvQrHistoryLocation.setText(qrHistories.get(position).getLocation());
         }
-        HistoryItemAdapter historyItemAdapter = new HistoryItemAdapter(qrHistories.get(position).getDetails());
+        HistoryItemAdapter historyItemAdapter = new HistoryItemAdapter(qrHistories.get(position).getDetails(),qrHistories.size()-1-position, user);
         holder.rvQrHistoryItem.setAdapter(historyItemAdapter);
         holder.rvQrHistoryItem.setLayoutManager(new LinearLayoutManager(context));
         holder.rvQrHistoryItem.addItemDecoration(new DividerItemDecoration(context,LinearLayoutManager.VERTICAL));

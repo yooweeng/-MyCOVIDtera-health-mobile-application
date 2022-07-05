@@ -16,7 +16,13 @@ public class QrHistory {
     public QrHistory(String date, String location, ArrayList<HistoryItem> details) {
         this.date = date;
         this.location = location;
-        this.details = details;
+
+        this.details=details;
+//        //copy the value instead of reference by creating new arraylist
+//        this.details=new ArrayList<>();
+//        for(int i=0; i<details.size(); i++){
+//            this.details.add(details.get(i));
+//        }
     }
 
     public String getDate() {
