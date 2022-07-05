@@ -72,6 +72,9 @@ public class EditProfileFragment extends Fragment {
         updateBtn = view.findViewById(R.id.btnEditProfileUpdate);
 
         user = Parcels.unwrap(getArguments().getParcelable("activeUser"));
+        String userRisk = getArguments().getString("currUserRisk");
+        Log.i("currRisk@profile", userRisk);
+
         nricEt.setText(user.getNric());
         nameEt.setText(user.getName());
         phoneEt.getEditText().setText(user.getPhone());
@@ -113,7 +116,9 @@ public class EditProfileFragment extends Fragment {
                             Log.d("EditActivity user @ after update dr ", updateUser.toString());
                             Bundle bundle = new Bundle();
                             bundle.putParcelable("activeUser", Parcels.wrap(updateUser));
+                            bundle.putString("currUserRisk", userRisk);
                             Log.d("EditActivity user @ update ", updateUser.toString());
+
                             ((MainActivity) requireActivity()).getUser();
                             Navigation.findNavController(view).navigate(R.id.action_editProfileFragment_to_profileFragment, bundle);
                         }

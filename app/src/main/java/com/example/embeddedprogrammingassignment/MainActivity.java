@@ -153,7 +153,6 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                bundle.putParcelable("activeUser", Parcels.wrap(user));
                 updateBottomNav(1, bundle);
             }
         }, 2000);
@@ -166,6 +165,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 user = snapshot.getValue(User.class);
+                bundle.putParcelable("activeUser", Parcels.wrap(user));
             }
 
             @Override
