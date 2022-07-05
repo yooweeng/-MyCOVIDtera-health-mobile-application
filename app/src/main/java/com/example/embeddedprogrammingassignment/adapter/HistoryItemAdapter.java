@@ -3,22 +3,39 @@ package com.example.embeddedprogrammingassignment.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.embeddedprogrammingassignment.R;
 import com.example.embeddedprogrammingassignment.modal.HistoryItem;
+import com.example.embeddedprogrammingassignment.modal.HistoryItemDetail;
+import com.example.embeddedprogrammingassignment.modal.QrHistory;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class HistoryItemAdapter extends RecyclerView.Adapter<HistoryItemAdapter.HistoryItemViewHolder> {
     ArrayList<HistoryItem> historyItems;
+    int parentPosition;
+    FirebaseDatabase rootNode;
+    DatabaseReference reference;
 
-    public HistoryItemAdapter(ArrayList<HistoryItem> historyItems) {
+    public HistoryItemAdapter(ArrayList<HistoryItem> historyItems, int parentPosition) {
         this.historyItems = historyItems;
+        this.parentPosition = parentPosition;
     }
 
     @NonNull
@@ -31,6 +48,13 @@ public class HistoryItemAdapter extends RecyclerView.Adapter<HistoryItemAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull HistoryItemAdapter.HistoryItemViewHolder holder, int position) {
+
+        rootNode = FirebaseDatabase.getInstance();
+        reference = rootNode.getReference("history").child("000514020234").child("history"+parentPosition).child("details");
+
+        if(historyItems.size() > 1){
+            holder.btnCheckout.setVisibility(View.GONE);
+        }
         if(historyItems.get(position).getIsCheckIn().equals("true")){
             holder.status.setImageResource(R.drawable.icon_checkin);
         }
@@ -39,6 +63,21 @@ public class HistoryItemAdapter extends RecyclerView.Adapter<HistoryItemAdapter.
         }
         holder.location.setText(historyItems.get(position).getLocation());
         holder.date.setText(historyItems.get(position).getTime());
+
+        holder.btnCheckout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LocalDateTime now = LocalDateTime.now();
+                DateTimeFormatter format= DateTimeFormatter.ofPattern("dd-MMMM-yyyy HH:mm:ss");
+                String formatDateTime  = now.format(format);
+
+                HistoryItemDetail historyItemDetail = new HistoryItemDetail(historyItems.get(position).getLocation(),"false",formatDateTime);
+                reference.child("1").setValue(historyItemDetail);
+
+                Navigation.findNavController(holder.itemView).navigate(R.id.action_qrHistoryFragment_self);
+            }
+        });
+
     }
 
     @Override
@@ -50,6 +89,7 @@ public class HistoryItemAdapter extends RecyclerView.Adapter<HistoryItemAdapter.
 
         TextView location,date;
         ImageView status;
+        Button btnCheckout;
 
         public HistoryItemViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -57,6 +97,7 @@ public class HistoryItemAdapter extends RecyclerView.Adapter<HistoryItemAdapter.
             location = itemView.findViewById(R.id.tvHistoryItemLocation);
             date = itemView.findViewById(R.id.tvHistoryItemDate);
             status = itemView.findViewById(R.id.ivHistoryItemStatus);
+            btnCheckout = itemView.findViewById(R.id.btnCheckoutHistoryItem);
         }
     }
 }

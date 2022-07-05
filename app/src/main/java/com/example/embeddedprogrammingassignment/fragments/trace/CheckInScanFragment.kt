@@ -77,7 +77,7 @@ class CheckInScanFragment : Fragment() {
                         override fun onDataChange(snapshot: DataSnapshot) {
                             for (dataSnapshot in snapshot.children) {
                                 Log.i("resultchildcount", snapshot.childrenCount.toString())
-                                i=snapshot.childrenCount
+                                i=snapshot.childrenCount -1
                             }
                         }
 

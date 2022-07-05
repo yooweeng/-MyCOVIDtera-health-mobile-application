@@ -52,7 +52,7 @@ public class QrHistoryAdapter extends RecyclerView.Adapter<QrHistoryAdapter.qrHi
         else{
             holder.tvQrHistoryLocation.setText(qrHistories.get(position).getLocation());
         }
-        HistoryItemAdapter historyItemAdapter = new HistoryItemAdapter(qrHistories.get(position).getDetails());
+        HistoryItemAdapter historyItemAdapter = new HistoryItemAdapter(qrHistories.get(position).getDetails(),qrHistories.size()-1-position);
         holder.rvQrHistoryItem.setAdapter(historyItemAdapter);
         holder.rvQrHistoryItem.setLayoutManager(new LinearLayoutManager(context));
         holder.rvQrHistoryItem.addItemDecoration(new DividerItemDecoration(context,LinearLayoutManager.VERTICAL));
