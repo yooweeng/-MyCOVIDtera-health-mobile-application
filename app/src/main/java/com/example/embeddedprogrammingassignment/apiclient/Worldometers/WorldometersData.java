@@ -1,9 +1,11 @@
 package com.example.embeddedprogrammingassignment.apiclient.Worldometers;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class WorldometersData {
     String updated;
     String country;
-    Country countryInfo;
     String cases;
     String todayCases;
     String deaths;
@@ -25,6 +27,9 @@ public class WorldometersData {
     String recoveredPerOneMillion;
     String criticalPerOneMillion;
 
+    public WorldometersData() {
+    }
+
     public String getUpdated() {
         return updated;
     }
@@ -39,14 +44,6 @@ public class WorldometersData {
 
     public void setCountry(String country) {
         this.country = country;
-    }
-
-    public Country getCountryInfo() {
-        return countryInfo;
-    }
-
-    public void setCountryInfo(Country countryInfo) {
-        this.countryInfo = countryInfo;
     }
 
     public String getCases() {
@@ -209,91 +206,28 @@ public class WorldometersData {
         this.criticalPerOneMillion = criticalPerOneMillion;
     }
 
-    public class Country{
-        String _id;
-        String iso2;
-        String iso3;
-        String lat;
-        String flag;
-
-        public String get_id() {
-            return _id;
-        }
-
-        public void set_id(String _id) {
-            this._id = _id;
-        }
-
-        public String getIso2() {
-            return iso2;
-        }
-
-        public void setIso2(String iso2) {
-            this.iso2 = iso2;
-        }
-
-        public String getIso3() {
-            return iso3;
-        }
-
-        public void setIso3(String iso3) {
-            this.iso3 = iso3;
-        }
-
-        public String getLat() {
-            return lat;
-        }
-
-        public void setLat(String lat) {
-            this.lat = lat;
-        }
-
-        public String getFlag() {
-            return flag;
-        }
-
-        public void setFlag(String flag) {
-            this.flag = flag;
-        }
-
-        @Override
-        public String toString() {
-            return "Country{" +
-                    "_id='" + _id + '\'' +
-                    ", iso2='" + iso2 + '\'' +
-                    ", iso3='" + iso3 + '\'' +
-                    ", lat='" + lat + '\'' +
-                    ", flag='" + flag + '\'' +
-                    '}';
-        }
-    }
-
-    @Override
-    public String toString() {
-        return "CovidData{" +
-                "updated='" + updated + '\'' +
-                ", country='" + country + '\'' +
-                ", countryInfo=" + countryInfo +
-                ", cases='" + cases + '\'' +
-                ", todayCases='" + todayCases + '\'' +
-                ", deaths='" + deaths + '\'' +
-                ", todayDeaths='" + todayDeaths + '\'' +
-                ", recovered='" + recovered + '\'' +
-                ", todayRecovered='" + todayRecovered + '\'' +
-                ", active='" + active + '\'' +
-                ", critical='" + critical + '\'' +
-                ", casesPerOneMillion='" + casesPerOneMillion + '\'' +
-                ", deathsPerOneMillion='" + deathsPerOneMillion + '\'' +
-                ", tests='" + tests + '\'' +
-                ", testsPerOneMillion='" + testsPerOneMillion + '\'' +
-                ", population='" + population + '\'' +
-                ", continent='" + continent + '\'' +
-                ", oneCasePerPeople='" + oneCasePerPeople + '\'' +
-                ", oneDeathPerPeople='" + oneDeathPerPeople + '\'' +
-                ", oneTestPerPeople='" + oneTestPerPeople + '\'' +
-                ", activePerOneMillion='" + activePerOneMillion + '\'' +
-                ", recoveredPerOneMillion='" + recoveredPerOneMillion + '\'' +
-                ", criticalPerOneMillion='" + criticalPerOneMillion + '\'' +
-                '}';
+    public WorldometersData(String updated, String country, String cases, String todayCases, String deaths, String todayDeaths, String recovered, String todayRecovered, String active, String critical, String casesPerOneMillion, String deathsPerOneMillion, String tests, String testsPerOneMillion, String population, String continent, String oneCasePerPeople, String oneDeathPerPeople, String oneTestPerPeople, String activePerOneMillion, String recoveredPerOneMillion, String criticalPerOneMillion) {
+        this.updated = updated;
+        this.country = country;
+        this.cases = cases;
+        this.todayCases = todayCases;
+        this.deaths = deaths;
+        this.todayDeaths = todayDeaths;
+        this.recovered = recovered;
+        this.todayRecovered = todayRecovered;
+        this.active = active;
+        this.critical = critical;
+        this.casesPerOneMillion = casesPerOneMillion;
+        this.deathsPerOneMillion = deathsPerOneMillion;
+        this.tests = tests;
+        this.testsPerOneMillion = testsPerOneMillion;
+        this.population = population;
+        this.continent = continent;
+        this.oneCasePerPeople = oneCasePerPeople;
+        this.oneDeathPerPeople = oneDeathPerPeople;
+        this.oneTestPerPeople = oneTestPerPeople;
+        this.activePerOneMillion = activePerOneMillion;
+        this.recoveredPerOneMillion = recoveredPerOneMillion;
+        this.criticalPerOneMillion = criticalPerOneMillion;
     }
 }
