@@ -41,6 +41,7 @@
 
                 <com.google.android.material.checkbox.MaterialCheckBox
                     android:layout_width="match_parent"
+                    android:id="@+id/tgRisk1"
                     style="@style/Widget.AppCompat.CompoundButton.RadioButton"
                     android:layout_height="30dp"
                     android:text="Fever"
@@ -51,6 +52,7 @@
 
                 <com.google.android.material.checkbox.MaterialCheckBox
                     android:layout_width="match_parent"
+                    android:id="@+id/tgRisk2"
                     style="@style/Widget.AppCompat.CompoundButton.RadioButton"
                     android:layout_height="30dp"
                     android:text="Cough"
@@ -61,6 +63,7 @@
 
                 <com.google.android.material.checkbox.MaterialCheckBox
                     android:layout_width="match_parent"
+                    android:id="@+id/tgRisk3"
                     style="@style/Widget.AppCompat.CompoundButton.RadioButton"
                     android:layout_height="30dp"
                     android:text="Difficulty in breathing"
@@ -71,6 +74,7 @@
 
                 <com.google.android.material.checkbox.MaterialCheckBox
                     android:layout_width="match_parent"
+                    android:id="@+id/tgRisk4"
                     style="@style/Widget.AppCompat.CompoundButton.RadioButton"
                     android:layout_height="30dp"
                     android:text="Sore throat"
@@ -81,6 +85,7 @@
 
                 <com.google.android.material.checkbox.MaterialCheckBox
                     android:layout_width="match_parent"
+                    android:id="@+id/tgRisk5"
                     style="@style/Widget.AppCompat.CompoundButton.RadioButton"
                     android:layout_height="30dp"
                     android:text="Headache"
@@ -91,6 +96,7 @@
 
                 <com.google.android.material.checkbox.MaterialCheckBox
                     android:layout_width="match_parent"
+                    android:id="@+id/tgRisk6"
                     style="@style/Widget.AppCompat.CompoundButton.RadioButton"
                     android:layout_height="30dp"
                     android:text="Lost of smell"
@@ -101,6 +107,7 @@
 
                 <com.google.android.material.checkbox.MaterialCheckBox
                     android:layout_width="match_parent"
+                    android:id="@+id/tgRisk7"
                     style="@style/Widget.AppCompat.CompoundButton.RadioButton"
                     android:layout_height="30dp"
                     android:text="Loss of taste"
@@ -111,6 +118,7 @@
 
                 <com.google.android.material.checkbox.MaterialCheckBox
                     android:layout_width="match_parent"
+                    android:id="@+id/tgRisk8"
                     style="@style/Widget.AppCompat.CompoundButton.RadioButton"
                     android:layout_height="30dp"
                     android:text="Chills"
@@ -121,6 +129,7 @@
 
                 <com.google.android.material.checkbox.MaterialCheckBox
                     android:layout_width="match_parent"
+                    android:id="@+id/tgRisk9"
                     style="@style/Widget.AppCompat.CompoundButton.RadioButton"
                     android:layout_height="30dp"
                     android:text="Diarrhea"
@@ -131,6 +140,7 @@
 
                 <com.google.android.material.checkbox.MaterialCheckBox
                     android:layout_width="match_parent"
+                    android:id="@+id/tgRisk10"
                     style="@style/Widget.AppCompat.CompoundButton.RadioButton"
                     android:layout_height="30dp"
                     android:text="Fatique"
@@ -141,6 +151,7 @@
 
                 <com.google.android.material.checkbox.MaterialCheckBox
                     android:layout_width="match_parent"
+                    android:id="@+id/tgRisk11"
                     style="@style/Widget.AppCompat.CompoundButton.RadioButton"
                     android:layout_height="30dp"
                     android:text="Nausea or vomiting"
@@ -151,6 +162,7 @@
 
                 <com.google.android.material.checkbox.MaterialCheckBox
                     android:layout_width="match_parent"
+                    android:id="@+id/tgRisk12"
                     style="@style/Widget.AppCompat.CompoundButton.RadioButton"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/amiko_semibold"

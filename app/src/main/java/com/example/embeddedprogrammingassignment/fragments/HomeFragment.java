@@ -92,14 +92,14 @@ public class HomeFragment extends Fragment {
         riskStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_riskStatusFragment);
+                Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_riskStatusFragment, passingBundle);
             }
         });
 
         selfReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_selfReportCovidFragment);
+                Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_selfReportCovidFragment, passingBundle);
             }
         });
 

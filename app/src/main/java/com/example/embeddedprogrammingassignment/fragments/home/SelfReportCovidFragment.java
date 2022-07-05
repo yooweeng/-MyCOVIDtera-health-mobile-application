@@ -13,15 +13,22 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.example.embeddedprogrammingassignment.MainActivity;
 import com.example.embeddedprogrammingassignment.R;
+import com.example.embeddedprogrammingassignment.modal.User;
+import com.google.firebase.database.FirebaseDatabase;
+
+import org.parceler.Parcels;
 
 public class SelfReportCovidFragment extends Fragment {
 
     AlertDialog.Builder dialogBuilder;
     AlertDialog dialog;
     ImageView infoButton,testkitPositive,testkitNegative;
-    Button coughButton,tirednessButton,crampButton,smellLossButton,feverButton;
+    Button coughButton,tirednessButton,crampButton,smellLossButton,feverButton, submitButton;
     Boolean isSelected=true;
+    int symScore=0;
+    User user;
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -29,6 +36,11 @@ public class SelfReportCovidFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view=inflater.inflate(R.layout.fragment_home_self_report_covid, container, false);
+
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            user = Parcels.unwrap(getArguments().getParcelable("activeUser"));
+        }
 
         infoButton=view.findViewById(R.id.ivInfo);
         testkitPositive=view.findViewById(R.id.ivTestkitPositive);
@@ -38,6 +50,7 @@ public class SelfReportCovidFragment extends Fragment {
         crampButton=view.findViewById(R.id.btnCramp);
         smellLossButton=view.findViewById(R.id.btnSmellLoss);
         feverButton=view.findViewById(R.id.btnFever);
+        submitButton = view.findViewById(R.id.btnSelfReportSubmit);
 
         testkitPositive.setForegroundTintList(ContextCompat.getColorStateList(requireContext(),R.color.testkit_selected));
         testkitPositive.setSelected(!isSelected);
@@ -82,6 +95,8 @@ public class SelfReportCovidFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 coughButton.setSelected(!coughButton.isSelected());
+                if(coughButton.isSelected())
+                    symScore += 1;
             }
         });
 
@@ -89,6 +104,8 @@ public class SelfReportCovidFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 tirednessButton.setSelected(!tirednessButton.isSelected());
+                if(tirednessButton.isSelected())
+                    symScore+=1;
             }
         });
 
@@ -96,6 +113,8 @@ public class SelfReportCovidFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 crampButton.setSelected(!crampButton.isSelected());
+                if(crampButton.isSelected())
+                    symScore+=1;
             }
         });
 
@@ -103,6 +122,8 @@ public class SelfReportCovidFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 smellLossButton.setSelected(!smellLossButton.isSelected());
+                if(smellLossButton.isSelected())
+                    symScore+=1;
             }
         });
 
@@ -110,6 +131,23 @@ public class SelfReportCovidFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 feverButton.setSelected(!feverButton.isSelected());
+                if(feverButton.isSelected())
+                    symScore+=1;
+            }
+        });
+
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String riskStatus = "No Exposure Detected";
+                if(symScore>=3 && testkitNegative.isSelected()) {
+                    riskStatus = "You are at High Risk";
+                } else if (testkitPositive.isSelected()) {
+                    riskStatus = "You are positive for COVID-19";
+                }
+
+                FirebaseDatabase.getInstance().getReference("risks").child(user.getNric()).child("risk").setValue(riskStatus);
+                ((MainActivity) requireActivity()).getUser();
             }
         });
 

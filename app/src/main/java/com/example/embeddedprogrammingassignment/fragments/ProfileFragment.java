@@ -47,7 +47,8 @@ public class ProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         user = Parcels.unwrap(getArguments().getParcelable("activeUser"));
-
+        String test = getArguments().getString("currUserRisk");
+        Log.i("currRisk@profile", test);
         nameTv = view.findViewById(R.id.tvProfileName);
         nricTv = view.findViewById(R.id.tvProfileNRIC);
         phoneTv = view.findViewById(R.id.tvProfilePhone);
