@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,10 +38,11 @@ import org.parceler.Parcels;
 import java.util.Calendar;
 
 public class AppointmentFragment extends Fragment {
-
+    long vaccineNo, getVaccineDetails;
     Button q1Yes, q1No, q2Yes, q2No, submit, btnConfirm, btnVaccine1, btnVaccine2, btnVaccine3;
     MaterialButtonToggleGroup q1Toggle, q2Toggle;
     TextView tvNRIC, tvPhone, tvState, tvName, tvVaccine1, tvVaccine2, tvVaccine3;
+    TextView tvVaccineNo, tvAppointDate, tvAppointLocation;
     CardView appointDetails, vaccineBooking;
     AutoCompleteTextView selectDate, selectLocation;
     ArrayAdapter<String> ppvAdapterItems;
@@ -96,6 +98,9 @@ public class AppointmentFragment extends Fragment {
         tvName.setText(user.getName());
         tvPhone.setText(user.getPhone());
         tvNRIC.setText(user.getNric());
+        tvVaccineNo = view.findViewById(R.id.tvVaccineNo);
+        tvAppointDate = view.findViewById(R.id.tvDate);
+        tvAppointLocation = view.findViewById(R.id.tvLocation);
 
         Bundle bundle = new Bundle();
         bundle.putParcelable("activeUser", Parcels.wrap(user));
@@ -170,9 +175,31 @@ public class AppointmentFragment extends Fragment {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                    addAppointment();
                 if (q1Yes.isSelected()){
                     vaccineBooking.setVisibility(view.GONE);
+
+                    FirebaseDatabase.getInstance().getReference("appointments").child(user.getNric()).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                            for (DataSnapshot dsp : snapshot.getChildren()) {
+//                                vaccineNo=String.valueOf(dsp.getValue()); //add result into array list
+//                            }
+                            vaccineNo=snapshot.getChildrenCount();
+                            Log.d("Vaccine No: ", String.valueOf(vaccineNo));
+                            addAppointment(String.valueOf(vaccineNo));
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            updateAppointment(String.valueOf(vaccineNo));
+                        }
+                    },2000);
                     appointDetails.setVisibility(view.VISIBLE);
                 }
                 else {
@@ -184,9 +211,7 @@ public class AppointmentFragment extends Fragment {
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bundle result = new Bundle();
-                result.putString("vaccine1Status", "completed");
-                getParentFragmentManager().setFragmentResult("vaccineStatus", result);
+                updateStatus(String.valueOf(vaccineNo), "completed");
                 Navigation.findNavController(view).navigate(R.id.action_appointmentFragment_to_vaccinationFragment, bundle);
             }
         });
@@ -194,16 +219,15 @@ public class AppointmentFragment extends Fragment {
         return view;
     }
 
-    private void addAppointment(){
+    private void addAppointment(String vaccineNumber){
         String nric = user.getNric();
         String vaccine = getVaccine;
         String comm = comorbidities;
         String date = selectDate.getText().toString();
         String location = selectLocation.getText().toString();
-        String vaccine1 = "booked";
-        String vaccine2 = "not available";
-        String vaccine3 = "not available";
-        Appointments appointments = new Appointments(nric, vaccine, comm, date, location, vaccine1, vaccine2, vaccine3);
+        String status = "booked";
+        Appointments appointments = new Appointments(nric, vaccine, comm, date, location, status);
+        Log.d("VaccineNo: ", vaccineNumber);
 
         if(validAppointment(appointments)){
             rootNode = FirebaseDatabase.getInstance();
@@ -214,7 +238,7 @@ public class AppointmentFragment extends Fragment {
             newAppointment.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    reference.child(nric).setValue(appointments);
+                    reference.child(nric).child(vaccineNumber).setValue(appointments);
                 }
 
                 @Override
@@ -223,7 +247,10 @@ public class AppointmentFragment extends Fragment {
                 }
             });
         }
+    }
 
+    private void updateStatus(String vaccineNo, String currentStatus){
+        FirebaseDatabase.getInstance().getReference("appointments").child(user.getNric()).child(vaccineNo).child("status").setValue(currentStatus);
     }
 
     private boolean validAppointment(Appointments appointments) {
@@ -247,7 +274,26 @@ public class AppointmentFragment extends Fragment {
             Toast.makeText(getContext(), "Please select a location.", Toast.LENGTH_SHORT).show();
             return false;
         }
-
         return true;
+    }
+
+    private void updateAppointment(String vaccineNumber){
+        FirebaseDatabase.getInstance().getReference("appointments").child(user.getNric()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                getVaccineDetails = snapshot.getChildrenCount()-1;
+                String date = (String) snapshot.child(String.valueOf(getVaccineDetails)).child("appointmentDate").getValue();
+                String location = (String) snapshot.child(String.valueOf(getVaccineDetails)).child("appointmentLocation").getValue();
+
+                tvVaccineNo.setText(vaccineNumber);
+                tvAppointDate.setText(date);
+                tvAppointLocation.setText(location);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }
