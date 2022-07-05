@@ -20,20 +20,36 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.embeddedprogrammingassignment.R;
+import com.example.embeddedprogrammingassignment.modal.User;
 import com.google.android.material.button.MaterialButtonToggleGroup;
+import com.google.android.material.checkbox.MaterialCheckBox;
+import com.google.firebase.database.FirebaseDatabase;
+
+import org.parceler.Parcels;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class RiskStatusFragment extends Fragment {
 
     MaterialButtonToggleGroup toggleGroupQ2,toggleGroupQ3,toggleGroupQ4;
+    MaterialCheckBox sym1, sym2, sym3, sym4, sym5, sym6, sym7, sym8, sym9, sym10,sym11,sym12;
+
     Button q2YesBtn,q2NoBtn,q3YesBtn,q3NoBtn,q4YesBtn,q4NoBtn, submitRiskBtn;
     ImageView riskLogoIv;
     TextView statusTv, riskTv;
     CardView riskCv;
+    User user;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_home_risk_status, container, false);
+
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            user = Parcels.unwrap(getArguments().getParcelable("activeUser"));
+        }
 
         toggleGroupQ2=view.findViewById(R.id.tgq2);
         toggleGroupQ3=view.findViewById(R.id.tgq3);
@@ -45,6 +61,21 @@ public class RiskStatusFragment extends Fragment {
         q4YesBtn=view.findViewById(R.id.btnq4Yes);
         q4NoBtn=view.findViewById(R.id.btnq4No);
         submitRiskBtn = view.findViewById(R.id.btnSubmitRiskStatus);
+
+        sym1 = view.findViewById(R.id.tgRisk1);
+        sym2 = view.findViewById(R.id.tgRisk2);
+        sym3 = view.findViewById(R.id.tgRisk3);
+        sym4 = view.findViewById(R.id.tgRisk4);
+        sym5 = view.findViewById(R.id.tgRisk5);
+        sym6 = view.findViewById(R.id.tgRisk6);
+        sym7 = view.findViewById(R.id.tgRisk7);
+        sym8 = view.findViewById(R.id.tgRisk8);
+        sym9 = view.findViewById(R.id.tgRisk9);
+        sym10 = view.findViewById(R.id.tgRisk10);
+        sym11 = view.findViewById(R.id.tgRisk11);
+        sym12 = view.findViewById(R.id.tgRisk12);
+
+        List<MaterialCheckBox> q1 = Arrays.asList(sym1, sym2, sym3, sym4, sym5, sym6, sym7, sym8, sym9, sym10,sym11,sym12);
 
         riskLogoIv = view.findViewById(R.id.ivCardviewCovidRisk);
         statusTv = view.findViewById(R.id.tvCardviewCovidTitle);
@@ -116,11 +147,12 @@ public class RiskStatusFragment extends Fragment {
             @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View view) {
+
                 int score = 0;
                 boolean isSelected = false;
                 isSelected = (q2YesBtn.isSelected() || q2NoBtn.isSelected()) && (q3YesBtn.isSelected() || q3NoBtn.isSelected()) && (q4YesBtn.isSelected() || q4NoBtn.isSelected());
                 if(!isSelected) {
-                    Toast.makeText(requireContext(), "Please answer all the questions selected.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), "Please answer all the questions above.", Toast.LENGTH_SHORT).show();
                     return ;
                 }
 
@@ -131,13 +163,25 @@ public class RiskStatusFragment extends Fragment {
                 if(q4YesBtn.isSelected())
                     score += 1;
 
-                Log.i("Risk score", "="+ score);
+                Log.i("Risk score for q2, q3, q4", "="+ score);
 
-                if(score < 3)
-                    setStatus(R.drawable.risk_green, R.color.green_warning, R.color.white, "No Exposure Detected");
-                else
-                    setStatus(R.drawable.risk_warning, R.color.yellow_warning, R.color.black_txt, "You Are At High Risk!");
+                int q1Sym=0;
+                for (int i = 0; i < q1.size(); i++) {
+                    if(q1.get(i).isChecked())
+                        q1Sym+=1;
+                }
+                Log.i("Risk score for q1", "="+ q1Sym);
 
+                String riskStatus = "No Exposure Detected";
+                if(score==0 && q1Sym<3) {
+                    riskStatus = "No Exposure Detected";
+                } else if (score>1 && q1Sym<4) {
+                    riskStatus = "You are at High Risk";
+                } else if (score>2 && q1Sym>4) {
+                    riskStatus = "You are positive for COVID-19";
+                }
+
+                FirebaseDatabase.getInstance().getReference("risks").child(user.getNric()).child("risk").setValue(riskStatus);
 
             }
         });
