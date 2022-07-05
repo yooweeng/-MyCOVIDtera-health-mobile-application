@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.embeddedprogrammingassignment.MainActivity;
 import com.example.embeddedprogrammingassignment.R;
 import com.example.embeddedprogrammingassignment.modal.User;
 import com.google.android.material.button.MaterialButtonToggleGroup;
@@ -182,11 +183,9 @@ public class RiskStatusFragment extends Fragment {
                 }
 
                 FirebaseDatabase.getInstance().getReference("risks").child(user.getNric()).child("risk").setValue(riskStatus);
-
+                ((MainActivity) requireActivity()).getUser();
             }
         });
-
-
 
         // Inflate the layout for this fragment
         return view;

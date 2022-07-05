@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.example.embeddedprogrammingassignment.MainActivity;
 import com.example.embeddedprogrammingassignment.R;
 import com.example.embeddedprogrammingassignment.modal.User;
 import com.google.firebase.database.FirebaseDatabase;
@@ -146,7 +147,7 @@ public class SelfReportCovidFragment extends Fragment {
                 }
 
                 FirebaseDatabase.getInstance().getReference("risks").child(user.getNric()).child("risk").setValue(riskStatus);
-
+                ((MainActivity) requireActivity()).getUser();
             }
         });
 
