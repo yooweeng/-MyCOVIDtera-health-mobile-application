@@ -1,10 +1,12 @@
 package com.example.embeddedprogrammingassignment.fragments;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -34,21 +36,23 @@ public class ProfileFragment extends Fragment {
 
     }
 
-    TextView nricTv, phoneTv, stateTv, nameTv;
+    TextView nricTv, phoneTv, stateTv, nameTv, riskTv;
     TextView nricVaxTv, phoneVaxTv, nameVaxTv;
-    ImageView editProfileBtn;
+    ImageView editProfileBtn, riskIv;
     LottieAnimationView lottieBtn;
     Button logOutBtn;
     User user;
+    CardView covidRiskCv;
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         user = Parcels.unwrap(getArguments().getParcelable("activeUser"));
-        String test = getArguments().getString("currUserRisk");
-        Log.i("currRisk@profile", test);
+        String userRisk = getArguments().getString("currUserRisk");
+        Log.i("currRisk@profile", userRisk);
         nameTv = view.findViewById(R.id.tvProfileName);
         nricTv = view.findViewById(R.id.tvProfileNRIC);
         phoneTv = view.findViewById(R.id.tvProfilePhone);
@@ -59,6 +63,20 @@ public class ProfileFragment extends Fragment {
         phoneVaxTv = view.findViewById(R.id.tvProfileVaxStatusPhone);
         lottieBtn = view.findViewById(R.id.lottieProfileLogoutBtn);
         logOutBtn = view.findViewById(R.id.btnProfileLogout);
+        covidRiskCv = view.findViewById(R.id.cvCovidExposureRisk);
+        riskTv = view.findViewById(R.id.tvCardviewCovidRisk);
+        riskIv = view.findViewById(R.id.ivCardviewCovidRisk);
+
+        riskTv.setText(userRisk);
+        switch(userRisk) {
+            case "No Exposure Detected":
+                riskIv.setImageResource(R.drawable.risk_green);
+            case "You are at High Risk":
+                riskIv.setImageResource(R.drawable.risk_warning);
+            case "You are positive for COVID-19":
+                riskIv.setImageResource(R.drawable.risk_red);
+        }
+
 
         stateTv.setText(user.getState());
         setDetails(nameTv, nricTv, phoneTv);
