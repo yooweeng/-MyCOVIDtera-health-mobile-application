@@ -19,18 +19,15 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
 
 
 public class QrHistoryFragment extends Fragment {
 
     ArrayList<QrHistory> qrHistories = new ArrayList<>();
-    ArrayList<HistoryItem> historyItems2 = new ArrayList<>();
-    ArrayList<HistoryItem> historyItems3 = new ArrayList<>();
 
     RecyclerView qrHistoryRv;
 
@@ -79,6 +76,7 @@ public class QrHistoryFragment extends Fragment {
                     }
 
                     if (i == snapshot.getChildrenCount()) {
+                        Collections.reverse(qrHistories);
                         QrHistoryAdapter qrHistoryAdapter = new QrHistoryAdapter(qrHistories);
                         qrHistoryRv.setAdapter(qrHistoryAdapter);
                         qrHistoryRv.setLayoutManager(new LinearLayoutManager(getContext()));

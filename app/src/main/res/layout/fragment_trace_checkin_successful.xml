@@ -238,7 +238,7 @@
                         android:layout_marginStart="15dp"
                         android:layout_marginEnd="15dp"
                         android:backgroundTint="@color/purple_btn"
-                        android:text="Checkout"
+                        android:text="Return"
                         android:textColor="@color/white"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
