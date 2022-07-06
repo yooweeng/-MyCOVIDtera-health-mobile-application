@@ -44,7 +44,7 @@ import java.util.Calendar;
 public class VaccinationFragment extends Fragment {
 
     long vaccineNumber, getVaccineDetails;
-    TextView tvVaccinationNRIC, tvVaccinationPhone, tvVaccinationState, tvVaccinationName, vaccine1, vaccine2, vaccine3, tvVaccineNo, tvAppointDate, tvAppointLocation;
+    TextView tvVaccinationNRIC, tvVaccinationPhone, tvVaccinationState, tvVaccinationName, vaccine1, vaccine2, vaccine3, tvVaccineNo, tvAppointDate, tvAppointLocation, tvAppointManufacturer;
     Button appointVaccine1Btn, appointVaccine2Btn, appointVaccine3Btn, confirmBtn;
     CardView appointDetailsCard, vaccineDetailsCard;
     User user;
@@ -77,6 +77,7 @@ public class VaccinationFragment extends Fragment {
         tvVaccineNo = view.findViewById(R.id.tvVaccineNo);
         tvAppointDate = view.findViewById(R.id.tvDate);
         tvAppointLocation = view.findViewById(R.id.tvLocation);
+        tvAppointManufacturer = view.findViewById(R.id.tvManufacturer);
         confirmBtn = view.findViewById(R.id.btnConfirmAppointment);
 
         Bundle bundle = new Bundle();
@@ -112,6 +113,7 @@ public class VaccinationFragment extends Fragment {
                 String currentStatus = String.valueOf(snapshot.child(String.valueOf(getVaccineDetails)).child("status").getValue());
                 String date = (String) snapshot.child(String.valueOf(getVaccineDetails)).child("appointmentDate").getValue();
                 String location = (String) snapshot.child(String.valueOf(getVaccineDetails)).child("appointmentLocation").getValue();
+                String manufacturer = (String) snapshot.child(String.valueOf(getVaccineDetails)).child("vaccineManufacturer").getValue();
 
                 int vaccine1Done = 1;
                 int vaccine2Done = 2;
@@ -130,6 +132,7 @@ public class VaccinationFragment extends Fragment {
                         tvVaccineNo.setText(String.valueOf(vaccine1Done));
                         tvAppointDate.setText(date);
                         tvAppointLocation.setText(location);
+                        tvAppointManufacturer.setText(manufacturer);
 
                         confirmBtn.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -162,6 +165,7 @@ public class VaccinationFragment extends Fragment {
                         tvVaccineNo.setText(String.valueOf(vaccine2Done));
                         tvAppointDate.setText(date);
                         tvAppointLocation.setText(location);
+                        tvAppointManufacturer.setText(manufacturer);
 
                         confirmBtn.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -197,6 +201,7 @@ public class VaccinationFragment extends Fragment {
                         tvVaccineNo.setText(String.valueOf(vaccine3Done));
                         tvAppointDate.setText(date);
                         tvAppointLocation.setText(location);
+                        tvAppointManufacturer.setText(manufacturer);
 
                         confirmBtn.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -220,7 +225,6 @@ public class VaccinationFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
         return view;

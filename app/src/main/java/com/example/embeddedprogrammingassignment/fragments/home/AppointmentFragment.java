@@ -42,10 +42,10 @@ public class AppointmentFragment extends Fragment {
     Button q1Yes, q1No, q2Yes, q2No, submit, btnConfirm, btnVaccine1, btnVaccine2, btnVaccine3;
     MaterialButtonToggleGroup q1Toggle, q2Toggle;
     TextView tvNRIC, tvPhone, tvState, tvName, tvVaccine1, tvVaccine2, tvVaccine3;
-    TextView tvVaccineNo, tvAppointDate, tvAppointLocation;
+    TextView tvVaccineNo, tvAppointDate, tvAppointLocation, tvAppointManufacturer;
     CardView appointDetails, vaccineBooking;
-    AutoCompleteTextView selectDate, selectLocation;
-    ArrayAdapter<String> ppvAdapterItems;
+    AutoCompleteTextView selectDate, selectLocation, selectManufacturer;
+    ArrayAdapter<String> ppvAdapterItems, manufacturerAdapterItems;
     User user;
     FirebaseDatabase rootNode;
     DatabaseReference reference;
@@ -86,6 +86,7 @@ public class AppointmentFragment extends Fragment {
         q2Toggle = view.findViewById(R.id.toggleQ2);
         selectDate = view.findViewById(R.id.vaccinationDate);
         selectLocation = view.findViewById(R.id.vaccinationLocation);
+        selectManufacturer = view.findViewById(R.id.vaccinationManufacturer);
         submit = view.findViewById(R.id.btnAppointment);
 
         q1Yes.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(),R.color.vaccination_question_option_selected));
@@ -101,6 +102,7 @@ public class AppointmentFragment extends Fragment {
         tvVaccineNo = view.findViewById(R.id.tvVaccineNo);
         tvAppointDate = view.findViewById(R.id.tvDate);
         tvAppointLocation = view.findViewById(R.id.tvLocation);
+        tvAppointManufacturer = view.findViewById(R.id.vaccinationManufacturer);
 
         Bundle bundle = new Bundle();
         bundle.putParcelable("activeUser", Parcels.wrap(user));
@@ -172,6 +174,10 @@ public class AppointmentFragment extends Fragment {
         ppvAdapterItems = new ArrayAdapter<String>(getContext(), R.layout.vaccination_ppv_dropdown_item, ppv_option);
         selectLocation.setAdapter(ppvAdapterItems);
 
+        String[] manufacturer_option = getResources().getStringArray(R.array.manufacturer);
+        manufacturerAdapterItems = new ArrayAdapter<String>(getContext(), R.layout.vaccination_manufacturer_dropdown_list, manufacturer_option);
+        selectManufacturer.setAdapter(manufacturerAdapterItems);
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -223,10 +229,11 @@ public class AppointmentFragment extends Fragment {
         String nric = user.getNric();
         String vaccine = getVaccine;
         String comm = comorbidities;
+        String manufacturer = selectManufacturer.getText().toString();
         String date = selectDate.getText().toString();
         String location = selectLocation.getText().toString();
         String status = "booked";
-        Appointments appointments = new Appointments(nric, vaccine, comm, date, location, status);
+        Appointments appointments = new Appointments(nric, vaccine, comm, manufacturer, date, location, status);
         Log.d("VaccineNo: ", vaccineNumber);
 
         if(validAppointment(appointments)){
@@ -282,12 +289,16 @@ public class AppointmentFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 getVaccineDetails = snapshot.getChildrenCount()-1;
+                int vacNumber = Integer.parseInt(vaccineNumber) + 1;
+                String currentVaccineNo = String.valueOf(vacNumber);
                 String date = (String) snapshot.child(String.valueOf(getVaccineDetails)).child("appointmentDate").getValue();
                 String location = (String) snapshot.child(String.valueOf(getVaccineDetails)).child("appointmentLocation").getValue();
+                String manufacturer = (String) snapshot.child(String.valueOf(getVaccineDetails)).child("vaccineManufacturer").getValue();
 
-                tvVaccineNo.setText(vaccineNumber);
+                tvVaccineNo.setText(currentVaccineNo);
                 tvAppointDate.setText(date);
                 tvAppointLocation.setText(location);
+                tvAppointManufacturer.setText(manufacturer);
             }
 
             @Override

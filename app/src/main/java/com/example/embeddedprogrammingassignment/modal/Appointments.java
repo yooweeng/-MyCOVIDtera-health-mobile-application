@@ -4,18 +4,20 @@ import org.parceler.Parcel;
 
 @Parcel
 public class Appointments {
-    String nric, getVaccine, comorbidities, appointmentDate, appointmentLocation, status;
+    String nric, getVaccine, comorbidities, vaccineManufacturer, appointmentDate, appointmentLocation, status;
 
-    public Appointments(String nric, String getVaccine, String comorbidities, String appointmentDate, String appointmentLocation, String status) {
+    public Appointments(String nric, String getVaccine, String comorbidities, String vaccineManufacturer, String appointmentDate, String appointmentLocation, String status) {
         this.nric = nric;
         this.getVaccine = getVaccine;
         this.comorbidities = comorbidities;
+        this.vaccineManufacturer = vaccineManufacturer;
         this.appointmentDate = appointmentDate;
         this.appointmentLocation = appointmentLocation;
         this.status = status;
     }
 
-    public Appointments() {
+    public Appointments(){
+
     }
 
     public String getNric() {
@@ -40,6 +42,14 @@ public class Appointments {
 
     public void setComorbidities(String comorbidities) {
         this.comorbidities = comorbidities;
+    }
+
+    public String getVaccineManufacturer() {
+        return vaccineManufacturer;
+    }
+
+    public void setVaccineManufacturer(String vaccineManufacturer) {
+        this.vaccineManufacturer = vaccineManufacturer;
     }
 
     public String getAppointmentDate() {
@@ -72,6 +82,7 @@ public class Appointments {
                 "nric='" + nric + '\'' +
                 ", getVaccine='" + getVaccine + '\'' +
                 ", comorbiditites='" + comorbidities + '\'' +
+                ", manufacturer='" + vaccineManufacturer + '\'' +
                 ", date='" + appointmentDate + '\'' +
                 ", location='" + appointmentLocation + '\'' +
                 ", status='" + status + '\'' +
