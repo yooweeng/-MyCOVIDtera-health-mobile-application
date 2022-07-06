@@ -11,8 +11,11 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +23,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.load.engine.Resource;
 import com.example.embeddedprogrammingassignment.R;
+import com.example.embeddedprogrammingassignment.modal.RedZoneLocation;
 import com.example.embeddedprogrammingassignment.modal.User;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -33,8 +37,16 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.parceler.Parcels;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class HotspotFragment extends Fragment {
 
@@ -42,6 +54,8 @@ public class HotspotFragment extends Fragment {
     FusedLocationProviderClient client;
     TextView tvCases;
     User user;
+    private static final int LOCATION_PERMISSION_CODE = 101;
+    ArrayList<RedZoneLocation> zoneList = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,12 +79,26 @@ public class HotspotFragment extends Fragment {
 
         client = LocationServices.getFusedLocationProviderClient(getActivity());
 
-        getCurrentLocation();
+        getPermission();
 
         return view;
     }
 
-    public void getCurrentLocation(){
+    public void getPermission(){
+        if(ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+            getCurrentLocation();
+        }
+        else {
+            ActivityCompat.requestPermissions(getActivity(), new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_CODE);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    getCurrentLocation();
+                }
+            },2000);
+        }
+    }
+    private void getCurrentLocation(){
         @SuppressLint("MissingPermission")
         Task<Location> task = client.getLastLocation();
         task.addOnSuccessListener(new OnSuccessListener<Location>() {
@@ -81,7 +109,12 @@ public class HotspotFragment extends Fragment {
                     @Override
                     public void onMapReady(GoogleMap googleMap) {
                         // Initialize lat lug
-                        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                        LatLng latLng;
+                        if (location==null)
+                            latLng = new LatLng(2.8325, 101.70694);
+                         else
+                            latLng = new LatLng(location.getLatitude(), location.getLongitude());
+
                         // Initialize marker options
                         MarkerOptions markerOptions = new MarkerOptions();
                         // Set position of marker
@@ -92,19 +125,59 @@ public class HotspotFragment extends Fragment {
                         googleMap.clear();
                         // Animating to zoom the marker
                         googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 20));
+                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
                         // Add marker on map
                         googleMap.addMarker(markerOptions);
 
-                        googleMap.addCircle(new CircleOptions()
-                                        .center(new LatLng(latLng.latitude, latLng.longitude))
-                                        .radius(10)
-                                        .strokeWidth(3f)
-                                        .strokeColor(Color.RED)
-                                        .fillColor(Color.argb(70,150,50,50)));
+                        getRedZone(googleMap, latLng.latitude, latLng.longitude);
+
                     }
                 });
             }
         });
     }
+
+    private void getRedZone(GoogleMap googleMap, double latitude, double longitude) {
+
+        FirebaseDatabase.getInstance().getReference("hotspots").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.hasChildren()) {
+                    Log.i("MapError snapshot", String.valueOf(snapshot.getChildren()));
+                    for(DataSnapshot child: snapshot.getChildren()) {
+                        String cases = Objects.requireNonNull(child.child("cases").getValue()).toString();
+                        String lg = Objects.requireNonNull(child.child("longitude").getValue()).toString();
+                        String lt = Objects.requireNonNull(child.child("latitude").getValue()).toString();
+                        Log.i("MapError loop", "cases: " + cases + " lat: " + lt + " long:" +  lg);
+                        RedZoneLocation zone = new RedZoneLocation(Integer.parseInt(cases), Double.parseDouble(lt), Double.parseDouble(lg));
+                        Log.i("MapError object", zone.toString());
+                        zoneList.add(zone);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Log.i("MapError Zone List", zoneList.toString());
+                for (int i=0; i<zoneList.size(); i++) {
+                    googleMap.addCircle(new CircleOptions()
+                            .center(new LatLng(zoneList.get(i).getLatitude(), zoneList.get(i).getLongitude()))
+                            .radius(500)
+                            .strokeWidth(3f)
+                            .strokeColor(Color.RED)
+                            .fillColor(Color.argb(70,150,50,50)));
+                }
+            }
+        },1500);
+
+    }
+
 }
