@@ -26,7 +26,7 @@
         android:fontFamily="@font/amiko_bold"
         android:textColor="@color/black"
         android:textSize="16sp"
-        android:justificationMode="inter_word"/>
+        />
 
     <com.google.android.material.button.MaterialButtonToggleGroup
         android:id="@+id/toggleQ1"
@@ -80,7 +80,7 @@
         android:fontFamily="@font/amiko_bold"
         android:textColor="@color/black"
         android:textSize="18sp"
-        android:justificationMode="inter_word"/>
+        />
 
     <com.google.android.material.button.MaterialButtonToggleGroup
         android:id="@+id/toggleQ2"
@@ -133,7 +133,7 @@
         android:fontFamily="@font/amiko_bold"
         android:textColor="@color/black"
         android:textSize="18sp"
-        android:justificationMode="inter_word"/>
+        />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -158,7 +158,7 @@
         android:fontFamily="@font/amiko_bold"
         android:textColor="@color/black"
         android:textSize="18sp"
-        android:justificationMode="inter_word"/>
+        />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -184,7 +184,7 @@
         android:fontFamily="@font/amiko_bold"
         android:textColor="@color/black"
         android:textSize="18sp"
-        android:justificationMode="inter_word"/>
+        />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
