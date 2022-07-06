@@ -3,7 +3,6 @@ package com.example.embeddedprogrammingassignment.fragments;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -13,16 +12,11 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.embeddedprogrammingassignment.apiclient.Covid19.Covid19Data;
-import com.example.embeddedprogrammingassignment.apiclient.Covid19.Covid19DataController;
-import com.example.embeddedprogrammingassignment.apiclient.Covid19.Covid19DataService;
 import com.example.embeddedprogrammingassignment.apiclient.Worldometers.WorldometersData;
-import com.example.embeddedprogrammingassignment.apiclient.Worldometers.WorldometersDataController;
-import com.example.embeddedprogrammingassignment.apiclient.Worldometers.WorldometersDataService;
 import com.example.embeddedprogrammingassignment.fragments.statistics.DailyCases;
 import com.example.embeddedprogrammingassignment.fragments.statistics.GraphMarkerView;
 import com.example.embeddedprogrammingassignment.R;
-import com.example.embeddedprogrammingassignment.modal.PointValueLabel;
+import com.example.embeddedprogrammingassignment.singleton.SingletonBundle;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -30,11 +24,10 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+
+import org.parceler.Parcels;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -42,84 +35,49 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class StatisticsFragment extends Fragment {
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
-    private ArrayList<Entry> total_cases_data = new ArrayList<>();
-    private List<String> total_cases_label = new ArrayList<>();
+
     List<Integer> dailyCasesProgress;
     ProgressBar progMon, progTue, progWed, progThurs, progFri, progSat, progSun;
     TextView dailyCasesTv, dailyIncreaseTv, dailyRecoveredCaseTv, dailyRecoveredRateTv, dailyDeathsTv, totalDeathsTv, totalMalaysiaTv, dailyMalaysiaTv, casePerPeopleTv;
-    WorldometersData worldometersData;
+
     List<String> daysList = Arrays.asList("MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY");
+
+    Bundle bundle;
+    WorldometersData worldometersData;
+    ArrayList<Integer> pastWeekCases = new ArrayList<>();
+    static ArrayList<String> pastWeekDayLabels = new ArrayList<>();
+    private ArrayList<Entry> total_cases_data = new ArrayList<>();
+    private ArrayList<String> total_cases_label = new ArrayList<>();
+    static Boolean isFirstTime=true;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_statistics, container, false);
 
+        bundle = SingletonBundle.getBundle();
         progressBarHooker(view);
 
-        //can implement yesterday today filter
-        WorldometersDataService worldometersDataService = new WorldometersDataService();
-        WorldometersDataController worldometersDataController = new WorldometersDataController(worldometersDataService);
-        Call<WorldometersData> worldometerCall = worldometersDataController.findAll(true);
+        Log.i("@StatisticFragment","here");
+        worldometersData = Parcels.unwrap(bundle.getParcelable("worldometerData"));
+        pastWeekCases = bundle.getIntegerArrayList("pastWeekCases");
+        pastWeekDayLabels = bundle.getStringArrayList("pastWeekDayLabels");
+        total_cases_data = bundle.getParcelableArrayList("total_cases_data");
+        total_cases_label = bundle.getStringArrayList("total_cases_label");
 
-        worldometerCall.enqueue(new Callback<WorldometersData>() {
-            @Override
-            public void onResponse(Call<WorldometersData> call, Response<WorldometersData> response) {
-                WorldometersData responseBody = response.body();
-                Log.i("CovidDatafromApi Worldometers","Response body: " + responseBody);
-                worldometersData = responseBody;
-                getCasesFromWorldometerAPI(worldometersData);
-            }
+        Log.i("@StatisticFragment worldometersData",worldometersData.toString());
+        Log.i("@StatisticFragment pastWeekCases",pastWeekCases.toString());
+        Log.i("@StatisticFragment pastWeekDayLabels",pastWeekDayLabels.toString());
+        Log.i("@StatisticFragment total_cases_data",total_cases_data.toString());
+        Log.i("@StatisticFragment total_cases_label",total_cases_label.toString());
 
-            @Override
-            public void onFailure(Call<WorldometersData> call, Throwable t) {
-                Log.i("CovidDatafromApi","onFailure: " + t.getMessage());
-            }
-        });
-
-        Covid19DataService covid19DataService = new Covid19DataService();
-        Covid19DataController covid19DataController = new Covid19DataController(covid19DataService);
-        Call<List<Covid19Data>> covid19Call = covid19DataController.findAll("2022-01-01T00:00:00Z",LocalDate.now()+"T00:00:00Z");
-
-        covid19Call.enqueue(new Callback<List<Covid19Data>>() {
-            @Override
-            public void onResponse(Call<List<Covid19Data>> call, Response<List<Covid19Data>> response) {
-                List<Covid19Data> responseBody = response.body();
-
-                Log.i("CovidDatafromApi Covid19Dataservice","Response body: " + responseBody.get(responseBody.size()-1));
-
-                List<Covid19Data> pastWeekListTemp = responseBody.subList(responseBody.size()-8,responseBody.size());
-                List<Integer> pastWeekCases = new ArrayList<>();
-                List<String> pastWeekDayLabels = new ArrayList<>();
-
-
-                for(int i=0; i<responseBody.size(); i++) {
-                    total_cases_data.add(new Entry(i, Float.parseFloat(responseBody.get(i).getConfirmed())));
-                    String[] tempSplit = responseBody.get(i).getDate().split("T");
-                    total_cases_label.add(tempSplit[0]);
-                }
-
-                pastWeekListTemp.forEach(object -> {
-                    pastWeekCases.add(Integer.parseInt(object.getConfirmed()));
-                    pastWeekDayLabels.add(object.getDate());
-                });
-                getDailyCasesFromAPI(pastWeekCases, pastWeekDayLabels);
-                showTotalCaseChart(view);
-            }
-
-            @Override
-            public void onFailure(Call<List<Covid19Data>> call, Throwable t) {
-
-            }
-        });
+        getCasesFromWorldometerAPI(worldometersData);
+        getDailyCasesFromAPI(pastWeekCases, pastWeekDayLabels);
+        showTotalCaseChart(view);
 
         // Inflate the layout for this fragment
         return view;
@@ -141,17 +99,20 @@ public class StatisticsFragment extends Fragment {
 
         DailyCases dailyCases = new DailyCases();
 
-        for(int i=0; i<pastWeekLabels.size(); i++)
-            pastWeekLabels.set(i, pastWeekLabels.get(i).substring(0, pastWeekLabels.get(i).length()-10));
+        if(isFirstTime){
+            for(int i=0; i<pastWeekLabels.size(); i++){
+                pastWeekLabels.set(i, pastWeekLabels.get(i).substring(0, pastWeekLabels.get(i).length()-10));
+            }
+        }
 
         String day = LocalDate.parse(pastWeekLabels.get(pastWeekLabels.size()-1)).getDayOfWeek().toString();
 
         int dayIndex = daysList.indexOf(day);
 
-        Log.i("CovidDatafromApi labels in string",pastWeekLabels.toString());
-
-        for(int i=0; i < pastWeekCases.size()-1; i++) {
-            pastWeekCases.set(i, pastWeekCases.get(i+1) - pastWeekCases.get(i));
+        if(isFirstTime){
+            for(int i=0; i < pastWeekCases.size()-1; i++) {
+                pastWeekCases.set(i, pastWeekCases.get(i+1) - pastWeekCases.get(i));
+            }
         }
 
         pastWeekCases = pastWeekCases.subList(0,pastWeekCases.size()-1);
@@ -178,6 +139,8 @@ public class StatisticsFragment extends Fragment {
         dailyCasesProgress = dailyCases.setProgressValues();
 
         setProgressBar(dailyCasesProgress, dailyCases, day);
+
+        isFirstTime=false;
     }
 
     @SuppressLint({"UseCompatLoadingForDrawables", "SetTextI18n"})
