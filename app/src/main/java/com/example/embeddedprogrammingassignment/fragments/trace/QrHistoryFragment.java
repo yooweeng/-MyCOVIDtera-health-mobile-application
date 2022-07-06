@@ -11,7 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
+import com.airbnb.lottie.LottieDrawable;
 import com.example.embeddedprogrammingassignment.R;
 import com.example.embeddedprogrammingassignment.adapter.QrHistoryAdapter;
 import com.example.embeddedprogrammingassignment.modal.HistoryItem;
@@ -34,6 +37,8 @@ public class QrHistoryFragment extends Fragment {
     ArrayList<QrHistory> qrHistories = new ArrayList<>();
 
     RecyclerView qrHistoryRv;
+    LottieAnimationView lottieEmpty;
+    TextView emptyTv;
 
     FirebaseDatabase rootNode;
     DatabaseReference reference;
@@ -54,6 +59,8 @@ public class QrHistoryFragment extends Fragment {
         bundle.putParcelable("activeUser", Parcels.wrap(user));
 
         qrHistoryRv = view.findViewById(R.id.rvCheckInHistory);
+        lottieEmpty = view.findViewById(R.id.lottieQRHistEmpty);
+        emptyTv = view.findViewById(R.id.tvQrHisotryNoRecord);
 
         rootNode = FirebaseDatabase.getInstance();
         reference = rootNode.getReference("history").child(user.getNric());
@@ -61,6 +68,17 @@ public class QrHistoryFragment extends Fragment {
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if(!snapshot.exists()) {
+                    lottieEmpty.playAnimation();
+                    lottieEmpty.setRepeatCount(LottieDrawable.INFINITE);
+                    lottieEmpty.setVisibility(View.VISIBLE);
+                    emptyTv.setVisibility(View.VISIBLE);
+                } else {
+                    lottieEmpty.pauseAnimation();
+                    lottieEmpty.setVisibility(View.GONE);
+                    emptyTv.setVisibility(View.GONE);
+                }
 
                 int i = 1;
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
