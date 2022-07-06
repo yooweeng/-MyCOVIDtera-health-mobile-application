@@ -141,8 +141,8 @@ public class EditProfileFragment extends Fragment {
             Toast.makeText(getContext(), "Please enter a valid phone number.", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if(!pwd1.equals(pwd2)) {
-            Toast.makeText(getContext(), "Passwords does not match!.", Toast.LENGTH_SHORT).show();
+        if(!pwd1.equals(pwd2) && pwd1.length()<=5) {
+            Toast.makeText(getContext(), "Passwords does not match or less than 5 characters!", Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;

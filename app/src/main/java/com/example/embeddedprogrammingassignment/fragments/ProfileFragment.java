@@ -26,9 +26,7 @@ import android.widget.TextView;
 import com.airbnb.lottie.LottieAnimationView;
 import com.airbnb.lottie.LottieDrawable;
 import com.example.embeddedprogrammingassignment.LoginActivity;
-import com.example.embeddedprogrammingassignment.MainActivity;
 import com.example.embeddedprogrammingassignment.R;
-import com.example.embeddedprogrammingassignment.fragments.profile.EditProfileFragment;
 import com.example.embeddedprogrammingassignment.modal.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -51,7 +49,7 @@ public class ProfileFragment extends Fragment {
     TextView dose1Date, dose1Manufacturer, dose1Location, dose2Date, dose2Manufacturer, dose2Location, dose3Date, dose3Manufacturer, dose3Location;
     TextView nricVaxTv, phoneVaxTv, nameVaxTv, noVaxTv;
     ImageView editProfileBtn, riskIv;
-    LottieAnimationView lottieBtn, lottieVax;
+    LottieAnimationView lottieDelBtn, lottieVax;
     Button logOutBtn;
     User user;
     CardView covidRiskCv;
@@ -74,7 +72,7 @@ public class ProfileFragment extends Fragment {
         nameVaxTv = view.findViewById(R.id.tvProfileVaxStatusName);
         nricVaxTv = view.findViewById(R.id.tvProfileVaxStatusNRIC);
         phoneVaxTv = view.findViewById(R.id.tvProfileVaxStatusPhone);
-        lottieBtn = view.findViewById(R.id.lottieProfileLogoutBtn);
+        lottieDelBtn = view.findViewById(R.id.lottieProfileDeleteBtn);
         lottieVax = view.findViewById(R.id.lottieProfileNoVaccine);
         logOutBtn = view.findViewById(R.id.btnProfileLogout);
         covidRiskCv = view.findViewById(R.id.cvCovidExposureRisk);
@@ -136,7 +134,7 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        lottieBtn.setOnClickListener(new View.OnClickListener() {
+        lottieDelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog alert = new AlertDialog.Builder(getContext())
@@ -145,11 +143,13 @@ public class ProfileFragment extends Fragment {
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                lottieBtn.playAnimation();
+                                lottieDelBtn.playAnimation();
 
                                 new Handler().postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
+                                        DeleteAccountFromDB(user.getNric());
+
                                         Intent intent = new Intent(getActivity(), LoginActivity.class);
                                         startActivity(intent);
                                         requireActivity().finish();
@@ -195,6 +195,15 @@ public class ProfileFragment extends Fragment {
                         dose1Date.setText(dateDose1);
                         dose1Location.setText(locationDose1);
                         dose1Manufacturer.setText(manufacturerDose1);
+                        lottieVax.pauseAnimation();
+                        lottieVax.setVisibility(View.GONE);
+                        noVaxTv.setVisibility(View.GONE);
+                    } else {
+                        lottieVax.setVisibility(View.VISIBLE);
+                        lottieVax.setSpeed(2);
+                        lottieVax.setRepeatCount(LottieDrawable.INFINITE);
+                        lottieVax.playAnimation();
+                        noVaxTv.setVisibility(View.VISIBLE);
                     }
                 }
                 if (String.valueOf(dosNumber).equals(String.valueOf(dose2))){
@@ -265,6 +274,16 @@ public class ProfileFragment extends Fragment {
 
         // Inflate the layout for this fragment
         return view;
+    }
+
+    private void DeleteAccountFromDB(String nric) {
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        db.getReference("users").child(nric).removeValue();
+        db.getReference("appointments").child(nric).removeValue();
+        db.getReference("healthAssessment").child(nric).removeValue();
+        db.getReference("history").child(nric).removeValue();
+        db.getReference("risks").child(nric).removeValue();
+        db.getReference("sopReport").removeValue();
     }
 
     private void setDetails(TextView nameText, TextView nricText, TextView phoneText) {
