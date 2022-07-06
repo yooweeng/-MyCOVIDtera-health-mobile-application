@@ -32,6 +32,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -45,6 +46,7 @@ import com.google.firebase.database.ValueEventListener;
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -56,6 +58,7 @@ public class HotspotFragment extends Fragment {
     User user;
     private static final int LOCATION_PERMISSION_CODE = 101;
     ArrayList<RedZoneLocation> zoneList = new ArrayList<>();
+    ArrayList<Circle> circleList = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,8 +74,6 @@ public class HotspotFragment extends Fragment {
         tvCases = view.findViewById(R.id.tvZoneCases);
 
         user = Parcels.unwrap(getArguments().getParcelable("activeUser"));
-
-        tvCases.setText("Hi " + user.getName() + ", there has been 28 reported case(s) of COVID-19 within a 1 km radius from your current position in the last 14 days.");
 
         // Initialize map fragment
         supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.googleMaps);
@@ -166,14 +167,42 @@ public class HotspotFragment extends Fragment {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                List<Integer> tempIndex = new ArrayList<>();
                 Log.i("MapError Zone List", zoneList.toString());
                 for (int i=0; i<zoneList.size(); i++) {
-                    googleMap.addCircle(new CircleOptions()
-                            .center(new LatLng(zoneList.get(i).getLatitude(), zoneList.get(i).getLongitude()))
-                            .radius(500)
-                            .strokeWidth(3f)
-                            .strokeColor(Color.RED)
-                            .fillColor(Color.argb(70,150,50,50)));
+                    if(zoneList.get(i).getCases() > 0) {
+                        Circle circle = googleMap.addCircle(new CircleOptions()
+                                .center(new LatLng(zoneList.get(i).getLatitude(), zoneList.get(i).getLongitude()))
+                                .radius(500)
+                                .strokeWidth(3f)
+                                .strokeColor(Color.RED)
+                                .fillColor(Color.argb(70,150,50,50)));
+
+                        circleList.add(circle);
+                        tempIndex.add(i);
+                    }
+                }
+
+                if(circleList.isEmpty()) {
+                    tvCases.setText("Hi " + user.getName() + ", there has been no reported case(s) of COVID-19 within a 500m radius from your current position.");
+                } else {
+                    float[] distance = new float[2];
+                    int tempCase=0;
+                    float tempDistance = 2000;
+
+                    for(int i=0; i<circleList.size(); i++) {
+                        Location.distanceBetween(latitude, longitude, circleList.get(i).getCenter().latitude, circleList.get(i).getCenter().longitude, distance);
+
+                        Log.i("MapDistance", Arrays.toString(distance));
+                        if(distance[0] < circleList.get(i).getRadius()) {
+                            tempCase = zoneList.get(tempIndex.get(i)).getCases();
+                            tempDistance = distance[0];
+                        }
+                    }
+                    if(tempDistance < circleList.get(0).getRadius())
+                        tvCases.setText("Hi " + user.getName() + ", there has been "+ tempCase +" reported case(s) of COVID-19 within a 500m radius from your current position.");
+                    else
+                        tvCases.setText("Hi " + user.getName() + ", there has been no reported case(s) of COVID-19 within a 500m radius from your current position.");
                 }
             }
         },1500);

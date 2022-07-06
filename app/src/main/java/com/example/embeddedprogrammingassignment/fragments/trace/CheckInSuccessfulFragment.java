@@ -5,6 +5,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -19,8 +20,15 @@ import android.widget.TextView;
 
 import com.example.embeddedprogrammingassignment.R;
 import com.example.embeddedprogrammingassignment.modal.User;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.parceler.Parcels;
+
+import java.util.Objects;
 
 
 public class CheckInSuccessfulFragment extends Fragment {
@@ -78,6 +86,7 @@ public class CheckInSuccessfulFragment extends Fragment {
             riskIv.setImageResource(R.drawable.risk_red);
             riskIv.setImageTintList(ColorStateList.valueOf(Color.TRANSPARENT));
             covidRiskCv.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.red_warning));
+            addCaseToHotspotZone(location);
         }
 
         checkoutBtn=view.findViewById(R.id.btnCheckout);
@@ -90,5 +99,24 @@ public class CheckInSuccessfulFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private void addCaseToHotspotZone(String location) {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("hotspots").child(location).child("cases");
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()) {
+                    int cases = Integer.parseInt(Objects.requireNonNull(snapshot.getValue()).toString());
+                    cases += 1;
+                    ref.setValue(cases);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

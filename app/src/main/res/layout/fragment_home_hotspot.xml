@@ -83,7 +83,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
-                    android:text="Hi Alvin Yeoh, there has been 28 reported case(s) of COVID-19 within a 1 km radius from your current position in the last 14 days."
+                    android:text="Loading..."
                     android:textColor="@color/white"
                     android:fontFamily="@font/amiko_semibold"
                     android:textSize="16sp"
