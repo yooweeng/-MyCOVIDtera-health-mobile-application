@@ -33,6 +33,7 @@
                 android:textSize="24sp" />
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/vaccineCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
@@ -51,7 +52,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="20dp"
                         android:orientation="horizontal">
 
                         <TextView
@@ -120,7 +121,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:layout_marginBottom="25dp"
+                        android:layout_marginBottom="20dp"
                         android:orientation="horizontal">
 
                         <TextView
@@ -146,13 +147,19 @@
                         android:id="@+id/btnVaccine3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="-20dp"
+                        android:layout_marginBottom="20dp"
                         android:backgroundTint="@color/purple_btn"
-                        android:text="Appoint Vaccine 2"
+                        android:text="Appoint Vaccine 3"
                         android:textColor="@color/white"
                         android:visibility="gone"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
-        </LinearLayout>
 
+            <include
+                android:id="@+id/vac_appointmentDetailsCardView"
+                layout="@layout/cardview_appointment_details"
+                android:visibility="gone"/>
+        </LinearLayout>
     </FrameLayout>
 </ScrollView>

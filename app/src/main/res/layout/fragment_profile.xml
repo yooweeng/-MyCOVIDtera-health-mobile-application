@@ -81,10 +81,29 @@
                     android:textColor="@color/black_txt"
                     android:textSize="16sp" />
 
-                <include layout="@layout/cardview_user_vaccine_doses"
+                <include
+                    android:id="@+id/userDose1"
+                    layout="@layout/cardview_user_vaccine_dose1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="10dp"/>
+                    android:layout_margin="10dp"
+                    android:visibility="gone"/>
+
+                <include
+                    android:id="@+id/userDose2"
+                    layout="@layout/cardview_user_vaccine_dose2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:visibility="gone"/>
+
+                <include
+                    android:id="@+id/userDose3"
+                    layout="@layout/cardview_user_vaccine_dose3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:visibility="gone"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"

@@ -59,6 +59,14 @@
         <item>17:00</item>
     </string-array>
 
+    <string-array name="manufacturer">
+        <item>BioNTech Pfizer</item>
+        <item>Sinovac Biotech</item>
+        <item>AstraZeneca</item>
+        <item>Moderna</item>
+        <item>Sinopharm</item>
+    </string-array>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

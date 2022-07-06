@@ -249,6 +249,10 @@ public class MainActivity extends AppCompatActivity {
                     Log.i("currRisk@main", currRisk[0]);
                     bundle.putString("currUserRisk", currRisk[0]);
                 }
+                else{
+                    FirebaseDatabase.getInstance().getReference("risks").child(user.getNric()).child("risk").setValue("No Exposure Detected");
+                    bundle.putString("currUserRisk", "No Exposure Detected");
+                }
             }
 
             @Override

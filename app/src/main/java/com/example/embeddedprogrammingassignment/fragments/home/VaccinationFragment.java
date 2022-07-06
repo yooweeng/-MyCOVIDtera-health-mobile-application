@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
@@ -42,8 +43,10 @@ import java.util.Calendar;
 
 public class VaccinationFragment extends Fragment {
 
-    TextView tvVaccinationNRIC, tvVaccinationPhone, tvVaccinationState, tvVaccinationName, vaccine1, vaccine2, vaccine3;
-    Button appointVaccine1Btn, appointVaccine2Btn, appointVaccine3Btn;
+    long vaccineNumber, getVaccineDetails;
+    TextView tvVaccinationNRIC, tvVaccinationPhone, tvVaccinationState, tvVaccinationName, vaccine1, vaccine2, vaccine3, tvVaccineNo, tvAppointDate, tvAppointLocation, tvAppointManufacturer;
+    Button appointVaccine1Btn, appointVaccine2Btn, appointVaccine3Btn, confirmBtn;
+    CardView appointDetailsCard, vaccineDetailsCard;
     User user;
 
     @Override
@@ -69,6 +72,14 @@ public class VaccinationFragment extends Fragment {
         tvVaccinationPhone.setText(user.getPhone());
         tvVaccinationNRIC.setText(user.getNric());
 
+        appointDetailsCard = view.findViewById(R.id.vac_appointmentDetailsCardView);
+        vaccineDetailsCard = view.findViewById(R.id.vaccineCard);
+        tvVaccineNo = view.findViewById(R.id.tvVaccineNo);
+        tvAppointDate = view.findViewById(R.id.tvDate);
+        tvAppointLocation = view.findViewById(R.id.tvLocation);
+        tvAppointManufacturer = view.findViewById(R.id.tvManufacturer);
+        confirmBtn = view.findViewById(R.id.btnConfirmAppointment);
+
         Bundle bundle = new Bundle();
         bundle.putParcelable("activeUser", Parcels.wrap(user));
 
@@ -79,18 +90,147 @@ public class VaccinationFragment extends Fragment {
             }
         });
 
-        getParentFragmentManager().setFragmentResultListener("vaccineStatus", this, new FragmentResultListener() {
+        appointVaccine2Btn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                String vaccine1Completion = result.getString("vaccine1Status");
-                if (vaccine1Completion == "completed"){
-                    vaccine1.setVisibility(view.VISIBLE);
-                    appointVaccine1Btn.setVisibility(view.GONE);
-                    vaccine2.setVisibility(view.GONE);
-                    appointVaccine2Btn.setVisibility(view.VISIBLE);
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_vaccinationFragment_to_appointmentFragment, bundle);
+            }
+        });
+
+        appointVaccine3Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_vaccinationFragment_to_appointmentFragment, bundle);
+            }
+        });
+
+        FirebaseDatabase.getInstance().getReference("appointments").child(user.getNric()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                vaccineNumber=snapshot.getChildrenCount();
+                Log.d("Vaccine Number in Vac Page", String.valueOf(vaccineNumber));
+                getVaccineDetails = snapshot.getChildrenCount()-1;
+                String currentStatus = String.valueOf(snapshot.child(String.valueOf(getVaccineDetails)).child("status").getValue());
+                String date = (String) snapshot.child(String.valueOf(getVaccineDetails)).child("appointmentDate").getValue();
+                String location = (String) snapshot.child(String.valueOf(getVaccineDetails)).child("appointmentLocation").getValue();
+                String manufacturer = (String) snapshot.child(String.valueOf(getVaccineDetails)).child("vaccineManufacturer").getValue();
+
+                int vaccine1Done = 1;
+                int vaccine2Done = 2;
+                int vaccine3Done = 3;
+
+                if (String.valueOf(vaccineNumber).equals(String.valueOf(vaccine1Done))){
+                    if (currentStatus.equals("completed")){
+                        vaccine1.setVisibility(view.VISIBLE);
+                        appointVaccine1Btn.setVisibility(view.GONE);
+                        vaccine2.setVisibility(view.GONE);
+                        appointVaccine2Btn.setVisibility(view.VISIBLE);
+                    }
+                    else{
+                        appointDetailsCard.setVisibility(View.VISIBLE);
+                        vaccineDetailsCard.setVisibility(View.GONE);
+                        tvVaccineNo.setText(String.valueOf(vaccine1Done));
+                        tvAppointDate.setText(date);
+                        tvAppointLocation.setText(location);
+                        tvAppointManufacturer.setText(manufacturer);
+
+                        confirmBtn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                updateStatus(String.valueOf(getVaccineDetails), "completed");
+                                vaccineDetailsCard.setVisibility(View.VISIBLE);
+                                appointDetailsCard.setVisibility(View.GONE);
+                                vaccine1.setVisibility(view.VISIBLE);
+                                appointVaccine1Btn.setVisibility(view.GONE);
+                                vaccine1.setText("completed");
+                                vaccine2.setVisibility(view.GONE);
+                                appointVaccine2Btn.setVisibility(view.VISIBLE);
+                            }
+                        });
+                    }
                 }
+                else if (String.valueOf(vaccineNumber).equals(String.valueOf(vaccine2Done))){
+                    if (currentStatus.equals("completed")){
+                        vaccine1.setVisibility(view.VISIBLE);
+                        appointVaccine1Btn.setVisibility(view.GONE);
+                        vaccine2.setVisibility(view.VISIBLE);
+                        vaccine2.setText("Completed");
+                        appointVaccine2Btn.setVisibility(view.GONE);
+                        vaccine3.setVisibility(view.GONE);
+                        appointVaccine3Btn.setVisibility(view.VISIBLE);
+                    }
+                    else{
+                        appointDetailsCard.setVisibility(View.VISIBLE);
+                        vaccineDetailsCard.setVisibility(View.GONE);
+                        tvVaccineNo.setText(String.valueOf(vaccine2Done));
+                        tvAppointDate.setText(date);
+                        tvAppointLocation.setText(location);
+                        tvAppointManufacturer.setText(manufacturer);
+
+                        confirmBtn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                updateStatus(String.valueOf(getVaccineDetails), "completed");
+                                vaccineDetailsCard.setVisibility(View.VISIBLE);
+                                appointDetailsCard.setVisibility(View.GONE);
+                                vaccine1.setVisibility(view.VISIBLE);
+                                appointVaccine1Btn.setVisibility(view.GONE);
+                                vaccine2.setVisibility(view.VISIBLE);
+                                vaccine2.setText("Completed");
+                                appointVaccine2Btn.setVisibility(view.GONE);
+                                vaccine3.setVisibility(view.GONE);
+                                appointVaccine3Btn.setVisibility(view.VISIBLE);
+                            }
+                        });
+                    }
+                }
+                else if (String.valueOf(vaccineNumber).equals(String.valueOf(vaccine3Done))){
+                    if (currentStatus.equals("completed")){
+                        vaccine1.setVisibility(view.VISIBLE);
+                        appointVaccine1Btn.setVisibility(view.GONE);
+                        vaccine2.setVisibility(view.VISIBLE);
+                        vaccine2.setText("Completed");
+                        appointVaccine2Btn.setVisibility(view.GONE);
+                        vaccine3.setVisibility(view.VISIBLE);
+                        vaccine3.setText("Completed");
+                        appointVaccine3Btn.setVisibility(view.GONE);
+                    }
+                    else{
+                        appointDetailsCard.setVisibility(View.VISIBLE);
+                        vaccineDetailsCard.setVisibility(View.GONE);
+                        tvVaccineNo.setText(String.valueOf(vaccine3Done));
+                        tvAppointDate.setText(date);
+                        tvAppointLocation.setText(location);
+                        tvAppointManufacturer.setText(manufacturer);
+
+                        confirmBtn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                updateStatus(String.valueOf(getVaccineDetails), "completed");
+                                vaccineDetailsCard.setVisibility(View.VISIBLE);
+                                appointDetailsCard.setVisibility(View.GONE);
+                                vaccine1.setVisibility(view.VISIBLE);
+                                appointVaccine1Btn.setVisibility(view.GONE);
+                                vaccine2.setVisibility(view.VISIBLE);
+                                vaccine2.setText("Completed");
+                                appointVaccine2Btn.setVisibility(view.GONE);
+                                vaccine3.setVisibility(view.VISIBLE);
+                                vaccine3.setText("Completed");
+                                appointVaccine3Btn.setVisibility(view.GONE);
+                            }
+                        });
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
             }
         });
         return view;
+    }
+
+    private void updateStatus(String vaccineNo, String currentStatus){
+        FirebaseDatabase.getInstance().getReference("appointments").child(user.getNric()).child(vaccineNo).child("status").setValue(currentStatus);
     }
 }

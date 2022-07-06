@@ -164,7 +164,7 @@
                     android:layout_width="match_parent"
                     android:id="@+id/tgRisk12"
                     style="@style/Widget.AppCompat.CompoundButton.RadioButton"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:fontFamily="@font/amiko_semibold"
                     android:text="Runny nose or nausal congestion"
                     android:textColor="@color/black_txt"

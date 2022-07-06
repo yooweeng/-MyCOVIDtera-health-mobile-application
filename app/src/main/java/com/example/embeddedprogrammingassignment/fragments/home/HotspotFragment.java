@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -17,14 +18,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bumptech.glide.load.engine.Resource;
 import com.example.embeddedprogrammingassignment.R;
 import com.example.embeddedprogrammingassignment.modal.User;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -88,9 +92,16 @@ public class HotspotFragment extends Fragment {
                         googleMap.clear();
                         // Animating to zoom the marker
                         googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
+                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 20));
                         // Add marker on map
                         googleMap.addMarker(markerOptions);
+
+                        googleMap.addCircle(new CircleOptions()
+                                        .center(new LatLng(latLng.latitude, latLng.longitude))
+                                        .radius(10)
+                                        .strokeWidth(3f)
+                                        .strokeColor(Color.RED)
+                                        .fillColor(Color.argb(70,150,50,50)));
                     }
                 });
             }
