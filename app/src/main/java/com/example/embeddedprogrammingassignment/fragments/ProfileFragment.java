@@ -283,7 +283,7 @@ public class ProfileFragment extends Fragment {
         db.getReference("healthAssessment").child(nric).removeValue();
         db.getReference("history").child(nric).removeValue();
         db.getReference("risks").child(nric).removeValue();
-        db.getReference("sopReport").removeValue();
+        db.getReference("sopReport").child(nric).removeValue();
     }
 
     private void setDetails(TextView nameText, TextView nricText, TextView phoneText) {
