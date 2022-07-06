@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.airbnb.lottie.LottieDrawable;
 import com.example.embeddedprogrammingassignment.LoginActivity;
 import com.example.embeddedprogrammingassignment.MainActivity;
 import com.example.embeddedprogrammingassignment.R;
@@ -48,9 +49,9 @@ public class ProfileFragment extends Fragment {
     CardView dose1Card, dose2Card, dose3Card;
     TextView nricTv, phoneTv, stateTv, nameTv, riskTv, riskTitleTv;
     TextView dose1Date, dose1Manufacturer, dose1Location, dose2Date, dose2Manufacturer, dose2Location, dose3Date, dose3Manufacturer, dose3Location;
-    TextView nricVaxTv, phoneVaxTv, nameVaxTv;
+    TextView nricVaxTv, phoneVaxTv, nameVaxTv, noVaxTv;
     ImageView editProfileBtn, riskIv;
-    LottieAnimationView lottieBtn;
+    LottieAnimationView lottieBtn, lottieVax;
     Button logOutBtn;
     User user;
     CardView covidRiskCv;
@@ -74,11 +75,13 @@ public class ProfileFragment extends Fragment {
         nricVaxTv = view.findViewById(R.id.tvProfileVaxStatusNRIC);
         phoneVaxTv = view.findViewById(R.id.tvProfileVaxStatusPhone);
         lottieBtn = view.findViewById(R.id.lottieProfileLogoutBtn);
+        lottieVax = view.findViewById(R.id.lottieProfileNoVaccine);
         logOutBtn = view.findViewById(R.id.btnProfileLogout);
         covidRiskCv = view.findViewById(R.id.cvCovidExposureRisk);
         riskTv = view.findViewById(R.id.tvCardviewCovidRisk);
         riskTitleTv = view.findViewById(R.id.tvCardviewCovidTitle);
         riskIv = view.findViewById(R.id.ivCardviewCovidRisk);
+        noVaxTv = view.findViewById(R.id.tvProfileVaxNoRecord);
         dose1Date = view.findViewById(R.id.tvDose1Date);
         dose1Location = view.findViewById(R.id.tvDose1Location);
         dose1Manufacturer = view.findViewById(R.id.tvDose1Manufacturer);
@@ -164,6 +167,17 @@ public class ProfileFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 dosNumber = snapshot.getChildrenCount();
                 Log.d("Vaccine No: ", String.valueOf(dosNumber));
+                if(dosNumber==0) {
+                    lottieVax.setVisibility(View.VISIBLE);
+                    lottieVax.setSpeed(2);
+                    lottieVax.setRepeatCount(LottieDrawable.INFINITE);
+                    lottieVax.playAnimation();
+                    noVaxTv.setVisibility(View.VISIBLE);
+                } else {
+                    lottieVax.pauseAnimation();
+                    lottieVax.setVisibility(View.GONE);
+                    noVaxTv.setVisibility(View.GONE);
+                }
 
                 getDoseDetails = snapshot.getChildrenCount()-1;
                 int dose1 = 1;
