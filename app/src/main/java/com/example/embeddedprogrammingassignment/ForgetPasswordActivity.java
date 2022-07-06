@@ -95,8 +95,8 @@ public class ForgetPasswordActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Please enter a valid phone number.", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if(!pwd1.equals(pwd2) && pwd1.length()<=5) {
-            Toast.makeText(getApplicationContext(), "Passwords does not match or less than 5 characters!", Toast.LENGTH_SHORT).show();
+        if(!pwd1.equals(pwd2) || pwd1.length()< 6) {
+            Toast.makeText(getApplicationContext(), "Passwords does not match or less than 6 characters!", Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;
