@@ -119,6 +119,8 @@ public class QrHistoryFragment extends Fragment {
             }
         });
 
+        
+
 //        historyItems.add(new HistoryItem(true,"Xiamen University Malaysia", "28-March-2022 07:00:24"));
 //        qrHistories.add(new QrHistory("28-March-2022","Xiamen University Malaysia",historyItems));
 //        historyItems2.add(new HistoryItem(true,"Pavilion, Kuala Lumpur", "27-March-2022 12:03:14"));

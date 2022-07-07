@@ -90,7 +90,7 @@ public class StatisticsFragment extends Fragment {
         dailyRecoveredRateTv.setText(String.format("%.02f", recoveryRate) + "%");
         dailyDeathsTv.setText(("(+") + worldometersData.getTodayDeaths()+" today)");
         totalDeathsTv.setText(worldometersData.getDeaths());
-        dailyMalaysiaTv.setText(worldometersData.getTodayCases());
+
         totalMalaysiaTv.setText(worldometersData.getCases());
         casePerPeopleTv.setText(worldometersData.getOneCasePerPeople());
     }
@@ -162,6 +162,7 @@ public class StatisticsFragment extends Fragment {
                 else
                     dailyIncreaseTv.setText(change+"%↑");
                 dailyCasesTv.setText(dailyCases.getDailyCasesList().get(i).toString());
+                dailyMalaysiaTv.setText(dailyCases.getDailyCasesList().get(i).toString());
             }
             else
                 progressBarList.get(i).setProgressDrawable(getResources().getDrawable(R.drawable.progress_vertical_unselected));

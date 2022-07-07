@@ -183,9 +183,9 @@ public class RiskStatusFragment extends Fragment {
                 Log.i("Risk score for q1", "="+ q1Sym);
 
                 String riskStatus = "No Exposure Detected";
-                if(score==0 && q1Sym<3) {
+                if(score==0 || q1Sym<3) {
                     riskStatus = "No Exposure Detected";
-                } else if (score<=1 && q1Sym<=4) {
+                } else if (score==1 || q1Sym<=4) {
                     riskStatus = "You are at High Risk";
                 } else if (score>=2 && q1Sym>4) {
                     riskStatus = "You are positive for COVID-19";
