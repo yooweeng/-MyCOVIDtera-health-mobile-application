@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
@@ -54,7 +55,7 @@ public class HotspotFragment extends Fragment {
 
     SupportMapFragment supportMapFragment;
     FusedLocationProviderClient client;
-    TextView tvCases;
+    TextView tvCases, tvZoneStatus;
     User user;
     private static final int LOCATION_PERMISSION_CODE = 101;
     ArrayList<RedZoneLocation> zoneList = new ArrayList<>();
@@ -72,7 +73,7 @@ public class HotspotFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home_hotspot, container, false);
 
         tvCases = view.findViewById(R.id.tvZoneCases);
-
+        tvZoneStatus = view.findViewById(R.id.tvZoneStatus);
         user = Parcels.unwrap(getArguments().getParcelable("activeUser"));
 
         // Initialize map fragment
@@ -165,6 +166,7 @@ public class HotspotFragment extends Fragment {
 
 
         new Handler().postDelayed(new Runnable() {
+            @SuppressLint({"ResourceAsColor", "ResourceType"})
             @Override
             public void run() {
                 List<Integer> tempIndex = new ArrayList<>();
@@ -184,6 +186,10 @@ public class HotspotFragment extends Fragment {
                 }
 
                 if(circleList.isEmpty()) {
+                    tvZoneStatus.setText("Green Zone");
+                    tvZoneStatus.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
+                    tvZoneStatus.setForegroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
+                    tvZoneStatus.setTextColor(ContextCompat.getColor(requireContext(), R.color.green_warning));
                     tvCases.setText("Hi " + user.getName() + ", there has been no reported case(s) of COVID-19 within a 500m radius from your current position.");
                 } else {
                     float[] distance = new float[2];
@@ -199,10 +205,18 @@ public class HotspotFragment extends Fragment {
                             tempDistance = distance[0];
                         }
                     }
-                    if(tempDistance < circleList.get(0).getRadius())
+                    if(tempDistance < circleList.get(0).getRadius()) {
                         tvCases.setText("Hi " + user.getName() + ", there has been "+ tempCase +" reported case(s) of COVID-19 within a 500m radius from your current position.");
-                    else
+                        tvZoneStatus.setText("Red Zone");
+                        tvZoneStatus.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
+                        tvZoneStatus.setForegroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
+                        tvZoneStatus.setTextColor(ContextCompat.getColor(requireContext(), R.color.red_warning));
+                    }
+                    else {
                         tvCases.setText("Hi " + user.getName() + ", there has been no reported case(s) of COVID-19 within a 500m radius from your current position.");
+                        tvZoneStatus.setText("Green Zone");
+                        tvZoneStatus.setTextColor(ContextCompat.getColor(requireContext(), R.color.green_warning));
+                    }
                 }
             }
         },1500);

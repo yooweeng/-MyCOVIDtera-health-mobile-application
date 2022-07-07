@@ -86,7 +86,7 @@ public class AppointmentFragment extends Fragment {
         q2Toggle = view.findViewById(R.id.toggleQ2);
         selectDate = view.findViewById(R.id.vaccinationDate);
         selectLocation = view.findViewById(R.id.vaccinationLocation);
-        selectManufacturer = view.findViewById(R.id.vaccinationManufacturer);
+        selectManufacturer = view.findViewById(R.id.tvVaccinationManufacturer);
         submit = view.findViewById(R.id.btnAppointment);
 
         q1Yes.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(),R.color.vaccination_question_option_selected));
@@ -102,7 +102,7 @@ public class AppointmentFragment extends Fragment {
         tvVaccineNo = view.findViewById(R.id.tvVaccineNo);
         tvAppointDate = view.findViewById(R.id.tvDate);
         tvAppointLocation = view.findViewById(R.id.tvLocation);
-        tvAppointManufacturer = view.findViewById(R.id.vaccinationManufacturer);
+        tvAppointManufacturer = view.findViewById(R.id.tvManufacturer);
 
         Bundle bundle = new Bundle();
         bundle.putParcelable("activeUser", Parcels.wrap(user));
@@ -289,16 +289,17 @@ public class AppointmentFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 getVaccineDetails = snapshot.getChildrenCount()-1;
-                int vacNumber = Integer.parseInt(vaccineNumber) + 1;
-                String currentVaccineNo = String.valueOf(vacNumber);
                 String date = (String) snapshot.child(String.valueOf(getVaccineDetails)).child("appointmentDate").getValue();
                 String location = (String) snapshot.child(String.valueOf(getVaccineDetails)).child("appointmentLocation").getValue();
                 String manufacturer = (String) snapshot.child(String.valueOf(getVaccineDetails)).child("vaccineManufacturer").getValue();
+                int vacNumber = Integer.parseInt(vaccineNumber) + 1;
+                String currentVaccineNo = String.valueOf(vacNumber);
 
+                tvAppointManufacturer.setText(manufacturer);
                 tvVaccineNo.setText(currentVaccineNo);
                 tvAppointDate.setText(date);
                 tvAppointLocation.setText(location);
-                tvAppointManufacturer.setText(manufacturer);
+
             }
 
             @Override

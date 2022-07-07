@@ -142,7 +142,7 @@
         android:hint="Select Preferably Location"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
         <AutoCompleteTextView
-            android:id="@+id/vaccinationManufacturer"
+            android:id="@+id/tvVaccinationManufacturer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"

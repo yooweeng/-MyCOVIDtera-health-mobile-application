@@ -1,5 +1,6 @@
 package com.example.embeddedprogrammingassignment.adapter;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,27 +10,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.embeddedprogrammingassignment.R;
 import com.example.embeddedprogrammingassignment.modal.HistoryItem;
-import com.example.embeddedprogrammingassignment.modal.HistoryItemDetail;
-import com.example.embeddedprogrammingassignment.modal.QrHistory;
 import com.example.embeddedprogrammingassignment.modal.User;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import org.parceler.Parcels;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class HistoryItemAdapter extends RecyclerView.Adapter<HistoryItemAdapter.HistoryItemViewHolder> {
     ArrayList<HistoryItem> historyItems;
@@ -54,7 +47,7 @@ public class HistoryItemAdapter extends RecyclerView.Adapter<HistoryItemAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HistoryItemAdapter.HistoryItemViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull HistoryItemAdapter.HistoryItemViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
         rootNode = FirebaseDatabase.getInstance();
         reference = rootNode.getReference("history").child(user.getNric()).child("history"+parentPosition).child("details");
@@ -78,12 +71,15 @@ public class HistoryItemAdapter extends RecyclerView.Adapter<HistoryItemAdapter.
                 DateTimeFormatter format= DateTimeFormatter.ofPattern("dd-MMMM-yyyy HH:mm:ss");
                 String formatDateTime  = now.format(format);
 
-                HistoryItemDetail historyItemDetail = new HistoryItemDetail(historyItems.get(position).getLocation(),"false",formatDateTime);
-                reference.child("1").setValue(historyItemDetail);
+                HistoryItem historyItem = new HistoryItem("false", historyItems.get(position).getLocation(),formatDateTime);
+                reference.child("1").setValue(historyItem);
 
                 Bundle bundle = new Bundle();
                 bundle.putParcelable("activeUser", Parcels.wrap(user));
-                Navigation.findNavController(holder.itemView).navigate(R.id.action_qrHistoryFragment_self, bundle);
+
+                historyItems.add(historyItem);
+                notifyDataSetChanged();
+
             }
         });
 

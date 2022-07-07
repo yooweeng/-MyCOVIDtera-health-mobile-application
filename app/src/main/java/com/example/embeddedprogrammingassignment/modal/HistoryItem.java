@@ -1,7 +1,5 @@
 package com.example.embeddedprogrammingassignment.modal;
 
-import com.example.embeddedprogrammingassignment.R;
-
 public class HistoryItem {
     String isCheckIn;
     String location;
