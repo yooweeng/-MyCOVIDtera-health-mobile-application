@@ -158,7 +158,7 @@ public class RiskStatusFragment extends Fragment {
 
                 FirebaseDatabase.getInstance().getReference("healthAssessment").child(user.getNric()).setValue(assessment);
 
-                int score = 0;
+                float score = 0;
                 boolean isSelected = false;
                 isSelected = (q2YesBtn.isSelected() || q2NoBtn.isSelected()) && (q3YesBtn.isSelected() || q3NoBtn.isSelected()) && (q4YesBtn.isSelected() || q4NoBtn.isSelected());
                 if(!isSelected) {
@@ -175,20 +175,20 @@ public class RiskStatusFragment extends Fragment {
 
                 Log.i("Risk score for q2, q3, q4", "="+ score);
 
-                int q1Sym=0;
+
                 for (int i = 0; i < q1.size(); i++) {
                     if(q1.get(i).isChecked())
-                        q1Sym+=1;
+                        score+=0.25;
                 }
-                Log.i("Risk score for q1", "="+ q1Sym);
+
 
                 String riskStatus = "No Exposure Detected";
-                if(score==0 || q1Sym<3) {
+                if(score < 1.50 ) {
                     riskStatus = "No Exposure Detected";
-                } else if (score==1 || q1Sym<=4) {
+                } else if (score < 3) {
                     riskStatus = "You are at High Risk";
-                } else if (score>=2 && q1Sym>4) {
-                    riskStatus = "You are positive for COVID-19";
+                } else {
+                    riskStatus = "You are positive for COVID-19";;
                 }
 
                 FirebaseDatabase.getInstance().getReference("risks").child(user.getNric()).child("risk").setValue(riskStatus);
