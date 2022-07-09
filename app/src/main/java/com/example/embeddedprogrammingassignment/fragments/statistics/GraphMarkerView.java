@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Point;
+import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -55,6 +56,25 @@ public class GraphMarkerView extends MarkerView {
         return mOffset;
     }
 
+    @Override
+    public void draw(Canvas canvas, float posx, float posy)
+    {
+        WindowManager windowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
+        Display display = windowManager.getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
 
+        int w = getWidth();
+        int h = getHeight();
 
+        if ((width - posx - w) < w)
+            posx -= w;
+         else
+            posy -= h;
+
+        canvas.translate(posx, posy);
+        draw(canvas);
+        canvas.translate(-posx, -posy);
+    }
 }

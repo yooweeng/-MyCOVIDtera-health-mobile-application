@@ -23,6 +23,7 @@ import com.example.embeddedprogrammingassignment.apiclient.Covid19.Covid19DataSe
 import com.example.embeddedprogrammingassignment.apiclient.Worldometers.WorldometersData;
 import com.example.embeddedprogrammingassignment.apiclient.Worldometers.WorldometersDataController;
 import com.example.embeddedprogrammingassignment.apiclient.Worldometers.WorldometersDataService;
+import com.example.embeddedprogrammingassignment.fragments.StatisticsFragment;
 import com.example.embeddedprogrammingassignment.modal.User;
 import com.example.embeddedprogrammingassignment.singleton.SingletonBundle;
 import com.github.mikephil.charting.data.Entry;

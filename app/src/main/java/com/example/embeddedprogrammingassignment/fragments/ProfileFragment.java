@@ -129,6 +129,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
+                StatisticsFragment.isFirstTime = true;
                 startActivity(intent);
                 requireActivity().finish();
             }
@@ -149,7 +150,7 @@ public class ProfileFragment extends Fragment {
                                     @Override
                                     public void run() {
                                         DeleteAccountFromDB(user.getNric());
-
+                                        StatisticsFragment.isFirstTime = true;
                                         Intent intent = new Intent(getActivity(), LoginActivity.class);
                                         startActivity(intent);
                                         requireActivity().finish();

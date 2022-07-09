@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.embeddedprogrammingassignment.LoginActivity;
 import com.example.embeddedprogrammingassignment.apiclient.Worldometers.WorldometersData;
 import com.example.embeddedprogrammingassignment.fragments.statistics.DailyCases;
 import com.example.embeddedprogrammingassignment.fragments.statistics.GraphMarkerView;
@@ -52,7 +54,7 @@ public class StatisticsFragment extends Fragment {
     static ArrayList<String> pastWeekDayLabels = new ArrayList<>();
     private ArrayList<Entry> total_cases_data = new ArrayList<>();
     private ArrayList<String> total_cases_label = new ArrayList<>();
-    static Boolean isFirstTime=true;
+    public static Boolean isFirstTime=true;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,7 +63,7 @@ public class StatisticsFragment extends Fragment {
 
         bundle = SingletonBundle.getBundle();
         progressBarHooker(view);
-
+        Log.i("isFirstTimeStat", String.valueOf(isFirstTime));
         Log.i("@StatisticFragment","here");
         worldometersData = Parcels.unwrap(bundle.getParcelable("worldometerData"));
         pastWeekCases = bundle.getIntegerArrayList("pastWeekCases");
@@ -227,7 +229,7 @@ public class StatisticsFragment extends Fragment {
         xAxis.setEnabled(false);
         leftAxis.setEnabled(false);
         xAxis.setSpaceMin(6f);
-        xAxis.setSpaceMax(6f);
+        leftAxis.setSpaceMax(10f);
         xAxis.setLabelCount(total_cases_label.size());
         xAxis.setCenterAxisLabels(true);
         lineChart.getDescription().setEnabled(false);
