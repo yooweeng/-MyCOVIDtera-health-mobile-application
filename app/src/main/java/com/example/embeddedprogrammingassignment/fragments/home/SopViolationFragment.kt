@@ -29,7 +29,7 @@ class SopViolationFragment : Fragment() {
 
     lateinit var selectDate: AutoCompleteTextView
     lateinit var calDraw: TextInputLayout
-    lateinit var imgUri: Uri
+    var imgUri: Uri? = null
     lateinit var titleTv: TextView
     lateinit var descriptionTv: TextView
     lateinit var storageReference: StorageReference
@@ -50,7 +50,7 @@ class SopViolationFragment : Fragment() {
         val evidence = view?.findViewById<ImageView>(R.id.ivSopViolation)
         titleTv = view?.findViewById<TextView>(R.id.tvSopTitle)!!
         descriptionTv = view.findViewById(R.id.tvSopDescription)!!
-        selectDate = view?.findViewById(R.id.tvSopDate)!!
+        selectDate = view.findViewById(R.id.tvSopDate)!!
         calDraw = view.findViewById(R.id.tilSopDateDrawable)
         val selectTime = view.findViewById<AutoCompleteTextView>(R.id.tvSopTime)
 
@@ -64,8 +64,10 @@ class SopViolationFragment : Fragment() {
 
         val loadImage = registerForActivityResult(ActivityResultContracts.GetContent(),
             ActivityResultCallback {
-                imgUri = it
-                evidence?.setImageURI(imgUri)
+                if (it != null) {
+                    imgUri = it
+                    evidence?.setImageURI(imgUri)
+                }
             })
 
         submitBtn?.setOnClickListener {
@@ -74,25 +76,32 @@ class SopViolationFragment : Fragment() {
             val time = selectTime.text.toString()
             val description = descriptionTv.text.toString()
 
+            if(title.isBlank() || date.isBlank() || time.isBlank() || description.isBlank()) {
+                Toast.makeText(requireContext(), "Please enter all the fields!", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener;
+            }
+
+            if(imgUri==null) {
+                Toast.makeText(requireContext(), "Please upload an image!", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener;
+            }
+
             // Add function to save to database
             val report = SopReport(title, date, time, description)
             FirebaseDatabase.getInstance().getReference("sopReport").child(user!!.nric).child(title).setValue(report).addOnCompleteListener {
                 if(it.isSuccessful) {
                     storageReference = FirebaseStorage.getInstance().getReference("reports/"+ user.nric+title)
-                    storageReference.putFile(imgUri).addOnSuccessListener {
-
-                    }.addOnFailureListener {
-                        Toast.makeText(requireContext(), "Fail to upload image!", Toast.LENGTH_SHORT).show()
-                        it.message?.let { it1 -> Log.i("Uploadfail", it1) }
+                    imgUri?.let { imgSelected ->
+                        storageReference.putFile(imgSelected).addOnSuccessListener {
+                            Toast.makeText(requireContext(), "Report submitted.", Toast.LENGTH_SHORT).show()
+                        }.addOnFailureListener {
+                            Toast.makeText(requireContext(), "Fail to upload image!", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 } else {
                     Toast.makeText(requireContext(), "Fail to upload report!", Toast.LENGTH_SHORT).show()
                 }
             }
-
-
-            Toast.makeText(requireContext(), "Report submitted.", Toast.LENGTH_SHORT).show()
-            // Navigation.findNavController(view).navigate(R.id.action_sopViolationFragment_to_homeFragment, bundle)
         }
 
         evidence?.setOnClickListener {
