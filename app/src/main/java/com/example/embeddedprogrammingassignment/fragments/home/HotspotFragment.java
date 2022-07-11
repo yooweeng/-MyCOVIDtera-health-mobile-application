@@ -76,8 +76,6 @@ public class HotspotFragment extends Fragment {
         tvZoneStatus = view.findViewById(R.id.tvZoneStatus);
         user = Parcels.unwrap(getArguments().getParcelable("activeUser"));
 
-        tvCases.setText("Hi " + user.getName() + ", there has been 28 reported case(s) of COVID-19 within a 1 km radius from your current position in the last 14 days.");
-
         // Initialize map fragment
         supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.googleMaps);
 
