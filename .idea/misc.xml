@@ -97,7 +97,6 @@
         <entry key="..\:/Users/USER/Desktop/SWE401 Mobile/class/W11/MyCOVIDtera/app/src/main/res/layout/fragment_home_vaccination.xml" value="0.16394927536231885" />
         <entry key="..\:/Users/USER/Desktop/SWE401 Mobile/class/W11/MyCOVIDtera/app/src/main/res/layout/fragment_profile.xml" value="0.176" />
         <entry key="..\:/Users/USER/Desktop/SWE401 Mobile/class/W11/MyCOVIDtera/app/src/main/res/layout/fragment_profile_edit_profile.xml" value="0.21105072463768115" />
-        <entry key="..\:/Users/USER/Desktop/SWE401 Mobile/class/W11/MyCOVIDtera/app/src/main/res/layout/fragment_statistics.xml" value="0.264" />
         <entry key="..\:/Users/USER/Desktop/SWE401 Mobile/class/W11/MyCOVIDtera/app/src/main/res/layout/fragment_trace_qr_history.xml" value="0.176" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MyCOVIDtera/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.179" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MyCOVIDtera/app/src/main/res/drawable/border.xml" value="0.179" />
@@ -153,6 +152,7 @@
         <entry key="..\:/Users/User/Documents/Embedded Programming/MyCOVIDtera/app/src/main/res/layout/cardview_user_profile.xml" value="0.25" />
         <entry key="..\:/Users/User/Documents/Embedded Programming/MyCOVIDtera/app/src/main/res/layout/cardview_user_profile_without_status.xml" value="0.25" />
         <entry key="..\:/Users/User/Documents/Embedded Programming/MyCOVIDtera/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/Users/User/Documents/Embedded Programming/MyCOVIDtera/app/src/main/res/layout/fragment_home_appointment.xml" value="0.10733695652173914" />
         <entry key="..\:/Users/User/Documents/Embedded Programming/MyCOVIDtera/app/src/main/res/layout/fragment_trace.xml" value="0.1" />
         <entry key="..\:/Users/User/Documents/Embedded Programming/MyCOVIDtera/app/src/main/res/layout/fragment_vaccination.xml" value="0.2" />
         <entry key="..\:/Users/User/Documents/Embedded Programming/MyCOVIDtera/app/src/main/res/layout/webview_announcement.xml" value="0.25" />

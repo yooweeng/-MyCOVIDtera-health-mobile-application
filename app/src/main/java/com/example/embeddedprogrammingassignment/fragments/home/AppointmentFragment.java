@@ -49,7 +49,7 @@ public class AppointmentFragment extends Fragment {
     User user;
     FirebaseDatabase rootNode;
     DatabaseReference reference;
-    String getVaccine, comorbidities;
+    String getVaccine = "", comorbidities = "";
     int flag = 0;
 
     @Override
@@ -127,6 +127,9 @@ public class AppointmentFragment extends Fragment {
                         getVaccine = q1No.getText().toString();
                     }
                 }
+                else{
+                    getVaccine = "";
+                }
             }
         });
 
@@ -146,6 +149,9 @@ public class AppointmentFragment extends Fragment {
                         q2No.setSelected(true);
                         comorbidities = q2No.getText().toString();
                     }
+                }
+                else{
+                    comorbidities = "";
                 }
             }
         });
@@ -182,17 +188,41 @@ public class AppointmentFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (q1Yes.isSelected()){
-                    vaccineBooking.setVisibility(view.GONE);
-
                     FirebaseDatabase.getInstance().getReference("appointments").child(user.getNric()).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                            for (DataSnapshot dsp : snapshot.getChildren()) {
-//                                vaccineNo=String.valueOf(dsp.getValue()); //add result into array list
-//                            }
                             vaccineNo=snapshot.getChildrenCount();
-                            Log.d("Vaccine No: ", String.valueOf(vaccineNo));
-                            addAppointment(String.valueOf(vaccineNo));
+//                            addAppointment(String.valueOf(vaccineNo));
+                            String nric = user.getNric();
+                            String vaccine = getVaccine;
+                            String comm = comorbidities;
+                            String manufacturer = selectManufacturer.getText().toString();
+                            String date = selectDate.getText().toString();
+                            String location = selectLocation.getText().toString();
+                            String status = "booked";
+                            Appointments appointments = new Appointments(nric, vaccine, comm, manufacturer, date, location, status);
+
+                            if(validAppointment(appointments)){
+                                rootNode = FirebaseDatabase.getInstance();
+                                reference = rootNode.getReference("appointments");
+
+                                Query newAppointment = reference.orderByChild("nric").equalTo(nric);
+
+                                newAppointment.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        reference.child(nric).child(String.valueOf(vaccineNo)).setValue(appointments);
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+                                vaccineBooking.setVisibility(view.GONE);
+                                updateAppointment(String.valueOf(vaccineNo));
+                                appointDetails.setVisibility(view.VISIBLE);
+                            }
                         }
 
                         @Override
@@ -200,16 +230,12 @@ public class AppointmentFragment extends Fragment {
 
                         }
                     });
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            updateAppointment(String.valueOf(vaccineNo));
-                        }
-                    },2000);
-                    appointDetails.setVisibility(view.VISIBLE);
+                }
+                else if (q1No.isSelected()) {
+                    Navigation.findNavController(view).navigate(R.id.action_appointmentFragment_to_vaccinationFragment, bundle);
                 }
                 else {
-                    Navigation.findNavController(view).navigate(R.id.action_appointmentFragment_to_vaccinationFragment, bundle);
+                    Toast.makeText(getContext(), "Please select whether you want to take a vaccine.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -225,37 +251,6 @@ public class AppointmentFragment extends Fragment {
         return view;
     }
 
-    private void addAppointment(String vaccineNumber){
-        String nric = user.getNric();
-        String vaccine = getVaccine;
-        String comm = comorbidities;
-        String manufacturer = selectManufacturer.getText().toString();
-        String date = selectDate.getText().toString();
-        String location = selectLocation.getText().toString();
-        String status = "booked";
-        Appointments appointments = new Appointments(nric, vaccine, comm, manufacturer, date, location, status);
-        Log.d("VaccineNo: ", vaccineNumber);
-
-        if(validAppointment(appointments)){
-            rootNode = FirebaseDatabase.getInstance();
-            reference = rootNode.getReference("appointments");
-
-            Query newAppointment = reference.orderByChild("nric").equalTo(nric);
-
-            newAppointment.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    reference.child(nric).child(vaccineNumber).setValue(appointments);
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-        }
-    }
-
     private void updateStatus(String vaccineNo, String currentStatus){
         FirebaseDatabase.getInstance().getReference("appointments").child(user.getNric()).child(vaccineNo).child("status").setValue(currentStatus);
     }
@@ -266,11 +261,15 @@ public class AppointmentFragment extends Fragment {
             return false;
         }
         if(appointments.getGetVaccine().equals("")) {
-            Toast.makeText(getContext(), "Please select a choice.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Please select whether you want to take a vaccine.", Toast.LENGTH_SHORT).show();
             return false;
         }
         if(appointments.getComorbidities().equals("") ) {
-            Toast.makeText(getContext(), "Please select a choice.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Please select whether you have any comordibity.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(appointments.getVaccineManufacturer().equals("") ) {
+            Toast.makeText(getContext(), "Please select a manufacturer.", Toast.LENGTH_SHORT).show();
             return false;
         }
         if(appointments.getAppointmentDate().equals("") ) {
@@ -299,7 +298,6 @@ public class AppointmentFragment extends Fragment {
                 tvVaccineNo.setText(currentVaccineNo);
                 tvAppointDate.setText(date);
                 tvAppointLocation.setText(location);
-
             }
 
             @Override

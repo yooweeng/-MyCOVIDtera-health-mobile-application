@@ -76,6 +76,8 @@ public class HotspotFragment extends Fragment {
         tvZoneStatus = view.findViewById(R.id.tvZoneStatus);
         user = Parcels.unwrap(getArguments().getParcelable("activeUser"));
 
+        tvCases.setText("Hi " + user.getName() + ", there has been 28 reported case(s) of COVID-19 within a 1 km radius from your current position in the last 14 days.");
+
         // Initialize map fragment
         supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.googleMaps);
 
@@ -112,10 +114,10 @@ public class HotspotFragment extends Fragment {
                     public void onMapReady(GoogleMap googleMap) {
                         // Initialize lat lug
                         LatLng latLng;
-                        if (location==null)
+                        //if (location==null)
                             latLng = new LatLng(2.8325, 101.70694);
-                         else
-                            latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                        // else
+                        //    latLng = new LatLng(location.getLatitude(), location.getLongitude());
 
                         // Initialize marker options
                         MarkerOptions markerOptions = new MarkerOptions();

@@ -100,8 +100,7 @@
                 android:fontFamily="@font/amiko_semibold"
                 android:text="Penang Hospital"
                 android:textColor="@color/black_txt"
-                android:textSize="16sp"
-                android:singleLine="true"/>
+                android:textSize="16sp" />
         </LinearLayout>
     </LinearLayout>
 
