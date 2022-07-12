@@ -112,6 +112,9 @@ public class HotspotFragment extends Fragment {
                     public void onMapReady(GoogleMap googleMap) {
                         // Initialize lat lug
                         LatLng latLng;
+
+                        // This if-else is to check the GPS of the phone, if we can't get it, we set it to XMU location.
+                        // So if you wanna spoof to XMU, remove the if-else and keep line 119 code.
                         if (location==null)
                             latLng = new LatLng(2.8325, 101.70694);
                          else
