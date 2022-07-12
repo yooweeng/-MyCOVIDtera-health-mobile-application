@@ -285,6 +285,21 @@ public class ProfileFragment extends Fragment {
         db.getReference("history").child(nric).removeValue();
         db.getReference("risks").child(nric).removeValue();
         db.getReference("sopReport").child(nric).removeValue();
+        db.getReference("likes").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot childSnapshot: snapshot.getChildren()) {
+                    if (childSnapshot.hasChild(nric)) {
+                        db.getReference("likes").child(childSnapshot.getKey()).child(nric).removeValue();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void setDetails(TextView nameText, TextView nricText, TextView phoneText) {

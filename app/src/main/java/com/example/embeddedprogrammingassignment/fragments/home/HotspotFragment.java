@@ -112,10 +112,10 @@ public class HotspotFragment extends Fragment {
                     public void onMapReady(GoogleMap googleMap) {
                         // Initialize lat lug
                         LatLng latLng;
-                        //if (location==null)
+                        if (location==null)
                             latLng = new LatLng(2.8325, 101.70694);
-                        // else
-                        //    latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                         else
+                            latLng = new LatLng(location.getLatitude(), location.getLongitude());
 
                         // Initialize marker options
                         MarkerOptions markerOptions = new MarkerOptions();
